@@ -35,7 +35,7 @@
         </a>
         <dl class="layui-nav-child">
           <dd><a href="">基本资料</a></dd>
-          <dd><a href="">安全设置</a></dd>
+          <dd><a href="">修改密码</a></dd>
         </dl>
       </li>
       <li class="layui-nav-item"><a href="{{url('/logout')}}">退出</a></li>
@@ -57,15 +57,15 @@
         <li class="layui-nav-item">
           <a class="" href="javascript:;">公告管理</a>
           <dl class="layui-nav-child">
-            <dd><a href="/brand/create">添加公告</a></dd>
-            <dd><a href="/brand/list">公告列表</a></dd>
+            <dd><a href="/notice/create">添加公告</a></dd>
+            <dd><a href="/notice/list">公告列表</a></dd>
           </dl>
         </li>
         <li class="layui-nav-item">
           <a class="" href="javascript:;">分类管理</a>
           <dl class="layui-nav-child">
-            <dd><a href="/brand/create">添加分类</a></dd>
-            <dd><a href="/brand/list">分类列表</a></dd>
+            <dd><a href="/cartgory/create">添加分类</a></dd>
+            <dd><a href="/cartgory/list">分类列表</a></dd>
           </dl>
         </li>
         <li class="layui-nav-item">
@@ -86,8 +86,8 @@
         <li class="layui-nav-item">
           <a href="javascript:;">菜单管理</a>
           <dl class="layui-nav-child">
-            <dd><a href="/weight/create">添加菜单</a></dd>
-            <dd><a href="/weight/list">菜单列表</a></dd>
+            <dd><a href="/menu/create">添加菜单</a></dd>
+            <dd><a href="/menu/list">菜单列表</a></dd>
           </dl>
         </li>
 
@@ -179,7 +179,7 @@ layui.use(['element','form','layedit'], function(){
                 $('input[name="goods_price"]').val(shop_price);
               }
 
-            },'json'); 
+            },'json');
           }
       });
 
@@ -228,7 +228,7 @@ layui.use('upload', function(){
     //拖拽上传
     upload.render({
         elem: '#test10'
-        ,url: 'http://blog2001.com/brand/uploads' //改成您自己的上传接口
+        ,url: 'http://2001.shop.admin.com/brand/uploads' //改成您自己的上传接口
         ,done: function(res){
             layer.msg(res.msg);
             layui.$('#uploadDemoView').removeClass('layui-hide').find('img').attr('src', res.data);
@@ -239,7 +239,7 @@ layui.use('upload', function(){
 
     upload.render({
         elem: '#test1'
-        ,url: 'http://blog2001.com/brand/uploads' //改成您自己的上传接口
+        ,url: 'http://2001.shop.admin.com/brand/uploads' //改成您自己的上传接口
         ,done: function(res){
             layer.msg(res.msg);
             layui.$('#uploadDemoView1').removeClass('layui-hide').find('img').attr('src', res.data);
@@ -251,7 +251,7 @@ layui.use('upload', function(){
      //多图片上传
    upload.render({
     elem: '#test2'
-    ,url: 'http://blog2001.com/brand/uploads' //改成您自己的上传接口
+    ,url: 'http://2001.shop.admin.com/brand/uploads' //改成您自己的上传接口
     ,multiple: true
     ,before: function(obj){
       //预读本地文件示例，不支持ie8
