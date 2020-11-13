@@ -23,9 +23,12 @@ class LoginController extends Controller
         if(!$admin){
             return redirect('/login')->with('msg','用户名或密码错误');
         }
-        if(decrypt($admin->admin_pwd)!=$post['admin_pwd']){
-            return redirect('/login')->with('msg','用户名或密码错误');
-        }
+        // if(decrypt($admin->admin_pwd)!=$post['admin_pwd']){
+        //     return redirect('/login')->with('msg','用户名或密码错误');
+        // }
+        if (!Hash::check($post['admin_pwd'],$admin['admin_pwd'])) {
+            return redirect('/login')->with('msg',"用户名或密码错误");
+         }
         session(['admin_name'=>$admin->admin_name]);
         return redirect('/');
     }
