@@ -10,17 +10,13 @@ class AdminModel extends Model
      protected $table = 'sh_admin';
      //指定主键
      protected $primaryKey = 'admin_id';
-<<<<<<< HEAD
+
      //不自动添加时间 
      public $timestamps = false;
      //黑名单
      protected $guarded=[];
-}
-=======
-     //不自动添加时间 create_at update_at
-     public $timestamps = false;
-     //黑名单
-     protected $guarded=[];
+
+
 
 
      public function create_data($data){
@@ -42,4 +38,3 @@ class AdminModel extends Model
      }
 }
 
->>>>>>> wang
