@@ -82,6 +82,7 @@ Route::prefix('/notice')->group(function(){
   Route::any('/updated','Admin\NoticeController@updated');
 });
 
+<<<<<<< HEAD
 });
 <<<<<<< HEAD
 =======
@@ -101,6 +102,25 @@ Route::prefix('/role')->group(function(){
   Route::get('/role/destroy/{role_id?}','Admin\RoleController@destroy');//删除
   Route::get('/role/addmenu/{menu_id?}','Admin\RoleController@addmenu');//角色添加权限
 });
+=======
+});
+
+//管理员
+Route::prefix('/admin')->group(function(){
+  Route::get('/create','Admin\AdminController@create');//添加管理员
+  Route::post('/store','Admin\AdminController@store');//执行添加
+  Route::any('/list','Admin\AdminController@index');//管理员列表
+  Route::get('/admin/destroy/{admin_id?}','Admin\AdminController@destroy');//删除
+});
+//角色管理
+Route::prefix('/role')->group(function(){
+  Route::get('/create','Admin\RoleController@create');//添加角色
+  Route::post('/store','Admin\RoleController@store');//执行添加
+  Route::any('/list','Admin\RoleController@index');//角色列表
+  Route::get('/role/destroy/{role_id?}','Admin\RoleController@destroy');//删除
+  Route::get('/role/addmenu/{menu_id?}','Admin\RoleController@addmenu');//角色添加权限
+});
+>>>>>>> main
 //权限管理
 Route::prefix('/menu')->group(function(){
   Route::get('/create','Admin\MenuController@create');//添加菜单
@@ -111,4 +131,7 @@ Route::prefix('/menu')->group(function(){
 });
 
 
+<<<<<<< HEAD
+>>>>>>> main
+=======
 >>>>>>> main
