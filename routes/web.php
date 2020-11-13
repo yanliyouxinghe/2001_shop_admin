@@ -52,14 +52,9 @@ Route::prefix('/cartgory')->group(function(){
   Route::post('/destroy','Admin\CartgoryController@destroy');
   Route::get('/edit/{id}','Admin\CartgoryController@edit');
   Route::post('/update','Admin\CartgoryController@update');
-
-  Route::get('/create','Brand\BrandController@create');
 });
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 58260538831706486c15eb53708d2c18fba90cc5
 //品牌
 
 Route::prefix('/brand')->group(function(){
@@ -71,10 +66,7 @@ Route::prefix('/brand')->group(function(){
   Route::get('/show/{id}','Admin\BrandController@show');
   Route::post('/edit/{id}','Admin\BrandController@edit');
   Route::any('/updated','Admin\BrandController@updated');
-<<<<<<< HEAD
-=======
 
->>>>>>> 58260538831706486c15eb53708d2c18fba90cc5
 });
 //公告
 Route::prefix('/notice')->group(function(){
@@ -88,10 +80,6 @@ Route::prefix('/notice')->group(function(){
   Route::any('/updated','Admin\NoticeController@updated');
 });
 
-<<<<<<< HEAD
-});
-<<<<<<< HEAD
-=======
 
 //管理员
 Route::prefix('/admin')->group(function(){
@@ -108,8 +96,6 @@ Route::prefix('/role')->group(function(){
   Route::get('/role/destroy/{role_id?}','Admin\RoleController@destroy');//删除
   Route::get('/role/addmenu/{menu_id?}','Admin\RoleController@addmenu');//角色添加权限
 });
-=======
-});
 
 //管理员
 Route::prefix('/admin')->group(function(){
@@ -126,22 +112,14 @@ Route::prefix('/role')->group(function(){
   Route::get('/role/destroy/{role_id?}','Admin\RoleController@destroy');//删除
   Route::get('/role/addmenu/{menu_id?}','Admin\RoleController@addmenu');//角色添加权限
 });
->>>>>>> main
+
 //权限管理
 Route::prefix('/menu')->group(function(){
   Route::get('/create','Admin\MenuController@create');//添加菜单
   Route::post('/store','Admin\MenuController@store');//执行添加
   Route::any('/list','Admin\MenuController@index');//菜单列表
   Route::get('/menu/destroy/{menu_id?}','Admin\MenuController@destroy');//删除
- 
+
 });
 
-
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> main
-=======
->>>>>>> main
-=======
->>>>>>> 58260538831706486c15eb53708d2c18fba90cc5
->>>>>>> main
+});
