@@ -11,7 +11,7 @@ class LoginController extends Controller
 {
     /**登录视图 */
     public function login(){
-       //echo encrypt(123);
+    //    echo encrypt(123);
        return view('/login');
     }
 
@@ -23,7 +23,7 @@ class LoginController extends Controller
         if(!$admin){
             return redirect('/login')->with('msg','用户名或密码错误');
         }
-        if(decrypt($admin->admin_pwd)!=$post['admin_pwd']){
+        if(password_verify($admin->admin_pwd,$post['admin_pwd'])){
             return redirect('/login')->with('msg','用户名或密码错误');
         }
         session(['admin_name'=>$admin->admin_name]);
