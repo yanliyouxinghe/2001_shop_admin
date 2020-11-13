@@ -20,5 +20,9 @@ Route::get('/', function () {
 //分类
 Route::prefix('/cartgory')->group(function(){
   Route::get('/create','Admin\CartgoryController@create');
-
+  Route::post('/store','Admin\CartgoryController@store');
+  Route::get('/list','Admin\CartgoryController@index');
+  Route::post('/destroy','Admin\CartgoryController@destroy');
+  Route::get('/edit/{id}','Admin\CartgoryController@edit');
+  Route::post('/update','Admin\CartgoryController@update');
 });
