@@ -19,6 +19,6 @@ Route::get('/', function () {
 
 //分类
 Route::prefix('/cartgory')->group(function(){
-  Route::get('/create','Brand\BrandController@create');
+  Route::get('/create','Admin\CartgoryController@create');
 
 });

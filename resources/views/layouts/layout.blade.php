@@ -61,8 +61,8 @@
         <li class="layui-nav-item">
           <a class="" href="javascript:;">分类管理</a>
           <dl class="layui-nav-child">
-            <dd><a href="/brand/create">添加分类</a></dd>
-            <dd><a href="/brand/list">分类列表</a></dd>
+            <dd><a href="/cartgory/create">添加分类</a></dd>
+            <dd><a href="/cartgory/list">分类列表</a></dd>
           </dl>
         </li>
         <li class="layui-nav-item">
@@ -167,7 +167,7 @@ layui.use(['element','form','layedit'], function(){
                 $('input[name="goods_price"]').val(shop_price);
               }
 
-            },'json'); 
+            },'json');
           }
       });
 
