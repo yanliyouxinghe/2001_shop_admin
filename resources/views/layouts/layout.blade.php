@@ -25,24 +25,27 @@
         </dl>
       </li>
     </ul>
+    
+    
     <ul class="layui-nav layui-layout-right">
       <li class="layui-nav-item">
         <a href="javascript:;">
           <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-          贤心
+          {{request()->session()->get('admin_name')}}
         </a>
         <dl class="layui-nav-child">
           <dd><a href="">基本资料</a></dd>
           <dd><a href="">安全设置</a></dd>
         </dl>
       </li>
-      <li class="layui-nav-item"><a href="/logout">退出</a></li>
+      <li class="layui-nav-item"><a href="{{url('/logout')}}">退出</a></li>
     </ul>
+    
   </div>
 
   <div class="layui-side layui-bg-black">
     <div class="layui-side-scroll">
-      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->  
       <ul class="layui-nav layui-nav-tree"  lay-filter="test">
         <li class="layui-nav-item">
           <a class="" href="javascript:;">品牌管理</a>
@@ -104,11 +107,20 @@
             <dd><a href="/goodstype/list">类型列表</a></dd>
           </dl>
         </li>
+
+        <li class="layui-nav-item">
+          <a href="javascript:;">广告位置管理</a>
+          <dl class="layui-nav-child">
+            <dd><a href="/ad/create">广告位置添加</a></dd>
+            <dd><a href="/ad">广告位置列表</a></dd>
+          </dl>
+        </li>
+
         <li class="layui-nav-item">
           <a href="javascript:;">广告管理</a>
           <dl class="layui-nav-child">
-            <dd><a href="/adver/list">广告列表</a></dd>
-            <dd><a href="/ad/list">广告位置</a></dd>
+            <dd><a href="/adv/create">广告添加</a></dd>
+            <dd><a href="/adv">广告列表</a></dd>
           </dl>
         </li>
 
