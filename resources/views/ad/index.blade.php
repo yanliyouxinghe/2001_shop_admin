@@ -41,11 +41,12 @@
             <td>{{$v->ad_desc}}</td>
             <!-- <td>{{$v->template}}</td> -->
             <td>
-            <a href="{{$v->ad_id}}"><button type="button" class="layui-btn layui-btn-normal">生成广告</button></a>
-            <a href="{{$v->ad_id}}"><button type="button" class="layui-btn layui-btn-normal">查看广告</button></a>
-            <a href="{{$v->ad_id}}"><button type="button" class="layui-btn layui-btn-normal">修改</button></a>
+            <a href="{{url('ad/sh/'.$v->ad_id)}"><button type="button" class="layui-btn layui-btn-normal">生成广告</button></a>
+            <a href="{{url('ad/ch/'.$v->ad_id)}"><button type="button" class="layui-btn layui-btn-normal">查看广告</button></a>
+            <a href="{{url('ad/edit/'.$v->ad_id)}}"><button type="button" class="layui-btn layui-btn-normal">修改</button></a>
             <button type="button" class="layui-btn layui-btn-danger del" ad_id="{{$v->ad_id}}">删除</button>
-            </td>
+
+           
           </tr>
         @endforeach
         </tbody>
