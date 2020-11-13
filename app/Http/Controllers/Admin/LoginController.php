@@ -11,7 +11,7 @@ class LoginController extends Controller
 {
     /**登录视图 */
     public function login(){
-       //echo encrypt(123);
+    //    echo encrypt(123);
        return view('/login');
     }
 
@@ -23,12 +23,18 @@ class LoginController extends Controller
         if(!$admin){
             return redirect('/login')->with('msg','用户名或密码错误');
         }
+<<<<<<< HEAD
         // if(decrypt($admin->admin_pwd)!=$post['admin_pwd']){
         //     return redirect('/login')->with('msg','用户名或密码错误');
         // }
         if (!Hash::check($post['admin_pwd'],$admin['admin_pwd'])) {
             return redirect('/login')->with('msg',"用户名或密码错误");
          }
+=======
+        if(password_verify($admin->admin_pwd,$post['admin_pwd'])){
+            return redirect('/login')->with('msg','用户名或密码错误');
+        }
+>>>>>>> 02d63288c1e92bcf226cd401f48f4314c592bc98
         session(['admin_name'=>$admin->admin_name]);
         return redirect('/');
     }
