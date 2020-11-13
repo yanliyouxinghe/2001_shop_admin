@@ -86,8 +86,8 @@
         <li class="layui-nav-item">
           <a href="javascript:;">菜单管理</a>
           <dl class="layui-nav-child">
-            <dd><a href="/weight/create">添加菜单</a></dd>
-            <dd><a href="/weight/list">菜单列表</a></dd>
+            <dd><a href="/menu/create">添加菜单</a></dd>
+            <dd><a href="/menu/list">菜单列表</a></dd>
           </dl>
         </li>
 
