@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('layouts.layout');
 });
+
+
+
+//分类
+Route::prefix('/cartgory')->group(function(){
+  Route::get('/create','Brand\BrandController@create');
+
+});
