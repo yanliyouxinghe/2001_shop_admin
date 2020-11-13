@@ -52,6 +52,20 @@
           </dl>
         </li>
         <li class="layui-nav-item">
+          <a class="" href="javascript:;">公告管理</a>
+          <dl class="layui-nav-child">
+            <dd><a href="/brand/create">添加公告</a></dd>
+            <dd><a href="/brand/list">公告列表</a></dd>
+          </dl>
+        </li>
+        <li class="layui-nav-item">
+          <a class="" href="javascript:;">分类管理</a>
+          <dl class="layui-nav-child">
+            <dd><a href="/brand/create">添加分类</a></dd>
+            <dd><a href="/brand/list">分类列表</a></dd>
+          </dl>
+        </li>
+        <li class="layui-nav-item">
           <a href="javascript:;">商品管理</a>
           <dl class="layui-nav-child">
             <dd><a href="/goods/create">添加商品</a></dd>
@@ -90,7 +104,6 @@
             <dd><a href="/goodstype/list">类型列表</a></dd>
           </dl>
         </li>
-
         <li class="layui-nav-item">
           <a href="javascript:;">广告管理</a>
           <dl class="layui-nav-child">
