@@ -22,7 +22,7 @@ Route::get('/', function(){
 });
 
 //广告位置
-Route::prefix('ad')->middleware('login')->group(function(){
+Route::prefix('ad')->group(function(){
   Route::get('create','Admin\AdController@create')->name('ad.create');   //广告位添加
   Route::post('store','Admin\AdController@store');   //广告位置执行添加
   Route::any('/','Admin\AdController@index');   //广告位置列表
@@ -45,18 +45,18 @@ Route::prefix('adv')->group(function(){
 
 //分类
 Route::prefix('/cartgory')->group(function(){
-<<<<<<< HEAD
+
   Route::get('/create','Admin\CartgoryController@create');
   Route::post('/store','Admin\CartgoryController@store');
   Route::get('/list','Admin\CartgoryController@index');
   Route::post('/destroy','Admin\CartgoryController@destroy');
   Route::get('/edit/{id}','Admin\CartgoryController@edit');
   Route::post('/update','Admin\CartgoryController@update');
-=======
+
   Route::get('/create','Brand\BrandController@create');
 });
 
-<<<<<<< HEAD
+
 //品牌
 
 Route::prefix('/brand')->group(function(){
@@ -68,7 +68,7 @@ Route::prefix('/brand')->group(function(){
   Route::get('/show/{id}','Admin\BrandController@show');
   Route::post('/edit/{id}','Admin\BrandController@edit');
   Route::any('/updated','Admin\BrandController@updated');
->>>>>>> jyl
+
 });
 //公告
 Route::prefix('/notice')->group(function(){
@@ -81,6 +81,5 @@ Route::prefix('/notice')->group(function(){
   Route::post('/edit/{id}','Admin\NoticeController@edit');
   Route::any('/updated','Admin\NoticeController@updated');
 });
-=======
+
 });
->>>>>>> ce83fae33b1225758cc9a4f1f1dc7fa617410ca1

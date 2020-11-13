@@ -21,10 +21,11 @@ class LoginController extends Controller
         $admin = AdminModel::where('admin_name',$post['admin_name'])->first();
         // dd($admin);
         if(!$admin){
-            return redirect('/login')->with('msg','用户名或密码错误');
+            return redirect('/login')->with('msg','用户名或密码错误');die;
         }
+
         if(decrypt($admin->admin_pwd)!=$post['admin_pwd']){
-            return redirect('/login')->with('msg','用户名或密码错误');
+            return redirect('/login')->with('msg','用户名或密码错误');die;
         }
         session(['admin_name'=>$admin->admin_name]);
         return redirect('/');
