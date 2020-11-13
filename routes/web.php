@@ -56,7 +56,10 @@ Route::prefix('/cartgory')->group(function(){
   Route::get('/create','Brand\BrandController@create');
 });
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> 58260538831706486c15eb53708d2c18fba90cc5
 //品牌
 
 Route::prefix('/brand')->group(function(){
@@ -68,7 +71,10 @@ Route::prefix('/brand')->group(function(){
   Route::get('/show/{id}','Admin\BrandController@show');
   Route::post('/edit/{id}','Admin\BrandController@edit');
   Route::any('/updated','Admin\BrandController@updated');
+<<<<<<< HEAD
+=======
 
+>>>>>>> 58260538831706486c15eb53708d2c18fba90cc5
 });
 //公告
 Route::prefix('/notice')->group(function(){
@@ -132,6 +138,10 @@ Route::prefix('/menu')->group(function(){
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> main
 =======
+>>>>>>> main
+=======
+>>>>>>> 58260538831706486c15eb53708d2c18fba90cc5
 >>>>>>> main
