@@ -54,8 +54,8 @@
         <li class="layui-nav-item">
           <a class="" href="javascript:;">公告管理</a>
           <dl class="layui-nav-child">
-            <dd><a href="/brand/create">添加公告</a></dd>
-            <dd><a href="/brand/list">公告列表</a></dd>
+            <dd><a href="/notice/create">添加公告</a></dd>
+            <dd><a href="/notice/list">公告列表</a></dd>
           </dl>
         </li>
         <li class="layui-nav-item">
@@ -216,7 +216,7 @@ layui.use('upload', function(){
     //拖拽上传
     upload.render({
         elem: '#test10'
-        ,url: 'http://blog2001.com/brand/uploads' //改成您自己的上传接口
+        ,url: 'http://2001.shop.admin.com/brand/uploads' //改成您自己的上传接口
         ,done: function(res){
             layer.msg(res.msg);
             layui.$('#uploadDemoView').removeClass('layui-hide').find('img').attr('src', res.data);
@@ -227,7 +227,7 @@ layui.use('upload', function(){
 
     upload.render({
         elem: '#test1'
-        ,url: 'http://blog2001.com/brand/uploads' //改成您自己的上传接口
+        ,url: 'http://2001.shop.admin.com/brand/uploads' //改成您自己的上传接口
         ,done: function(res){
             layer.msg(res.msg);
             layui.$('#uploadDemoView1').removeClass('layui-hide').find('img').attr('src', res.data);
@@ -239,7 +239,7 @@ layui.use('upload', function(){
      //多图片上传
    upload.render({
     elem: '#test2'
-    ,url: 'http://blog2001.com/brand/uploads' //改成您自己的上传接口
+    ,url: 'http://2001.shop.admin.com/brand/uploads' //改成您自己的上传接口
     ,multiple: true
     ,before: function(obj){
       //预读本地文件示例，不支持ie8
