@@ -78,7 +78,10 @@ class AdvController extends Controller
      */
     public function edit($id)
     {
-        //
+        $ad = AdModel::get();
+        $adv = AdvModel::where('adv_id',$id)->first();
+        return view('adv.edit',['adv'=>$adv,'ad'=>$ad]);
+
     }
 
     /**
@@ -90,7 +93,11 @@ class AdvController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = $request->except('_token');
+        $res = AdvModel::where('adv_id',$id)->update($post);
+        if($res){
+            return redirect('/adv');
+        }
     }
 
     /**
@@ -99,8 +106,22 @@ class AdvController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy()
     {
-        //
+        $id = request()->adv_id;
+        
+        if(!$id){
+            return json_encode(['code'=>1,'msg'=>'参数缺失']);
+        }
+
+        $res = AdvModel::where('adv_id',$id)->update(["is_del"=>2]);
+        // dd($res);
+        if($res){
+            return json_encode(['code'=>0,'msg'=>'OK']);
+        }else{
+            return json_encode(['code'=>2,'msg'=>'操作繁忙']);
+        }
+
+
     }
 }
