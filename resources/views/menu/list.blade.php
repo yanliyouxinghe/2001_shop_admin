@@ -26,6 +26,7 @@
                 <th>菜单id</th>
                 <th>菜单名称</th>
                 <th>路由别名</th>
+                <th>是否显示</th>
                 <th>操作</th>
             </tr> 
             </thead>
@@ -35,6 +36,13 @@
                 <td>{{$v->menu_id}}</td>
                 <td>{{$v->menu_name}}</td>
                 <td>{{$v->menu_url}}</td>
+                <td>
+                    @if($v->is_show==1)
+                      是
+                    @else
+                      否
+                    @endif
+                </td>
                 <td>
                     <a href="menu/destroy/{{$v->role_id}}" onclick="DeleteGetId({{$v->menu_id}},this)">
                         <button type="button" class="layui-btn layui-btn-danger">删除</button>

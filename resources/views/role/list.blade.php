@@ -39,7 +39,7 @@
                     <a href="role/destroy/{{$v->role_id}}" onclick="DeleteGetId({{$v->role_id}},this)">
                         <button type="button" class="layui-btn layui-btn-danger">删除</button>
                     </a>
-                    <a href="role/addmenu/{{$v->role_id}}">
+                    <a href="role/addpriv/{{$v->role_id}}">
                         <button type="button" class="layui-btn layui-btn-normal">添加权限</button>
                     </a>
                 </td>

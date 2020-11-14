@@ -31,57 +31,70 @@ Route::post('/changpwdDo','Admin\LoginController@changpwdDo');//执行修改密�
 Route::prefix('ad')->group(function(){
   Route::get('create','Admin\AdController@create')->name('ad.create');   //广告位添加
   Route::post('store','Admin\AdController@store');   //广告位置执行添加
-  Route::any('/','Admin\AdController@index');   //广告位置列表
-  Route::get('destroy/{id}','Admin\AdController@destroy');   //广告位置删除
+  Route::any('/','Admin\AdController@index')->name('ad.index');   //广告位置列表
+  Route::get('destroy/{id}','Admin\AdController@destroy')->name('ad.destroy');   //广告位置删除
   Route::get('edit/{id}','Admin\AdController@edit');   //广告位置修改
-  Route::post('update/{id}','Admin\AdController@update');   //广告位置执行修改
+  Route::post('update/{id}','Admin\AdController@update')->name('ad.update');   //广告位置执行修改
   Route::any('upload','Admin\AdController@upload');   //广告图片
 });
 
 //广告
 Route::prefix('adv')->group(function(){
-  Route::any('/create','Admin\AdvController@create')->name('adv.create');
-  Route::post('/store','Admin\AdvController@store');
-  Route::get('/index','Admin\AdvController@index');
+  Route::any('/create','Admin\AdvController@create')->name('adv.create');//广告添加
+  Route::post('/store','Admin\AdvController@store');//广告执行添加
+  Route::get('/index','Admin\AdvController@index')->name('adv.index');
   Route::any('/show/{id}','Admin\AdvController@show')->name('adv.show');;   ///预览
-  Route::any('/edit/{id}','Admin\AdvController@edit');
-  Route::any('/update/{id}','Admin\AdvController@update');
+  Route::any('/edit/{id}','Admin\AdvController@edit')->name('adv.edit');//广告删除
+  Route::any('/update/{id}','Admin\AdvController@update')->name('adv.update');//广告修改
   Route::any('/upload','Admin\AdvController@upload');   //上传文件
 });
 
 //分类
 Route::prefix('/cartgory')->group(function(){
 
-  Route::get('/create','Admin\CartgoryController@create');
+  Route::get('/create','Admin\CartgoryController@create')->name('cartgory.create');//分类添加
   Route::post('/store','Admin\CartgoryController@store');
-  Route::get('/list','Admin\CartgoryController@index');
-  Route::post('/destroy','Admin\CartgoryController@destroy');
+  Route::get('/list','Admin\CartgoryController@index')->name('cartgory.list');//分类展示
+  Route::post('/destroy','Admin\CartgoryController@destroy')->name('cartgory.destroy');//分类上删除
   Route::get('/edit/{id}','Admin\CartgoryController@edit');
-  Route::post('/update','Admin\CartgoryController@update');
+  Route::post('/update','Admin\CartgoryController@update')->name('cartgory.update');//分类修改
 
 });
 
+<<<<<<< HEAD
+=======
+//品牌
+
+>>>>>>> wang
 Route::prefix('/brand')->group(function(){
-  Route::get('/create','Admin\BrandController@create');
-  Route::get('/list','Admin\BrandController@index');
+  Route::get('/create','Admin\BrandController@create')->name('brand.create');//品牌添加
+  Route::get('/list','Admin\BrandController@index')->name('brand.index');//品牌展示
   Route::post('/store','Admin\BrandController@store');
   Route::any('/uploads','Admin\BrandController@uploads');
-  Route::get('/destroy','Admin\BrandController@destroy');
+  Route::get('/destroy','Admin\BrandController@destroy')->name('brand.destroy');//品牌删除
   Route::get('/show/{id}','Admin\BrandController@show');
   Route::post('/edit/{id}','Admin\BrandController@edit');
+<<<<<<< HEAD
   Route::any('/updated','Admin\BrandController@updated');
+=======
+  Route::any('/updated','Admin\BrandController@updated')->name('brand.updated');//品牌修改
+>>>>>>> wang
 
 });
 //公告
 Route::prefix('/notice')->group(function(){
-  Route::get('/create','Admin\NoticeController@create');
-  Route::get('/list','Admin\NoticeController@index');
+  Route::get('/create','Admin\NoticeController@create')->name('notice.create');//公告添加
+  Route::get('/list','Admin\NoticeController@index')->name('notice.list');//公告展示
   Route::post('/store','Admin\NoticeController@store');
   Route::any('/uploads','Admin\NoticeController@uploads');
-  Route::get('/destroy','Admin\NoticeController@destroy');
+  Route::get('/destroy','Admin\NoticeController@destroy')->name('notice.destroy');//公告删除
   Route::get('/show/{id}','Admin\NoticeController@show');
   Route::post('/edit/{id}','Admin\NoticeController@edit');
+<<<<<<< HEAD
   Route::any('/updated','Admin\NoticeController@updated');
+=======
+  Route::any('/updated','Admin\NoticeController@updated')->name('notice.updated');//公告修改
+>>>>>>> wang
 });
 
 //管理员
@@ -97,7 +110,8 @@ Route::prefix('/role')->group(function(){
   Route::post('/store','Admin\RoleController@store');//执行添加
   Route::any('/list','Admin\RoleController@index');//角色列表
   Route::get('/role/destroy/{role_id?}','Admin\RoleController@destroy');//删除
-  Route::get('/role/addmenu/{menu_id?}','Admin\RoleController@addmenu');//角色添加权限
+  Route::get('/role/addpriv/{role_id?}','Admin\RoleController@addpriv');//角色添加权限
+  Route::post('/addprivdo','Admin\RoleController@addprivdo');//执行添加权限
 });
 
 //权限管理
@@ -106,7 +120,17 @@ Route::prefix('/menu')->group(function(){
   Route::post('/store','Admin\MenuController@store');//执行添加
   Route::any('/list','Admin\MenuController@index');//菜单列表
   Route::get('/menu/destroy/{menu_id?}','Admin\MenuController@destroy');//删除
+<<<<<<< HEAD
+=======
+ 
+});
+});
+
+>>>>>>> wang
 
 });
 
+<<<<<<< HEAD
 });
+=======
+>>>>>>> wang

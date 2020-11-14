@@ -97,9 +97,36 @@ class RoleController extends Controller
             return redirect('role/list');
         }
     }
-    public function addmenu($id){
-        $role_id=$id;
-        $Role_MenuModel=new Role_MenuModel();
-        $res=$Role_MenuModel->addmenu($role_id);
+    public function addpriv($role_id){
+        // dump($role_id);
+        $MenuModel=new MenuModel();
+        $Menu = $MenuModel::get();
+        // dd($Menu);
+        $role_menu = Role_MenuModel::where('role_id',$role_id)->pluck('menu_id');
+        
+        $role_menu = count($role_menu)?$role_menu->toArray():[];
+        // dd($role_menu);
+        // $Menu = menuTree($Menu);
+        return view('role/addpriv',['menu'=>$Menu,'role_id'=>$role_id,'role_menu'=>$role_menu]);
+    }
+
+     //角色权限添加
+     public function addprivdo(Request $request){
+        $post = $request->except('_token');
+        // dd($post);
+        if(isset($post['menucheck'])){
+            Role_MenuModel::where('role_id',$post['role_id'])->delete();
+            $data = [];
+            foreach($post['menucheck'] as $v){
+                $data[]=[
+                    'role_id' => $post['role_id'],
+                    'menu_id' => $v
+                ];
+                
+            }
+            // dump($data);
+            Role_MenuModel::insert($data);
+        }
+        return redirect('role/list');
     }
 }

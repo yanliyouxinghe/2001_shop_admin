@@ -36,6 +36,7 @@
                 <td>{{$v->admin_name}}</td>
                 
                 <td>
+                
                     <a href="admin/destroy/{{$v->admin_id}}" onclick="DeleteGetId({{$v->admin_id}},this)">
                         <button type="button" class="layui-btn layui-btn-danger">删除</button>
                     </a>
@@ -46,7 +47,7 @@
             </tr>
             @endforeach
             <tr>
-                <td colspan="5">{{$data->links()}}</td>
+            <<td colspan="6">{{ $data->links('vendor.pagination.adminbrand') }}</td>
             </tr>
             
             

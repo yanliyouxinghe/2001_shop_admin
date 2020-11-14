@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Model\AdminModel;
 use App\Model\RoleModel;
 use App\Model\MenuModel;
+use App\Model\Admin_RoleModel;
 class AdminController extends Controller
 {
     /**
@@ -28,9 +29,10 @@ class AdminController extends Controller
      */
     public function create()
     {
-        
+        $RoleModel=new RoleModel();
+        $role=$RoleModel->roleinfo();
         // dd($data);
-       return  view('admin.create');
+       return  view('admin.create',['role'=>$role]);
     }
 
     /**
@@ -42,11 +44,23 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         
-        $data=$request->except('_token');
+        $data=$request->except('_token','role');
+       
         $AdminModel =  new AdminModel();
-        $data =  $AdminModel->create_data($data);
-        if($data){
+        $data['admin_pwd']=password_hash($data['admin_pwd'],PASSWORD_DEFAULT);
+        $reg=  $AdminModel->create($data);
+         
+        if($reg){
+            $role=$request->role;
+            $datas=[];
+            foreach($role as $k=>$v){
+                $datas['admin_id']=$reg->admin_id;
+                $datas['role_id']=$v;
+                $admin_role=Admin_RoleModel::insert($datas);
+            }
+          if($admin_role){
             return redirect('admin/list');
+          }
         }
     }
 
