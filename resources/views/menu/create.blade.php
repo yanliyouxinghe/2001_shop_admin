@@ -47,6 +47,15 @@
             <b style="color:red; font-family:'仿宋' "></b> 
             </div>
         </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">是否显示:</label>
+            <div class="layui-input-block">
+           是<input type="radio" name="is_show" value="1">
+           否<input type="radio" name="is_show" value="2">
+            <b style="color:red; font-family:'仿宋' "></b> 
+            </div>
+        </div>
+
        
 <div class="layui-form-item">
             <label class="layui-form-label"></label>

@@ -23,6 +23,10 @@ class RoleModel extends Model
          }
     
     }
+    public function roleinfo(){
+        $role=self::get();
+        return $role;
+    }
     public function list_data(){
         $data=self::orderBy('role_id','desc')->paginate(3);;
         return $data;
