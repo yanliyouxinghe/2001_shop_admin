@@ -144,7 +144,6 @@
     © layui.com - 底部固定区域
   </div>
 </div>
-<!-- <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script> -->
 <script src="/static/admin/layui.js"></script>
 <script src="/static/admin/jquery.min.js"></script>
 <script>

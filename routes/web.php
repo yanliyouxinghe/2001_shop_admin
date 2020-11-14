@@ -58,10 +58,8 @@ Route::prefix('/cartgory')->group(function(){
   Route::post('/destroy','Admin\CartgoryController@destroy');
   Route::get('/edit/{id}','Admin\CartgoryController@edit');
   Route::post('/update','Admin\CartgoryController@update');
+
 });
-
-
-//品牌
 
 Route::prefix('/brand')->group(function(){
   Route::get('/create','Admin\BrandController@create');
@@ -84,23 +82,6 @@ Route::prefix('/notice')->group(function(){
   Route::get('/show/{id}','Admin\NoticeController@show');
   Route::post('/edit/{id}','Admin\NoticeController@edit');
   Route::any('/updated','Admin\NoticeController@updated');
-});
-
-
-//管理员
-Route::prefix('/admin')->group(function(){
-  Route::get('/create','Admin\AdminController@create');//添加管理员
-  Route::post('/store','Admin\AdminController@store');//执行添加
-  Route::any('/list','Admin\AdminController@index');//管理员列表
-  Route::get('/admin/destroy/{admin_id?}','Admin\AdminController@destroy');//删除
-});
-//角色管理
-Route::prefix('/role')->group(function(){
-  Route::get('/create','Admin\RoleController@create');//添加角色
-  Route::post('/store','Admin\RoleController@store');//执行添加
-  Route::any('/list','Admin\RoleController@index');//角色列表
-  Route::get('/role/destroy/{role_id?}','Admin\RoleController@destroy');//删除
-  Route::get('/role/addmenu/{menu_id?}','Admin\RoleController@addmenu');//角色添加权限
 });
 
 //管理员

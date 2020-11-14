@@ -138,7 +138,7 @@
 </body>
 </html>
 <script src="/static/admin/layui.js"></script>
-<script src="/static/admin/layui.min.js"></script>
+<script src="/static/admin/jquery.min.js"></script>
 <script>
 //JavaScript代码区域
 layui.use(['element','form','laydate'], function(){

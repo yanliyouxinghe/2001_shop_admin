@@ -11,7 +11,6 @@ class LoginController extends Controller
 {
     /**登录视图 */
     public function login(){
-    //    echo encrypt(123);
        return view('/login');
     }
 
@@ -19,10 +18,11 @@ class LoginController extends Controller
     public function logindo(){
         $post = request()->except('_token');
         $admin = AdminModel::where('admin_name',$post['admin_name'])->first();
-        // dd($admin);
+  
         if(!$admin){
             return redirect('/login')->with('msg','用户名或密码错误');die;
         }
+
 
         if(password_verify($post['admin_pwd'],$admin->admin_pwd)){
               session(['admin_name'=>$admin->admin_name]);
@@ -30,7 +30,6 @@ class LoginController extends Controller
         }else{
             return redirect('/login')->with('msg','用户名或密码错误');
         }
-      
     }
 
     /**退出登录 */
