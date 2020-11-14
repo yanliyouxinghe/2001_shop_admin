@@ -16,19 +16,19 @@
 <blockquote class="layui-elem-quote layui-text">
 <h4 style="color:green">广告添加</h4>
 </blockquote>
-    <form class="layui-form" action="{{url('/adv/store')}}" method="post" enctype="multipart/form-data">
+    <form class="layui-form" action="{{url('/adv/update/'.$adv->adv_id)}}" method="post" enctype="multipart/form-data">
          @csrf
          <div class="layui-form-item">
             <label class="layui-form-label">广告名称:</label>
             <div class="layui-input-block">
-            <input type="text" name="adv_name" lay-verify="title" autocomplete="off" placeholder="请输入广告名称" class="layui-input">
+            <input type="text" name="adv_name" value="{{$adv->adv_name}}" lay-verify="title" autocomplete="off" placeholder="请输入广告名称" class="layui-input">
             </div>
         </div>
 
         <div class="layui-form-item">
                <label class="layui-form-label">媒介类型</label>
                <div class="layui-input-block">
-                 <select name="media_type" lay-filter="demo">
+                 <select name="media_type" lay-filter="demo" value="{{$adv->media_type==1?'图片':'文字'}}">
                    <option value="0">--请选择--</option>
                    <option value="1" >图片</option>
                    <option value="2">文字</option>
@@ -39,7 +39,7 @@
            <div class="layui-form-item layui-form-text desc" style="display: none;">
             <label class="layui-form-label">普通文本域</label>
             <div class="layui-input-block"> 
-              <textarea placeholder="请输入内容" class="layui-textarea" name="adv_desc"></textarea>
+              <textarea placeholder="请输入内容" class="layui-textarea" name="adv_desc">{{$adv->adv_desc}}</textarea>
             </div>
           </div>
 
@@ -67,7 +67,11 @@
                  <select name="ad_id" lay-filter="aihao">
                    <option value="">--请选择--</option>
                    @foreach($ad as $v)
-                   <option value="{{$v->ad_id}}">{{$v->ad_name}}</option>
+                   @if($v->ad_id==$adv->ad_id)
+                   <option value="{{$v->ad_id}}"  selected>{{$v->ad_name}}</option>
+                   @else
+                   <option value="{{$v->ad_id}}" >{{$v->ad_name}}</option>
+                   @endif
                    @endforeach
                    
                  </select>
@@ -95,7 +99,7 @@
          <div class="layui-form-item">
             <label class="layui-form-label">广告链接:</label>
             <div class="layui-input-block">
-            <input type="text" name="adv_link" lay-verify="title" autocomplete="off" placeholder="请输入广告链接" class="layui-input">
+            <input type="text" name="adv_link"  value="{{$adv->adv_link}}" lay-verify="title" autocomplete="off" placeholder="请输入广告链接" class="layui-input">
              
             </div>
         </div>
@@ -104,8 +108,8 @@
         <div class="layui-form-item" pane="">
              <label class="layui-form-label">是否开启:</label>
              <div class="layui-input-block">
-               <input type="radio" name="is_open" value="1" title="是" checked="">
-               <input type="radio" name="is_open" value="2" title="否">
+               <input type="radio" name="is_open" value="1" title="是" {{$adv->is_open==1?'checked':""}}>是
+               <input type="radio" name="is_open" value="2" title="否" {{$adv->is_open==2?'checked':""}}>否
              </div>
         </div>
 
@@ -113,7 +117,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">联系人Email:</label>
             <div class="layui-input-block">
-            <input type="text" name="link_email" lay-verify="title" autocomplete="off" placeholder="请输入联系人Email" class="layui-input"> 
+            <input type="text" name="link_email" value="{{$adv->link_email}}" lay-verify="title" autocomplete="off" placeholder="请输入联系人Email" class="layui-input"> 
             </div>
         </div>
 
@@ -121,14 +125,14 @@
         <div class="layui-form-item">
             <label class="layui-form-label">联系人电话:</label>
             <div class="layui-input-block">
-            <input type="text" name="link_tel" lay-verify="title" autocomplete="off" placeholder="请输入联系人电话" class="layui-input"> 
+            <input type="text" name="link_tel" value="{{$adv->link_tel}}" lay-verify="title" autocomplete="off" placeholder="请输入联系人电话" class="layui-input"> 
             </div>
         </div>        
 
         <div class="layui-form-item">
             <label class="layui-form-label"></label>
             <div class="layui-input-block" align="center">
-            <button type="submit" class="layui-btn">添加</button>
+            <button type="submit" class="layui-btn">修改</button>
             <button type="reset" class="layui-btn layui-btn-primary">清除</button>
             </div>
         </div>

@@ -42,7 +42,7 @@
                 <td>{{$v->adv_id}}</td>
                 <td>{{$v->adv_name}}</td>
                 <td>{{$v->media_type==1?'图片':'文字'}}</td>
-                <td>{{$v->adv_name}}</td>
+                <td>{{$v->ad_name}}</td>
                 <td>{{$v->start_time}}</td>
                 <td>{{$v->end_time}}</td>
                 <td>{{$v->adv_link}}</td>
@@ -70,7 +70,25 @@
 
 <script src="http://libs.baidu.com/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript">
+ /**ajax删除 */
+  $(document).on('click','.del',function(){
+     var _this = $(this);
+     var adv_id =_this.attr('adv_id');
+     if(!adv_id){
+         return;
+     }
 
+     if(confirm("您确定要删除吗?")){
+        $.get('/adv/destroy',{adv_id:adv_id},function(res){  
+            if(res.code==0){
+                _this.parent().parent().remove();
+            }else{
+                alert(res.msg);
+            }
+        },'json');
+     }
+
+  })
 
 
 

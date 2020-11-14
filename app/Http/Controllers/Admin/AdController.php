@@ -51,14 +51,30 @@ class AdController extends Controller
         $adv = AdvModel::join('sh_ad','sh_adv.ad_id','=','sh_ad.ad_id')
                        ->where('sh_adv.ad_id',$id)
                        ->paginate(5);
-        return view('admin.adv.index',['adv'=>$adv]);
+        return view('adv.index',['adv'=>$adv]);
     }
 
 
    
     /**生成广告 */
-    public function createhtml($ad_id){
-        
+    public function sh($ad_id){
+        //根据广告位ID查询广告位信息
+        $res = AdModel::where('ad_id',$ad_id)->orderBy('ad_id','desc')->first();
+        if($res->template==1){
+            $ads = AdvModel::where('ad_id',$ad_id)->value('adv_img');
+            $template='onepic';
+        }else if($res->template==2){
+        $ads = AdvModel::where('ad_id',$ad_id)->pluck('adv_img');
+        $template='morepic';
+        }
+        $content = view('ad.ads.'.$template,['ads'=>$ads,'height'=>$res->ad_height,'width'=>$res->ad_width])->render();
+        // dd($content);
+        $filename = resource_path('views/ad/lib/'.$ad_id.".blade.php");
+        $red = file_put_contents($filename,$content);
+        if($red){
+            echo "<script>alert('生成成功');history.go(-1);</script>";
+        }
+
     }
 
     /**
@@ -107,10 +123,9 @@ class AdController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id=0)
+    public function destroy()
     {
         $id = request()->ad_id;
-       
         if(!$id){
             return json_encode(['code'=>1,'msg'=>'参数丢失。。。。']);
         }
