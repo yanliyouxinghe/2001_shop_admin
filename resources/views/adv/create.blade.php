@@ -16,7 +16,7 @@
 <blockquote class="layui-elem-quote layui-text">
 <h4 style="color:green">广告添加</h4>
 </blockquote>
-    <form class="layui-form" action="{{url('/adv/store')}}" method="post">
+    <form class="layui-form" action="{{url('/adv/store')}}" method="post" enctype="multipart/form-data">
          @csrf
          <div class="layui-form-item">
             <label class="layui-form-label">广告名称:</label>
@@ -46,17 +46,17 @@
 
          
           <div class="layui-form-item image">
-                <label class="layui-form-label">上传图片:</label>
+                <label class="layui-form-label" name="adv_img" >上传图片:</label>
                 <div class="layui-input-block">
                 <div class="layui-upload-drag" id="test10">
                   <i class="layui-icon">&#xe67c;</i>
                   <p>点击上传，或将文件拖拽到此处</p >
-                  <div class="layui-hide" id="uploadDemoView">
+                  <div class="layui-hide" id="uploadDemoView" >
                     <hr>
                     <img src="" alt="上传成功后渲染" style="max-width: 196px">
+                    <input type="hidden" name="adv_img" value="">
                   </div>
                 </div>
-                <input type="hidden" name="adv_img">
                 </div>
             </div>
          
@@ -64,7 +64,7 @@
             <div class="layui-form-item">
                <label class="layui-form-label">广告位置</label>
                <div class="layui-input-block">
-                 <select name="position_id" lay-filter="aihao">
+                 <select name="ad_id" lay-filter="aihao">
                    <option value="">--请选择--</option>
                    @foreach($ad as $v)
                    <option value="{{$v->ad_id}}">{{$v->ad_name}}</option>
@@ -78,7 +78,7 @@
             <div class="layui-inline">
               <label class="layui-form-label">开始日期</label>
               <div class="layui-input-inline">
-                <input type="text" name="start_time" class="layui-input" id="test5" placeholder="yyyy-MM-dd HH:mm:ss">
+                <input type="text" name="start_time" class="layui-input" id="date1" placeholder="yyyy-MM-dd HH:mm:ss">
               </div>
             </div>
 			    </div>
@@ -87,7 +87,7 @@
             <div class="layui-inline">
               <label class="layui-form-label">结束日期</label>
               <div class="layui-input-inline">
-                <input type="text" name="end_time" class="layui-input" id="test6" placeholder="yyyy-MM-dd HH:mm:ss">
+                <input type="text" name="end_time" class="layui-input" id="date" placeholder="yyyy-MM-dd HH:mm:ss">
               </div>
             </div>
 			    </div>
@@ -99,7 +99,6 @@
              
             </div>
         </div>
-
 
 
         <div class="layui-form-item" pane="">
@@ -138,6 +137,7 @@
 </body>
 </html>
 <script src="/static/admin/layui.js"></script>
+<<<<<<< HEAD
 <script src="/static/admin/jquery.min.js"></script>
 <script>
 //JavaScript代码区域
@@ -210,6 +210,10 @@ upload.render({
 });
 
 
+=======
+<script src="/static/admin/jquery.js"></script>
+<script src="http://libs.baidu.com/jquery/1.7.2/jquery.min.js"></script>
+>>>>>>> gu
 
 
 

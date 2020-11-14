@@ -231,6 +231,7 @@ layui.use('upload', function(){
             layer.msg(res.msg);
             layui.$('#uploadDemoView').removeClass('layui-hide').find('img').attr('src', res.data);
             layui.$('#fileview').attr('value',res.data);
+            $('input[name="adv_img"]').val(res.data);
         }
     });
 
