@@ -15,10 +15,7 @@ class AdminModel extends Model
      //黑名单
      protected $guarded=[];
 
-<<<<<<< HEAD
 
-=======
->>>>>>> gu
 
 
 
@@ -41,8 +38,3 @@ class AdminModel extends Model
             return $res;
      }
 }
-<<<<<<< HEAD
-=======
-
-
->>>>>>> gu
