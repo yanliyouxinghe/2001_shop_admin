@@ -16,10 +16,6 @@ class AdminModel extends Model
      protected $guarded=[];
 
 
-
-
-
-
      public function create_data($data){
         $data['admin_pwd']=password_hash($data['admin_pwd'],PASSWORD_DEFAULT);
          $data=self::create($data);
