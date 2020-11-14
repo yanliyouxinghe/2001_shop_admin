@@ -45,18 +45,54 @@
             <a href="{{url('ad/ch/'.$v->ad_id)}}"><button type="button" class="layui-btn layui-btn-normal">查看广告</button></a>
             <a href="{{url('ad/edit/'.$v->ad_id)}}"><button type="button" class="layui-btn layui-btn-normal">修改</button></a>
             <button type="button" class="layui-btn layui-btn-danger del" ad_id="{{$v->ad_id}}">删除</button>
-
+               </td>
            
           </tr>
         @endforeach
+        <tr><td colspan="6">{{$ad->links()}}</td></tr>
         </tbody>
      </table>
     </div>
-
-
-
     </body>
     </html>
-   
+
+<script src="http://libs.baidu.com/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+  $(document).on('click','.del',function(){
+    var _this = $(this);
+    var ad_id = _this.attr('ad_id');
+    if(!ad_id){
+      return; 
+    }
+  if(confirm("您确定要删除吗?")){
+      $.get('/ad/destroy',{ad_id:ad_id},function(res){
+          if(res.code==0){
+              _this.parent().parent().remove();
+          }else{
+            alert(res.msg);
+          }
+      
+      },'json')
+  }
+    
+
+
+  })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
 @endsection
 
