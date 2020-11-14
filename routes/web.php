@@ -114,8 +114,19 @@ Route::prefix('/menu')->group(function(){
   Route::post('/store','Admin\MenuController@store');//执行添加
   Route::any('/list','Admin\MenuController@index');//菜单列表
   Route::get('/menu/destroy/{menu_id?}','Admin\MenuController@destroy');//删除
-
- 
+});
+//商品类型
+Route::prefix('/goodstype')->group(function(){
+  Route::get('/create','Admin\GoodsTypeController@create');//商品类型添加
+  Route::post('/store','Admin\GoodsTypeController@store');//执行添加
+  Route::get('/list','Admin\GoodsTypeController@index');//类型展示
+  Route::get('/destroy','Admin\GoodsTypeController@destroy')->name('/goodstype/destroy');
+  Route::get('/addprop/{id}','Admin\GoodsTypeController@addprop');
+  Route::post('/addpropdo','Admin\GoodsTypeController@addpropdo');
+  Route::get('/proplist/{id}','Admin\GoodsTypeController@proplist');//商品属性列表
+  Route::get('/delattr','Admin\GoodsTypeController@delattr');//删除属性
+  Route::get('/addattr/{id}','Admin\GoodsTypeController@addattr');//添加属性
+  Route::post('/storeattr','Admin\GoodsTypeController@storeattr');//执行添加属性
 });
 });
 
