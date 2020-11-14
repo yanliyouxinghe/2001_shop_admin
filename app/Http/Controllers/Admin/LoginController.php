@@ -18,7 +18,7 @@ class LoginController extends Controller
     public function logindo(){
         $post = request()->except('_token');
         $admin = AdminModel::where('admin_name',$post['admin_name'])->first();
-  
+        // dd($admin);
         if(!$admin){
             return redirect('/login')->with('msg','用户名或密码错误');die;
         }
@@ -26,6 +26,7 @@ class LoginController extends Controller
 
         if(password_verify($post['admin_pwd'],$admin->admin_pwd)){
               session(['admin_name'=>$admin->admin_name]);
+              session(['admin_id'=>$admin->admin_id]);
               return redirect('/');
         }else{
             return redirect('/login')->with('msg','用户名或密码错误');

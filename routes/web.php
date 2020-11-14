@@ -18,6 +18,8 @@ Route::post('/logindo','Admin\LoginController@logindo');//执行登录
 
 
 Route::middleware('login')->group(function(){
+  Route::middleware('checkadmin')->group(function(){
+  
 Route::get('/', function(){
     return view('layouts.layout');
 });
@@ -75,6 +77,8 @@ Route::prefix('/brand')->group(function(){
   Route::get('/destroy','Admin\BrandController@destroy')->name('brand.destroy');//品牌删除
   Route::get('/show/{id}','Admin\BrandController@show');
   Route::post('/edit/{id}','Admin\BrandController@edit');
+
+
   Route::any('/updated','Admin\BrandController@updated')->name('brand.updated');//品牌修改
 });
 
@@ -93,27 +97,28 @@ Route::prefix('/notice')->group(function(){
 
 //管理员
 Route::prefix('/admin')->group(function(){
-  Route::get('/create','Admin\AdminController@create');//添加管理员
+  Route::get('/create','Admin\AdminController@create')->name('admin.create');//添加管理员
   Route::post('/store','Admin\AdminController@store');//执行添加
-  Route::any('/list','Admin\AdminController@index');//管理员列表
-  Route::get('/admin/destroy/{admin_id?}','Admin\AdminController@destroy');//删除
+  Route::any('/list','Admin\AdminController@index')->name('admin.list');//管理员列表
+  Route::get('/admin/destroy/{admin_id?}','Admin\AdminController@destroy')->name('admin.destroy');//删除
 });
 //角色管理
 Route::prefix('/role')->group(function(){
-  Route::get('/create','Admin\RoleController@create');//添加角色
+  Route::get('/create','Admin\RoleController@create')->name('role.create');//添加角色
   Route::post('/store','Admin\RoleController@store');//执行添加
-  Route::any('/list','Admin\RoleController@index');//角色列表
-  Route::get('/role/destroy/{role_id?}','Admin\RoleController@destroy');//删除
-  Route::get('/role/addpriv/{role_id?}','Admin\RoleController@addpriv');//角色添加权限
+  Route::any('/list','Admin\RoleController@index')->name('role.list');//角色列表
+  Route::get('/role/destroy/{role_id?}','Admin\RoleController@destroy')->name('role.destroy');//删除
+  Route::get('/role/addpriv/{role_id?}','Admin\RoleController@addpriv')->name('role.addpriv');//角色添加权限
   Route::post('/addprivdo','Admin\RoleController@addprivdo');//执行添加权限
 });
 
 //权限管理
 Route::prefix('/menu')->group(function(){
-  Route::get('/create','Admin\MenuController@create');//添加菜单
+  Route::get('/create','Admin\MenuController@create')->name('menu.create');//添加菜单
   Route::post('/store','Admin\MenuController@store');//执行添加
-  Route::any('/list','Admin\MenuController@index');//菜单列表
-  Route::get('/menu/destroy/{menu_id?}','Admin\MenuController@destroy');//删除
+  Route::any('/list','Admin\MenuController@index')->name('menu.index');//菜单列表
+  Route::get('/menu/destroy/{menu_id?}','Admin\MenuController@destroy')->name('menu.destroy');//删除
+
 });
 //商品类型
 Route::prefix('/goodstype')->group(function(){
@@ -127,7 +132,7 @@ Route::prefix('/goodstype')->group(function(){
   Route::get('/delattr','Admin\GoodsTypeController@delattr');//删除属性
   Route::get('/addattr/{id}','Admin\GoodsTypeController@addattr');//添加属性
   Route::post('/storeattr','Admin\GoodsTypeController@storeattr');//执行添加属性
+
 });
 });
-
-
+});

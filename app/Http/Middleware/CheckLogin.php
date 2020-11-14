@@ -16,6 +16,7 @@ class CheckLogin
     public function handle($request, Closure $next)
     {
         $admin = session('admin_name');
+        // dd($admin);
         if(!$admin){
             return redirect('/login');
         }
