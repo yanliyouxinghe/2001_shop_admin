@@ -14,12 +14,18 @@
 //后台登录
 Route::get('/login','Admin\LoginController@login');//登录
 Route::post('/logindo','Admin\LoginController@logindo');//执行登录
-Route::get('/logout','Admin\LoginController@logout');//退出登录
+
+
 
 Route::middleware('login')->group(function(){
 Route::get('/', function(){
     return view('layouts.layout');
 });
+
+Route::get('/logout','Admin\LoginController@logout');//退出登录
+Route::get('/changepwd','Admin\LoginController@changepwd');//修改密码
+Route::post('/changpwdDo','Admin\LoginController@changpwdDo');//执行修改密码
+
 
 //广告位置
 Route::prefix('ad')->group(function(){
