@@ -16,7 +16,7 @@
 <blockquote class="layui-elem-quote layui-text">
 <h4 style="color:green">广告添加</h4>
 </blockquote>
-    <form class="layui-form" action="{{url('/adv/store')}}" method="post">
+    <form class="layui-form" action="{{url('/adv/store')}}" method="post" enctype="multipart/form-data">
          @csrf
          <div class="layui-form-item">
             <label class="layui-form-label">广告名称:</label>
@@ -46,17 +46,17 @@
 
          
           <div class="layui-form-item image">
-                <label class="layui-form-label">上传图片:</label>
+                <label class="layui-form-label" name="adv_img" >上传图片:</label>
                 <div class="layui-input-block">
                 <div class="layui-upload-drag" id="test10">
                   <i class="layui-icon">&#xe67c;</i>
                   <p>点击上传，或将文件拖拽到此处</p >
-                  <div class="layui-hide" id="uploadDemoView">
+                  <div class="layui-hide" id="uploadDemoView" >
                     <hr>
                     <img src="" alt="上传成功后渲染" style="max-width: 196px">
+                    <input type="hidden" name="adv_img" value="">
                   </div>
                 </div>
-                <input type="hidden" name="adv_img">
                 </div>
             </div>
          
@@ -64,7 +64,7 @@
             <div class="layui-form-item">
                <label class="layui-form-label">广告位置</label>
                <div class="layui-input-block">
-                 <select name="position_id" lay-filter="aihao">
+                 <select name="ad_id" lay-filter="aihao">
                    <option value="">--请选择--</option>
                    @foreach($ad as $v)
                    <option value="{{$v->ad_id}}">{{$v->ad_name}}</option>
@@ -78,7 +78,7 @@
             <div class="layui-inline">
               <label class="layui-form-label">开始日期</label>
               <div class="layui-input-inline">
-                <input type="text" name="start_time" class="layui-input" id="test5" placeholder="yyyy-MM-dd HH:mm:ss">
+                <input type="text" name="start_time" class="layui-input" id="date1" placeholder="yyyy-MM-dd HH:mm:ss">
               </div>
             </div>
 			    </div>
@@ -87,7 +87,7 @@
             <div class="layui-inline">
               <label class="layui-form-label">结束日期</label>
               <div class="layui-input-inline">
-                <input type="text" name="end_time" class="layui-input" id="test6" placeholder="yyyy-MM-dd HH:mm:ss">
+                <input type="text" name="end_time" class="layui-input" id="date" placeholder="yyyy-MM-dd HH:mm:ss">
               </div>
             </div>
 			    </div>
@@ -99,7 +99,6 @@
              
             </div>
         </div>
-
 
 
         <div class="layui-form-item" pane="">
@@ -138,78 +137,8 @@
 </body>
 </html>
 <script src="/static/admin/layui.js"></script>
-<script src="/static/admin/layui.min.js"></script>
-<script>
-//JavaScript代码区域
-layui.use(['element','form','laydate'], function(){
-  var element = layui.element;
-  var form = layui.form;
-  var laydate = layui.laydate;
-  form.render();
-
-  //日期时间选择器
-  laydate.render({
-    elem: '#test5'
-    ,type: 'datetime'
-  });
-    //日期时间选择器
-    laydate.render({
-    elem: '#test6'
-    ,type: 'datetime'
-  });
-
-})
-
-layui.use(['element','form'], function(){
-  var element = layui.element;
-  var form=layui.form;
-  form.on('select(demo)', function(data){
-    var type_id=data.value;
-    //alert(type_id);
-    if (type_id==1) {
-     $('.image').show();
-     $('.desc').hide();
-    }else{
-     $('.image').hide();
-     $('.desc').show();
-    }
-});
-});
-
-
-
-
-
-
-
-
-layui.use('upload', function(){
-  var $ = layui.jquery
-  ,upload = layui.upload;
-
-  $.ajaxSetup({
-    headers: {
-    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-  });
-
-//拖拽上传
-upload.render({
-    elem: '#test10'
-    ,url: 'http://2001.shop.admin/adv/upload' //改成您自己的上传接口
-    ,done: function(res){
-      layer.msg(res.msg);
-      layui.$('#uploadDemoView').removeClass('layui-hide').find('img').attr('src', res.data);
-      //console.log(res)
-
-      layui.$('input[name="ad_img"]').attr('value',res.data);
-    }
-  });
-
-
-});
-
-
+<script src="/static/admin/jquery.js"></script>
+<script src="http://libs.baidu.com/jquery/1.7.2/jquery.min.js"></script>
 
 
 

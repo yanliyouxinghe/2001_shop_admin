@@ -11,13 +11,6 @@ class LoginController extends Controller
 {
     /**登录视图 */
     public function login(){
-<<<<<<< HEAD
-    //    if(Hash::check('plain-text', $hashedPassword)) { 
-    //        // 密码匹配... 
-    //}
-=======
-    //    echo encrypt(123);
->>>>>>> main
        return view('/login');
     }
 

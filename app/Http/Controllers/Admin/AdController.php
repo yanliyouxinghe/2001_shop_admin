@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\AdModel;
+use App\Model\AdvModel;
 class AdController extends Controller
 {
     /**
@@ -14,7 +15,7 @@ class AdController extends Controller
      */
     public function index()
     {
-        $ad = AdModel::orderBy('ad_id','desc')->paginate(3);
+        $ad = AdModel::where('is_del',1)->orderBy('ad_id','desc')->paginate(3);
         return view('ad.index',['ad'=>$ad]);
     }
 
@@ -43,6 +44,23 @@ class AdController extends Controller
         }
     }
 
+    
+
+    /**查看广告 */
+    public function ch($id){
+        $adv = AdvModel::join('sh_ad','sh_adv.ad_id','=','sh_ad.ad_id')
+                       ->where('sh_adv.ad_id',$id)
+                       ->paginate(5);
+        return view('admin.adv.index',['adv'=>$adv]);
+    }
+
+
+   
+    /**生成广告 */
+    public function createhtml($ad_id){
+        
+    }
+
     /**
      * Display the specified resource.
      *
@@ -62,7 +80,8 @@ class AdController extends Controller
      */
     public function edit($id)
     {
-        //
+        $ad = AdModel::where('ad_id',$id)->first();
+        return view('ad.edit',['ad'=>$ad]);
     }
 
     /**
@@ -74,7 +93,12 @@ class AdController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = $request->except('_token');
+        $res = AdModel::where('ad_id',$id)->update($post);
+        if($res){
+            return redirect('/ad');
+        }
+        
     }
 
     /**
@@ -83,8 +107,20 @@ class AdController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id=0)
     {
-        //
+        $id = request()->ad_id;
+       
+        if(!$id){
+            return json_encode(['code'=>1,'msg'=>'参数丢失。。。。']);
+        }
+        $res = AdModel::where('ad_id',$id)->update(["is_del"=>2]);
+        if($res){
+            return json_encode(['code'=>0,'msg'=>'OK']);
+        }else{
+            return json_encode(['code'=>2,'msg'=>'操作繁忙。。。']);
+        }
+
+    
     }
 }

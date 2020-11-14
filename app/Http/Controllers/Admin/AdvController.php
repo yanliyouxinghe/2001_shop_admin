@@ -15,7 +15,10 @@ class AdvController extends Controller
      */
     public function index()
     {
-        //
+        $adv = AdvModel::join('sh_ad','sh_adv.ad_id','=','sh_ad.ad_id')
+                        ->orderBy('adv_id','desc')
+                        ->paginate(5);
+        return view('adv.index',['adv'=>$adv]);                
     }
 
     /**
@@ -29,6 +32,16 @@ class AdvController extends Controller
         return view('adv.create',['ad'=>$ad]);
     }
 
+    //单图片
+    // public function upload(Request $request){
+    //     if ($request->hasFile('file') && $request->file('file')->isValid()) {
+    //         $photo = $request->file;
+    //         $store_result = $photo->store('upload');
+    //          return $this->success('上传成功',env('UPLOADS_URL').$store_result);
+    //     }
+    //       return $this->error('上传失败');
+    // } 
+
     /**
      * Store a newly created resource in storage.
      *
@@ -37,7 +50,13 @@ class AdvController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post = $request->except('_token');
+        // dd($post);
+        $res = AdvModel::create($post);
+        // dd($res);
+        if($res){
+            return redirect('/adv');
+        }
     }
 
     /**

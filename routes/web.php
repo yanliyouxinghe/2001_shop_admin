@@ -29,14 +29,17 @@ Route::prefix('ad')->middleware('login')->group(function(){
   Route::get('destroy/{id}','Admin\AdController@destroy');   //广告位置删除
   Route::get('edit/{id}','Admin\AdController@edit');   //广告位置修改
   Route::post('update/{id}','Admin\AdController@update');   //广告位置执行修改
+  Route::get('/destroy','Admin\AdController@destroy');   //广告位置删除
   Route::any('upload','Admin\AdController@upload');   //广告图片
+  Route::any('/createhtml/{ad_id}','Admin\AdController@createhtml');   //生成文件
+  Route::any('/ch/{ad_id}','Admin\AdController@ch');   //查看文件
 });
 
 //广告
 Route::prefix('adv')->group(function(){
   Route::any('/create','Admin\AdvController@create')->name('adv.create');
   Route::post('/store','Admin\AdvController@store');
-  Route::get('/index','Admin\AdvController@index');
+  Route::get('/','Admin\AdvController@index');
   Route::any('/show/{id}','Admin\AdvController@show')->name('adv.show');;   ///预览
   Route::any('/edit/{id}','Admin\AdvController@edit');
   Route::any('/update/{id}','Admin\AdvController@update');
