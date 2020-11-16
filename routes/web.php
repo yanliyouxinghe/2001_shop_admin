@@ -125,7 +125,7 @@ Route::prefix('/goodstype')->group(function(){
   Route::get('/create','Admin\GoodsTypeController@create');//商品类型添加
   Route::post('/store','Admin\GoodsTypeController@store');//执行添加
   Route::get('/list','Admin\GoodsTypeController@index');//类型展示
-  Route::get('/destroy','Admin\GoodsTypeController@destroy')->name('/goodstype/destroy');
+  Route::get('/destroy','Admin\GoodsTypeController@destroy')->name('goodstype.destroy');
   Route::get('/addprop/{id}','Admin\GoodsTypeController@addprop');
   Route::post('/addpropdo','Admin\GoodsTypeController@addpropdo');
   Route::get('/proplist/{id}','Admin\GoodsTypeController@proplist');//商品属性列表
@@ -134,5 +134,17 @@ Route::prefix('/goodstype')->group(function(){
   Route::post('/storeattr','Admin\GoodsTypeController@storeattr');//执行添加属性
 
 });
+//商品
+Route::prefix('/goods')->group(function(){
+  Route::get('/create','Admin\GoodsController@create');
+  Route::any('/upload','Admin\GoodsController@upload');
+  Route::post('/uploads','Admin\GoodsController@uploads');
+  Route::get('/getattr','Admin\GoodsController@getattr');
+  Route::post('/store','Admin\GoodsController@store');
+  Route::post('/pruct','Admin\GoodsController@pruct');
+  Route::get('/list','Admin\GoodsController@list');
+  Route::get('/jyl/{id}','Admin\GoodsController@item');
+});
+
 });
 });
