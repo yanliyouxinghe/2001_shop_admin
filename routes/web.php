@@ -41,6 +41,7 @@ Route::prefix('ad')->group(function(){
   Route::any('upload','Admin\AdController@upload');   //广告图片
   Route::any('/sh/{ad_id}','Admin\AdController@sh');   //生成广告
   Route::any('/ch/{ad_id}','Admin\AdController@ch');   //查看广告
+  Route::post('/change','Admin\AdController@change')->name('ad.change');//广告位置即点即改
 });
 
 //广告
@@ -54,6 +55,7 @@ Route::prefix('adv')->group(function(){
   Route::get('edit/{id}','Admin\AdvController@edit');   //广告修改
   Route::any('/update/{id}','Admin\AdvController@update')->name('adv.update');  //执行修改
   Route::any('/upload','Admin\AdvController@upload');   //上传文件
+  Route::post('/change','Admin\AdvController@change')->name('adv.change');//广告位置即点即改
 });
 
 //分类

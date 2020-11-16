@@ -22,6 +22,7 @@
             <label class="layui-form-label">广告名称:</label>
             <div class="layui-input-block">
             <input type="text" name="adv_name" lay-verify="title" autocomplete="off" placeholder="请输入广告名称" class="layui-input">
+            <b style="color:red">{{$errors->first('adv_name')}}</b>
             </div>
         </div>
 

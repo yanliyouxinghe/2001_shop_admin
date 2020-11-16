@@ -22,6 +22,7 @@
             <label class="layui-form-label">广告位置名称:</label>
             <div class="layui-input-block">
             <input type="text" name="ad_name" lay-verify="title" autocomplete="off" placeholder="请输入广告位置位名称" class="layui-input">
+            <b style="color:red">{{$errors->first('ad_name')}}</b>
             </div>
         </div>
 
@@ -29,6 +30,7 @@
             <label class="layui-form-label">广告位置宽度:</label>
             <div class="layui-input-block">
             <input type="text" name="ad_width" lay-verify="title" autocomplete="off" placeholder="请输入广告位置宽度" class="layui-input">
+            <b style="color:red">{{$errors->first('ad_width')}}</b>
             </div>
         </div>
 
