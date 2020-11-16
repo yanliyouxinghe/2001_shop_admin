@@ -20,10 +20,11 @@ class Admin
      */
     public function handle($request, Closure $next)
     {   
+        //查询权限
         $url=$request->route()->getAction();
     //    $url= $request->route()->getName();
         // $url=Route::currentRouteName();
-        // dd($url);
+       // dd($url);
         $admin_id = session('admin_id');
         if(!$admin_id){
             return redirect('/login');
@@ -51,8 +52,11 @@ class Admin
         // dd($arr3);
         // dd($arr3);
     //     if(!in_array($url['as'],$arr3)){
-    //         die('403');
+    //       return redirect('/403');
     //    }
         return $next($request);
     }
+
+     //查询左侧菜单
+
 }

@@ -41,6 +41,19 @@
               @endforeach
             </div>
         </div>
+        <div class="form-group">
+        <label for="firstname" class="col-sm-2 control-label">管理员头像</label>
+        <div class="layui-upload-drag" id="test10">
+            <input type="hidden" id="fileview" name="admin_logo" value="">
+            <i class="layui-icon"></i>
+            <p>点击上传，或将文件拖拽到此处</p>
+            <div class="layui-hide" id="uploadDemoView">
+                <hr>
+                <img src="" alt="上传成功后渲染" style="max-width: 196px">
+            </div>
+        </div>
+        <span style="color: darkred;"></span>
+    </div>
 <div class="layui-form-item">
             <label class="layui-form-label"></label>
             <div class="layui-input-block" align="center">
