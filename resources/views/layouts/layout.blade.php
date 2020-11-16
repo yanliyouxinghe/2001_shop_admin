@@ -46,90 +46,24 @@
     <div class="layui-side-scroll">
       <!-- 左侧导航区域（可配合layui已有的垂直导航） -->  
       <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-        <li class="layui-nav-item">
-          <a class="" href="javascript:;">品牌管理</a>
+      @php $name = Route::currentRouteName(); @endphp
+     
+      @if(isset($priv))
+      @foreach($priv as $v)
+         
+        <li @if(strpos($name,$v->menu_url)!==false) class="layui-nav-item" @else class="layui-nav-item " @endif>
+          <a class="" href="javascript:;">{{$v->menu_name}}</a>
+          @if($v->son) 
           <dl class="layui-nav-child">
-            <dd><a href="/brand/create">添加品牌</a></dd>
-            <dd><a href="/brand/list">品牌列表</a></dd>
+            @foreach($v->son as $value)
+            <dd @if($name==$value->menu_url) class="layui-this" @endif><a href="{{$value->route}}">{{$value->menu_name}}</a></dd>
+            @endforeach
           </dl>
+          @endif
         </li>
-        <li class="layui-nav-item">
-          <a class="" href="javascript:;">公告管理</a>
-          <dl class="layui-nav-child">
-            <dd><a href="/notice/create">添加公告</a></dd>
-            <dd><a href="/notice/list">公告列表</a></dd>
-          </dl>
-        </li>
-        <li class="layui-nav-item">
-          <a class="" href="javascript:;">分类管理</a>
-          <dl class="layui-nav-child">
-            <dd><a href="/cartgory/create">添加分类</a></dd>
-            <dd><a href="/cartgory/list">分类列表</a></dd>
-          </dl>
-        </li>
-        <li class="layui-nav-item">
-          <a href="javascript:;">商品管理</a>
-          <dl class="layui-nav-child">
-            <dd><a href="/goods/create">添加商品</a></dd>
-            <dd><a href="/goods/list">商品列表</a></dd>
-          </dl>
-        </li>
-        <li class="layui-nav-item">
-          <a href="javascript:;">角色管理</a>
-          <dl class="layui-nav-child">
-            <dd><a href="/role/create">添加角色</a></dd>
-            <dd><a href="/role/list">角色列表</a></dd>
-          </dl>
-        </li>
-
-        <li class="layui-nav-item">
-          <a href="javascript:;">菜单管理</a>
-          <dl class="layui-nav-child">
-            <dd><a href="/menu/create">添加菜单</a></dd>
-            <dd><a href="/menu/list">菜单列表</a></dd>
-          </dl>
-        </li>
-
-        <li class="layui-nav-item">
-          <a href="javascript:;">管理员管理</a>
-          <dl class="layui-nav-child">
-            <dd><a href="/admin/create">添加管理员</a></dd>
-            <dd><a href="/admin/list">管理员列表</a></dd>
-          </dl>
-        </li>
-
-
-        <li class="layui-nav-item">
-          <a href="javascript:;">商品类型管理</a>
-          <dl class="layui-nav-child">
-            <dd><a href="/goodstype/create">添加类型</a></dd>
-            <dd><a href="/goodstype/list">类型列表</a></dd>
-          </dl>
-        </li>
-
-        <li class="layui-nav-item">
-          <a href="javascript:;">广告位置管理</a>
-          <dl class="layui-nav-child">
-            <dd><a href="/ad/create">广告位置添加</a></dd>
-            <dd><a href="/ad">广告位置列表</a></dd>
-          </dl>
-        </li>
-
-        <li class="layui-nav-item">
-          <a href="javascript:;">广告管理</a>
-          <dl class="layui-nav-child">
-            <dd><a href="/adv/create">广告添加</a></dd>
-            <dd><a href="/adv">广告列表</a></dd>
-          </dl>
-        </li>
-
-        <li class="layui-nav-item">
-          <a href="javascript:;">营销管理</a>
-          <dl class="layui-nav-child">
-            <dd><a href="/seckill/list">秒杀列表</a></dd>
-          </dl>
-        </li>
-
+      @endforeach
+      }
+      @endif
       </ul>
     </div>
   </div>

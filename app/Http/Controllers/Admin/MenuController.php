@@ -47,10 +47,16 @@ class MenuController extends Controller
         $MenuModel =  new MenuModel();
         $data =  $MenuModel->create_data($data);
         if($data){
-            return redirect('menu/list');
+          echo "<script>
+                  if(confirm('添加成功,是否继续添加')==true){
+                      location.href='create';
+                 }else{
+                    location.href='list';
+                 }
+                 </script>";
         }
-    }
 
+    }
     /**
      * Display the specified resource.
      *
@@ -70,12 +76,7 @@ class MenuController extends Controller
      */
     public function edit($id)
     {
-        $menu_id=$id; 
-        $MenuModel =  new MenuModel();
-         $res=$MenuModel->destroy_date($menu_id);
-        if($res){
-            return redirect('menu/list');
-        }
+        //
     }
 
     /**
@@ -98,6 +99,11 @@ class MenuController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $menu_id=$id; 
+        $MenuModel =  new MenuModel();
+         $res=$MenuModel->destroy_date($menu_id);
+        if($res){
+            return redirect('menu/list');
+        }
     }
 }

@@ -112,9 +112,51 @@ class AdminController extends Controller
         if($res){
             return redirect('admin/list');
         }
-           
+    }
+
+    public function addrole($admin_id){
+        $RoleModel=new RoleModel();
+        $Role = $RoleModel::get();
+        // dd($Menu);
+        $Admin_role = Admin_RoleModel::where('admin_id',$admin_id)->pluck('role_id');
         
-        
+        $admin_role = count($Admin_role)?$Admin_role->toArray():[];
+        // dd($admin_role);
+        // $Menu = menuTree($Menu);
+        return view('admin/addrole',['role'=>$Role,'admin_id'=>$admin_id,'admin_role'=>$admin_role]);
+    }
+    public function addroledo(Request $request){
+        $post = $request->except('_token');
+        // dd($post);
+        if(isset($post['menucheck'])){
+            Role_MenuModel::where('admin_id',$post['admin_id'])->delete();
+            $data = [];
+            foreach($post['menucheck'] as $v){
+                $data[]=[
+                    'admin_id' => $post['admin_id'],
+                    'role_id' => $v
+                ];
+                
+            }
+            // dump($data);
+            Admin_RoleModel::insert($data);
+        }
+        return redirect('admin/list');
+    }
+
+
+    public function uploads(Request $request)
+    {
+        //接收文件上传的值
+        $photo = $request->file();
+        if ($request->hasFile('file') && $request->file('file')->isValid()) {
+        $photo = $request->file('file');
+        //文件上传
+        $store_result = $photo->store("upload");
+            $store_results = '/'.$store_result;
+            return json_encode(['code'=>0,'msg'=>'上传成功','data'=>$store_results]);
+        }
+        return json_encode(['code'=>1,'msg'=>'文件上传失败']);
 
     }
 }
