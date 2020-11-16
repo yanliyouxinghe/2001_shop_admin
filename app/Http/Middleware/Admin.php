@@ -51,12 +51,40 @@ class Admin
         }
         // dd($arr3);
         // dd($arr3);
-    //     if(!in_array($url['as'],$arr3)){
-    //       return redirect('/403');
-    //    }
+        if(!in_array($url['as'],$arr3)){
+          return redirect('/403');
+       }
+
+          //查询左侧菜单
+     if($admin_id == 1){
+        $privmenu = \DB::select("select * from sh_menu where is_show = 1");
+       // dd($privmenu);
+    }else{
+        $privmenu = \DB::select("select DISTINCT rm.menu_id,m.* from sh_role_menu as rm inner join sh_menu as m on rm.menu_id=m.menu_id inner join sh_admin_role as ar on ar.role_id = rm.role_id where m.is_show =1 and ar.admin_id='$admin_id'");
+    }
+      //控制左侧菜单的展示
+        // dd($privmenu);
+        $privmenu = $this->createsontree($privmenu);
+       
+       // dd($privmenu);
+        view()->share('priv',$privmenu);
         return $next($request);
+        return $next($request);
+     
     }
 
-     //查询左侧菜单
-
+    public function createsontree($data,$partent_id=0){
+        if(!$data){
+            return;
+        }
+        $newarray = [];
+        foreach($data as $k=>$v){
+            if($v->parent_id==$partent_id){
+                $newarray[$k] = $v;
+                $newarray[$k]->son = $this->createsontree($data,$v->menu_id);
+            }
+        }
+        return $newarray;
+    }
+     
 }

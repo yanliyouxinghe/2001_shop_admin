@@ -46,8 +46,8 @@ Route::prefix('ad')->group(function(){
 Route::prefix('adv')->group(function(){
   Route::any('/create','Admin\AdvController@create')->name('adv.create');//广告添加
   Route::post('/store','Admin\AdvController@store')->name('adv.store');//广告执行添加
-  Route::get('/index','Admin\AdvController@index')->name('adv.index');
-  Route::get('/','Admin\AdvController@index')->name('adv./');
+
+  Route::get('/','Admin\AdvController@index')->name('adv.index');//广告列表
   Route::any('/show/{id}','Admin\AdvController@show')->name('adv.show');;   ///预览
   Route::any('/destroy','Admin\AdvController@destroy')->name('adv.destroy');//广告删除
   Route::get('edit/{id}','Admin\AdvController@edit')->name('adv.edit');   //广告修改
@@ -61,7 +61,7 @@ Route::prefix('/cartgory')->group(function(){
   Route::get('/create','Admin\CartgoryController@create')->name('cartgory.create');//分类添加
   Route::post('/store','Admin\CartgoryController@store')->name('cartgory.store');
   Route::get('/list','Admin\CartgoryController@index')->name('cartgory.list');//分类展示
-  Route::post('/destroy','Admin\CartgoryController@destroy')->name('cartgory.destroy');//分类上删除
+  Route::post('/destroy','Admin\CartgoryController@destroy')->name('cartgory.destroy');//分类删除
   Route::get('/edit/{id}','Admin\CartgoryController@edit')->name('cartgory.edit');
   Route::post('/update','Admin\CartgoryController@update')->name('cartgory.update');//分类修改
 
