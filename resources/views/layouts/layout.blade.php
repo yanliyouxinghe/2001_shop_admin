@@ -165,24 +165,24 @@ layui.use(['element','form','layedit'], function(){
       layedit.build('demo'); //建立编辑器
 
       form.on('select(demo)', function(data){
-          var goods_id = data.value;
-          if(goods_id.length==0){
-            return false;
-          }else{
-            $.post('/seckill/getgoodsprice',{goods_id:goods_id},function(res){
-              if(res.code==0){
-                var shop_price = res.data.shop_price;
-                $('input[name="goods_price"]').val(shop_price);
-              }else{
-                $('input[name="goods_price"]').val(shop_price);
-              }
-
-            },'json');
-          }
+            var cat_id = data.value;
+            if(!cat_id){
+              return;
+            }
+            $.get('/goods/getattr',{cat_id:cat_id},function(ret){
+                  $('#attrTable').html(ret);
+                  layui.use(['element','form'], function() {
+            var element = layui.element;
+            var form = layui.form;
+            form.render();
+        });
       });
+});
 
 
 });
+
+
 
 layui.use(['laydate'], function(){
    var laydate = layui.laydate;

@@ -12,3 +12,4 @@ class GoodsModel extends Model
 
       public $timestamps = false;
 }
+
