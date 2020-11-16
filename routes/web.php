@@ -65,6 +65,9 @@ Route::prefix('/cartgory')->group(function(){
   Route::post('/destroy','Admin\CartgoryController@destroy')->name('cartgory.destroy');//分类上删除
   Route::get('/edit/{id}','Admin\CartgoryController@edit');
   Route::post('/update','Admin\CartgoryController@update')->name('cartgory.update');//分类修改
+  Route::post('/destrys','Admin\CartgoryController@destrys');//分类修改
+
+  
 
 });
 

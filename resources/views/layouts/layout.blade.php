@@ -10,7 +10,7 @@
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
   <div class="layui-header">
-    <div class="layui-logo"><img src="/static/admin/images/111.png" height="60px" width="200px"></div>
+    <div class="layui-logo"><img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=652968666,3496267388&fm=26&gp=0.jpg" height="60px" width="200px"></div>
     <!-- 头部区域（可配合layui已有的水平导航） -->
     <ul class="layui-nav layui-layout-left">
       <li class="layui-nav-item"><a href="">控制台</a></li>
@@ -29,7 +29,7 @@
     <ul class="layui-nav layui-layout-right">
       <li class="layui-nav-item">
         <a href="javascript:;">
-          <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+          <img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2287385688,3737610662&fm=11&gp=0.jpg" class="layui-nav-img">
           {{request()->session()->get('admin_name')}}
         </a>
         <dl class="layui-nav-child">
@@ -199,7 +199,6 @@ layui.use(['laydate'], function(){
 
 
 
-
 layui.use(['layer', 'jquery', 'form'], function () {
 			var layer = layui.layer,
 					$ = layui.jquery,
@@ -268,8 +267,6 @@ layui.use('upload', function(){
     }
   });
 });
-
-
 
 
 

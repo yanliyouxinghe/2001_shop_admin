@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\CartgoryModel;
+use App\Model\GoodsModel;
 class CartgoryController extends Controller
 {
     /**
@@ -169,9 +170,33 @@ class CartgoryController extends Controller
         }else{
           return json_encode(['code'=>3,'msg'=>'删除失败，原因：该分类下存在子分类']);
         }
+    }
 
+    public function destrys(Request $request){
+        $cat_ids = $request->input('cat_ids');
+        if($cat_ids[0] == 'on'){
+            unset($cat_ids[0]);
+        }
 
+        foreach ($cat_ids as $k => $v) {
+           $count =  CartgoryModel::where('parent_id',$v)->count();
+           if(!$count){
+              $goods = GoodsModel::where('cat_id',$v)->count();
+              // dd($goods);
+              if(!$goods){
+                    $is_del = CartgoryModel::destroy($v);
+                    if($is_del){
+                        return json_encode(['code'=>0,'msg'=>'OK']);
+                    }else{
+                       return json_encode(['code'=>2,'msg'=>'删除失败']);
+                    }
+              }else{
+                 return json_encode(['code'=>4,'msg'=>'删除失败，原因：您所选择的分类下存在商品']);
+              }
+           }else{
+             return json_encode(['code'=>3,'msg'=>'删除失败，原因：您所选择的分类下存在子分类']);
+           }
 
-
+        }
     }
 }
