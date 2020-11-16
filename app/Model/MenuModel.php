@@ -28,7 +28,7 @@ class MenuModel extends Model
     public function create_data($data){
         $data=self::create($data);
         if($data){
-           return redirect('menu.list');
+           return $data;
         }
    
    }

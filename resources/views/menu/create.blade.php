@@ -33,7 +33,13 @@
             <b style="color:red; font-family:'仿宋' "></b> 
             </div>
         </div>
-        
+        <div class="layui-form-item">
+            <label class="layui-form-label">路径:</label>
+            <div class="layui-input-block">
+            <input type="text" name="route" lay-verify="title" autocomplete="off" placeholder="请输入路径" class="layui-input">
+            <b style="color:red; font-family:'仿宋' "></b> 
+            </div>
+        </div>
         <div class="layui-form-item">
             <label class="layui-form-label">所属模块:</label>
             <div class="layui-input-block">

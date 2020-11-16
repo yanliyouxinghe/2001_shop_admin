@@ -25,7 +25,7 @@
             <tr>
                 <th>管理员id</th>
                 <th>管理员名称</th>
-
+                <th>管理员logo</th>
                 <th>操作</th>
             </tr> 
             </thead>
@@ -34,7 +34,12 @@
             <tr>
                 <td>{{$v->admin_id}}</td>
                 <td>{{$v->admin_name}}</td>
-                
+                <td>
+            @if($v->admin_logo)
+            <img src="{{$v->admin_logo}}" width="50px" height="50px">
+            @endif
+
+            </td>
                 <td>
                 
                     <a href="admin/destroy/{{$v->admin_id}}" onclick="DeleteGetId({{$v->admin_id}},this)">
@@ -42,6 +47,9 @@
                     </a>
                     <a href="{{url('admin/edit/'.$v->admin_id)}}">
                         <button type="button" class="layui-btn layui-btn-normal">编辑</button>
+                    </a>
+                    <a href="admin/addrole/{{$v->admin_id}}" onclick="DeleteGetId({{$v->admin_id}},this)">
+                        <button type="button" class="layui-btn layui-btn-normal">添加角色</button>
                     </a>
                 </td>
             </tr>
