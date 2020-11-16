@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\AdModel;
 use App\Model\AdvModel;
+use App\Http\Requests\StoreAdPost;
 class AdController extends Controller
 {
     /**
@@ -35,7 +36,7 @@ class AdController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreAdPost $request)
     {
         $post = $request->except('token');
         $res = AdModel::create($post);
@@ -43,8 +44,6 @@ class AdController extends Controller
             return redirect('/ad');
         }
     }
-
-    
 
     /**查看广告 */
     public function ch($id){
@@ -54,8 +53,6 @@ class AdController extends Controller
         return view('adv.index',['adv'=>$adv]);
     }
 
-
-   
     /**生成广告 */
     public function sh($ad_id){
         //根据广告位ID查询广告位信息
@@ -63,9 +60,9 @@ class AdController extends Controller
         if($res->template==1){
             $ads = AdvModel::where('ad_id',$ad_id)->value('adv_img');
             $template='onepic';
-        }else if($res->template==2){
-        $ads = AdvModel::where('ad_id',$ad_id)->pluck('adv_img');
-        $template='morepic';
+            }else if($res->template==2){
+            $ads = AdvModel::where('ad_id',$ad_id)->pluck('adv_img');
+            $template='morepic';
         }
         $content = view('ad.ads.'.$template,['ads'=>$ads,'height'=>$res->ad_height,'width'=>$res->ad_width])->render();
         // dd($content);
@@ -107,11 +104,11 @@ class AdController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreAdPost $request, $id)
     {
         $post = $request->except('_token');
         $res = AdModel::where('ad_id',$id)->update($post);
-        if($res){
+        if($res!==false){
             return redirect('/ad');
         }
         
@@ -126,16 +123,42 @@ class AdController extends Controller
     public function destroy()
     {
         $id = request()->ad_id;
+
+        // foreach($id as $key=>$val){
+        //     $res = AdModel::where(['ad_id'=>$val])->update(['is_del'=>2]);
+        // }
+        // dd($res);
         if(!$id){
-            return json_encode(['code'=>1,'msg'=>'参数丢失。。。。']);
+            return json_encode(['code'=>1,'msg'=>'参数丢失']);
         }
-        $res = AdModel::where('ad_id',$id)->update(["is_del"=>2]);
-        if($res){
-            return json_encode(['code'=>0,'msg'=>'OK']);
+        if(is_array($id)){
+            foreach($id as $key=>$val){
+            $res = AdModel::where(['ad_id'=>$val])->update(['is_del'=>2]);
+            }
         }else{
-            return json_encode(['code'=>2,'msg'=>'操作繁忙。。。']);
+            $res = AdModel::where(['ad_id'=>$id])->update(['is_del'=>2]);
         }
 
-    
+        if($res){
+            return json_encode(['code'=>0,'msg'=>'删除成功']);
+        }else{
+            return json_encode(['code'=>2,'msg'=>'操作繁忙']);
+        }
+
+    }
+
+    /**即点即改 */
+    public function change(Request $request){
+        $id = $request->id;
+        $ad_name =  $request->ad_name;
+        if(!$id || !$ad_name){
+            return json_encode(['code'=>1,'msg'=>'参数丢失。。。。']);
+        }
+        $res = AdModel::where('ad_id',$id)->update(['ad_name'=>$ad_name]);
+        if($res==1){
+            return json_encode(['code'=>0,'msg'=>'修改成功']);
+        }else{
+            return json_encode(['code'=>4,'msg'=>'修改失败']);
+        }
     }
 }

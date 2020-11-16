@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\AdvModel;    
 use App\Model\AdModel;   //广告位置
+use App\Http\Requests\StoreAdvPost;   
 class AdvController extends Controller
 {
     /**
@@ -17,6 +18,7 @@ class AdvController extends Controller
     {
         $adv = AdvModel::join('sh_ad','sh_adv.ad_id','=','sh_ad.ad_id')
                         ->orderBy('adv_id','desc')
+                        ->where('sh_adv.is_del',1)
                         ->paginate(5);
         return view('adv.index',['adv'=>$adv]);                
     }
@@ -48,7 +50,7 @@ class AdvController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreAdvPost $request)
     {
         $post = $request->except('_token');
         // dd($post);
@@ -91,7 +93,7 @@ class AdvController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreAdvPost $request, $id)
     {
         $post = $request->except('_token');
         $res = AdvModel::where('adv_id',$id)->update($post);
@@ -109,19 +111,37 @@ class AdvController extends Controller
     public function destroy()
     {
         $id = request()->adv_id;
-        
+
         if(!$id){
-            return json_encode(['code'=>1,'msg'=>'参数缺失']);
+            return json_encode(['code'=>1,'msg'=>'参数丢失']);
+        }
+        if(is_array($id)){
+            foreach($id as $key=>$val){
+            $res = AdvModel::where(['adv_id'=>$val])->update(['is_del'=>2]);
+            }
+        }else{
+            $res = AdvModel::where(['adv_id'=>$id])->update(['is_del'=>2]);
         }
 
-        $res = AdvModel::where('adv_id',$id)->update(["is_del"=>2]);
-        // dd($res);
         if($res){
-            return json_encode(['code'=>0,'msg'=>'OK']);
+            return json_encode(['code'=>0,'msg'=>'删除成功']);
         }else{
             return json_encode(['code'=>2,'msg'=>'操作繁忙']);
         }
+    }
 
-
+    /**即点即改 */
+    public function change(Request $request){
+        $id = $request->id;
+        $adv_name = $request->adv_name;
+        if(!$id || !$adv_name){
+            return json_encode(['code'=>1,'msg'=>'参数缺失']);
+        }
+        $res = AdvModel::where('adv_id',$id)->update(['adv_name'=>$adv_name]);
+        if($res==1){
+            return json_encode(['code'=>0,'msg'=>'修改成功']);
+        }else{
+            return json_encode(['code'=>4,'msg'=>'修改失败']);
+        }
     }
 }

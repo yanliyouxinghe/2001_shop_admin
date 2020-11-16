@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @extends('layout.layout')
 @section('title','商品列表')
 @section('content')
@@ -8,6 +9,15 @@
               <a><cite>商品列表</cite></a>
             </span>
 <center><h1>商品列表</h1></center>
+=======
+@extends('layouts.layout')
+@section('title','商品列表')
+@section('content')
+<!-- class="layui-form" -->
+<blockquote class="layui-elem-quote layui-text">
+<h4 style="color:green">商品展示</h4>
+</blockquote>
+>>>>>>> main
 
 <div style="padding: 15px;">
     <form class="layui-form" action="/admin/goods" style="padding-bottom: 10px;padding-left: 10px;">
@@ -33,7 +43,11 @@
                 <th width="50px">商品存库</th>
                 <th width="50px">库存警告数量</th>
                 <th width="200px">操作</th>
+<<<<<<< HEAD
             </tr> 
+=======
+            </tr>
+>>>>>>> main
         </thead>
         <tbody>
         @foreach($goods as $v)
@@ -49,19 +63,33 @@
                 <td>{{$v->goods_number}}</td>
                 <td>{{$v->warn_number}}</td>
                 <td>
+<<<<<<< HEAD
                 <!-- <a href="/goods/item/{{$v->goods_id}}"><button type="button" class="layui-btn layui-btn-normal">查看</button></a> -->
                 <a href="/goods/item/{{$v->goods_id}}"><button type="button" class="layui-btn layui-btn-normal">查看</button></a>
                     <a href="/goods/edit/{{$v->goods_id}}"><button type="button" class="layui-btn layui-btn-normal">修改</button></a>
+=======
+                <a href="/goods/jyl/{{$v->goods_id}}"><button type="button" class="layui-btn layui-btn-normal">查看</button></a>
+                    <a href="/admin/goods/edit/{{$v->goods_id}}"><button type="button" class="layui-btn layui-btn-normal">修改</button></a>
+>>>>>>> main
                     <button type="button" class="layui-btn layui-btn-danger del">删除</button>
                 </td>
             </tr>
         @endforeach
         </tbody>
+<<<<<<< HEAD
         
     </table>
     </div>
 </div>
 <script src="/jquery.js"></script>
+=======
+
+    </table>
+    </div>
+</div>
+<!-- <script src="/jquery.js"></script> -->
+<script src="/static/js/jquery.min.js"></script>
+>>>>>>> main
 <script>
     //删除
     $(document).on('click','.del',function(){
@@ -94,4 +122,8 @@
     })
 </script>
 
+<<<<<<< HEAD
 @endsection
+=======
+@endsection
+>>>>>>> main

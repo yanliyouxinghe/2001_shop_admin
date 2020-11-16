@@ -22,6 +22,7 @@
      <table class="layui-table">
         <thead>
             <tr width="400px">
+                <th><input type="checkbox"  name="allbox"></th>
                 <th width="200px">广告ID</th>
                 <th width="300px">广告名称</th>
                 <th width="300px">媒介类型</th>
@@ -39,8 +40,11 @@
         <tbody>
         @foreach($adv as $v)
           <tr adv_id="{{$v->adv_id}}">
+                <td><input type="checkbox" class="box" name="box" value="{{$v->adv_id}}"></td>
                 <td>{{$v->adv_id}}</td>
-                <td>{{$v->adv_name}}</td>
+                <td id="{{$v->adv_id}}" oldval="{{$v->adv_name}}">
+                     <span class="span_name">{{$v->adv_name}}</span>
+                </td>
                 <td>{{$v->media_type==1?'图片':'文字'}}</td>
                 <td>{{$v->ad_name}}</td>
                 <td>{{$v->start_time}}</td>
@@ -61,7 +65,9 @@
            
           </tr>
         @endforeach
-        <tr><td colspan="12">{{$adv->links()}}</td></tr>
+        <tr><td colspan="7">{{$adv->links()}}</td>
+          <button type="button" class="moredel">批量删除</button>
+        </tr>
         </tbody>
      </table>
     </div>
@@ -71,24 +77,106 @@
 <script src="http://libs.baidu.com/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript">
  /**ajax删除 */
-  $(document).on('click','.del',function(){
-     var _this = $(this);
-     var adv_id =_this.attr('adv_id');
-     if(!adv_id){
-         return;
-     }
-
-     if(confirm("您确定要删除吗?")){
-        $.get('/adv/destroy',{adv_id:adv_id},function(res){  
+ $(document).on('click','.del',function(){
+    var _this = $(this);
+    var adv_id = [];''
+    adv_id.push(_this.attr('adv_id'));
+    if(!adv_id){
+      return; 
+    }
+    if(confirm("您确定要删除吗?")){
+        $.get('/adv/destroy',{'adv_id':adv_id},function(res){
             if(res.code==0){
                 _this.parent().parent().remove();
             }else{
-                alert(res.msg);
+              alert(res.msg);
+            }     
+        },'json')
+    }
+  })
+
+
+  /**批量删除 */
+  $(document).on('click','.moredel',function(){
+    var adv_id = new Array();
+    $('input[name="box"]:checked').each(function(){
+        // console.log($(this));
+        adv_id.push($(this).val());
+    });
+    // return false
+    if(adv_id.length==0){
+      alert("请选择要删除的数据");
+      return;
+    }
+    
+    //4.用ajax传数据
+    if(confirm("您确定要删除吗?")){
+      $.get('/adv/destroy',{'adv_id':adv_id},function(res){
+        if(res.code==0){
+          $('input[name="box"]:checked').parent().parent().remove();
+            }else{
+              alert(res.msg);
             }
-        },'json');
-     }
+      },'json')
+    }
+    
+  });''
+
+
+  /**全选反选 */
+  $(document).on('click','.layui-form-checkbox:eq(0)',function(){
+     var checkval = $('input[name="allbox"]').prop('checked');
+    $('input[name="box"]').prop('checked','checkval');
+    if(checkval){
+        $('.layui-form-checkbox:gt(0)').addClass('layui-form-checked');
+    }else{
+        $('.layui-form-checkbox:gt(0)').removeClass('layui-form-checked');
+    }
+  })
+
+  /**即点即改 */
+  $(document).on('click','.span_name',function(){
+     var adv_name=$(this).text();
+     var id = $(this).parent().attr('id');
+     $(this).parent().html('<input type="text" class="changeVal input_name"  value='+adv_name+'>');
+     //把|光标放到后面
+     $('.input_name').val('').focus().val(adv_name);
+     //第二部分 
+     $(document).on('blur','.changeVal',function(){
+         var newname = $(this).val();
+         if(!newname){
+             alert("内容不能为空");
+             return;
+         }  
+         //判断 不改  新值 = 旧值
+         var oldval = $(this).parent().val('oldval'); 
+         if(newname==oldval){
+            $(this).parent().html('<span class="span_name">'+newname+'</span>');
+            return;
+         } 
+         var id = $(this).parent().attr('id');
+         var obj = $(this);
+         //第三部分
+         $.ajax({
+             url:'/adv/change',
+             dataType:'json',
+             type:'post',
+             data:{id:id,adv_name:newname},
+             success:function(res){
+                 if(res.code==0){
+                    obj.parent().html('<span class="span_name">'+newname+'</span>');
+                 }
+             }
+         })
+         
+
+
+     })
 
   })
+
+
+
 
 
 

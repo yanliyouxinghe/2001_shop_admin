@@ -10,7 +10,7 @@
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
   <div class="layui-header">
-    <div class="layui-logo"><img src="/static/admin/images/111.png" height="60px" width="200px"></div>
+    <div class="layui-logo"><img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=652968666,3496267388&fm=26&gp=0.jpg" height="60px" width="200px"></div>
     <!-- 头部区域（可配合layui已有的水平导航） -->
     <ul class="layui-nav layui-layout-left">
       <li class="layui-nav-item"><a href="">控制台</a></li>
@@ -29,7 +29,7 @@
     <ul class="layui-nav layui-layout-right">
       <li class="layui-nav-item">
         <a href="javascript:;">
-          <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+          <img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2287385688,3737610662&fm=11&gp=0.jpg" class="layui-nav-img">
           {{request()->session()->get('admin_name')}}
         </a>
         <dl class="layui-nav-child">
@@ -46,90 +46,24 @@
     <div class="layui-side-scroll">
       <!-- 左侧导航区域（可配合layui已有的垂直导航） -->  
       <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-        <li class="layui-nav-item">
-          <a class="" href="javascript:;">品牌管理</a>
+      @php $name = Route::currentRouteName(); @endphp
+     
+      @if(isset($priv))
+      @foreach($priv as $v)
+         
+        <li @if(strpos($name,$v->menu_url)!==false) class="layui-nav-item" @else class="layui-nav-item " @endif>
+          <a class="" href="javascript:;">{{$v->menu_name}}</a>
+          @if($v->son) 
           <dl class="layui-nav-child">
-            <dd><a href="/brand/create">添加品牌</a></dd>
-            <dd><a href="/brand/list">品牌列表</a></dd>
+            @foreach($v->son as $value)
+            <dd @if($name==$value->menu_url) class="layui-this" @endif><a href="{{$value->route}}">{{$value->menu_name}}</a></dd>
+            @endforeach
           </dl>
+          @endif
         </li>
-        <li class="layui-nav-item">
-          <a class="" href="javascript:;">公告管理</a>
-          <dl class="layui-nav-child">
-            <dd><a href="/notice/create">添加公告</a></dd>
-            <dd><a href="/notice/list">公告列表</a></dd>
-          </dl>
-        </li>
-        <li class="layui-nav-item">
-          <a class="" href="javascript:;">分类管理</a>
-          <dl class="layui-nav-child">
-            <dd><a href="/cartgory/create">添加分类</a></dd>
-            <dd><a href="/cartgory/list">分类列表</a></dd>
-          </dl>
-        </li>
-        <li class="layui-nav-item">
-          <a href="javascript:;">商品管理</a>
-          <dl class="layui-nav-child">
-            <dd><a href="/goods/create">添加商品</a></dd>
-            <dd><a href="/goods/list">商品列表</a></dd>
-          </dl>
-        </li>
-        <li class="layui-nav-item">
-          <a href="javascript:;">角色管理</a>
-          <dl class="layui-nav-child">
-            <dd><a href="/role/create">添加角色</a></dd>
-            <dd><a href="/role/list">角色列表</a></dd>
-          </dl>
-        </li>
-
-        <li class="layui-nav-item">
-          <a href="javascript:;">菜单管理</a>
-          <dl class="layui-nav-child">
-            <dd><a href="/menu/create">添加菜单</a></dd>
-            <dd><a href="/menu/list">菜单列表</a></dd>
-          </dl>
-        </li>
-
-        <li class="layui-nav-item">
-          <a href="javascript:;">管理员管理</a>
-          <dl class="layui-nav-child">
-            <dd><a href="/admin/create">添加管理员</a></dd>
-            <dd><a href="/admin/list">管理员列表</a></dd>
-          </dl>
-        </li>
-
-
-        <li class="layui-nav-item">
-          <a href="javascript:;">商品类型管理</a>
-          <dl class="layui-nav-child">
-            <dd><a href="/goodstype/create">添加类型</a></dd>
-            <dd><a href="/goodstype/list">类型列表</a></dd>
-          </dl>
-        </li>
-
-        <li class="layui-nav-item">
-          <a href="javascript:;">广告位置管理</a>
-          <dl class="layui-nav-child">
-            <dd><a href="/ad/create">广告位置添加</a></dd>
-            <dd><a href="/ad">广告位置列表</a></dd>
-          </dl>
-        </li>
-
-        <li class="layui-nav-item">
-          <a href="javascript:;">广告管理</a>
-          <dl class="layui-nav-child">
-            <dd><a href="/adv/create">广告添加</a></dd>
-            <dd><a href="/adv">广告列表</a></dd>
-          </dl>
-        </li>
-
-        <li class="layui-nav-item">
-          <a href="javascript:;">营销管理</a>
-          <dl class="layui-nav-child">
-            <dd><a href="/seckill/list">秒杀列表</a></dd>
-          </dl>
-        </li>
-
+      @endforeach
+      }
+      @endif
       </ul>
     </div>
   </div>
@@ -165,24 +99,24 @@ layui.use(['element','form','layedit'], function(){
       layedit.build('demo'); //建立编辑器
 
       form.on('select(demo)', function(data){
-          var goods_id = data.value;
-          if(goods_id.length==0){
-            return false;
-          }else{
-            $.post('/seckill/getgoodsprice',{goods_id:goods_id},function(res){
-              if(res.code==0){
-                var shop_price = res.data.shop_price;
-                $('input[name="goods_price"]').val(shop_price);
-              }else{
-                $('input[name="goods_price"]').val(shop_price);
-              }
-
-            },'json');
-          }
+            var cat_id = data.value;
+            if(!cat_id){
+              return;
+            }
+            $.get('/goods/getattr',{cat_id:cat_id},function(ret){
+                  $('#attrTable').html(ret);
+                  layui.use(['element','form'], function() {
+            var element = layui.element;
+            var form = layui.form;
+            form.render();
+        });
       });
+});
 
 
 });
+
+
 
 layui.use(['laydate'], function(){
    var laydate = layui.laydate;
@@ -196,7 +130,6 @@ layui.use(['laydate'], function(){
   });
 
 });
-
 
 
 
@@ -268,8 +201,6 @@ layui.use('upload', function(){
     }
   });
 });
-
-
 
 
 

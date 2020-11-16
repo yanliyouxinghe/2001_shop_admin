@@ -3,7 +3,11 @@
 @section('content')
 
 <blockquote class="layui-elem-quote layui-text">
+<<<<<<< HEAD
 <h4 style="color:green">分类添加</h4>
+=======
+<h4 style="color:green">商品添加</h4>
+>>>>>>> main
 </blockquote>
 <form class="layui-form layui-form-pane" action="/goods/store" method="post" enctype="multipart/form-data">
 
@@ -43,7 +47,11 @@
     </div>
   </div>
 
+<<<<<<< HEAD
 
+=======
+   
+>>>>>>> main
   <div class="layui-form-item">
     <div class="layui-inline">
       <label class="layui-form-label">商品分类</label>
@@ -70,7 +78,11 @@
       </div>
     </div>
 
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> main
     <div class="form-group">
         <label for="firstname" class="col-sm-2 control-label">商品图片</label>
         <div class="layui-upload-drag" id="test10">
@@ -83,7 +95,11 @@
             </div>
         </div>
     </div>
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> main
     <div class="form-group">
         <label for="firstname" class="col-sm-2 control-label">商品缩略图</label>
         <div class="layui-upload-drag" id="test1">
@@ -129,7 +145,11 @@
     <label class="layui-form-label">库存警告数量</label>
     <div class="layui-input-inline">
       <input type="text" name="warn_number" lay-verify="required" placeholder="请输入商品存库" autocomplete="off" class="layui-input">
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> main
     </div>
   </div>
 
@@ -141,7 +161,10 @@
       <input type="checkbox" name="is_best" title="精品" value="1">
       <input type="checkbox" name="is_new" title="新品"  value="1" checked="">
       <input type="checkbox" name="is_hot" title="热销" value="1">
+<<<<<<< HEAD
       <input type="checkbox" name="is_show" title="首页轮播图" value="1">
+=======
+>>>>>>> main
     </div>
   </div>
 
@@ -197,7 +220,11 @@
     <!-- 多图片上传 -->
     <div class="layui-tab-item">
     <div class="layui-upload">
+<<<<<<< HEAD
   <button type="button" class="layui-btn" id="test2">多图片上传</button>
+=======
+  <button type="button" class="layui-btn" id="test2">多图片上传</button> 
+>>>>>>> main
   <blockquote class="layui-elem-quote  layui-quote-nm"  style="margin-top: 10px;">
     预览图：
     <div class="layui-upload-list demo2" id="demo2"></div>
@@ -207,12 +234,20 @@
     </div>
     <!-- 多图片上传 -->
 
+<<<<<<< HEAD
   </div>
+=======
+  </div>    
+>>>>>>> main
 
  <center><div>
         <button type="submit" class="layui-btn">添加</button>
         <button type="reset" class="layui-btn layui-btn-danger">重置</button>
+<<<<<<< HEAD
   </div></center>
+=======
+  </div></center> 
+>>>>>>> main
 </div>
 </form>
 <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
@@ -238,3 +273,11 @@ function descSpec(obj){
 
 </script>
 @endsection
+<<<<<<< HEAD
+=======
+
+
+
+
+
+>>>>>>> main

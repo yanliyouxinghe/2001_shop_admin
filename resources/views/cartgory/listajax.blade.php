@@ -1,5 +1,6 @@
 @foreach($cart_data as $v)
     <tr cat_id="{{$v->cat_id}}">
+        <td><input type="checkbox" class="cat_id" value="{{$v->cat_id}}" lay-skin="primary"></td>
         <td>{{$v->cat_id}}</td>
         <td>{{$v->cat_name}}</td>
         <td>

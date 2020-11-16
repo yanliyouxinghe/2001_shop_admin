@@ -30,7 +30,8 @@ class GoodsController extends Controller
      */
     public function list()
     {
-        $goods = Goods::get();
+
+        $goods = GoodsModel::get();
         return view('goods.list',['goods'=>$goods]);
     }
 
@@ -43,7 +44,7 @@ class GoodsController extends Controller
     {
         $data = CartgoryModel::all();
         $Ecsbrand = BrandModel::all();
-        $type = GoodsType::all();
+        $type = GoodsTypeModel::all();
         // dd($data);
         $weight_list =  $this->weightTrees($data);
         // dd($weight_list);
@@ -64,6 +65,7 @@ class GoodsController extends Controller
         }
         return $res;
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -90,9 +92,9 @@ class GoodsController extends Controller
                  $post['goods_sn'] = $post['goods_sn']?$post['goods_sn']:$this->addProduct();
                 $post['promote_start_date'] = strtotime($promote_start_date);
                 $post['promote_end_date'] = strtotime($promote_end_date);
-                // dd($post);
-                // dd($post);
-                $goods_id = Goods::insertGetId($post);
+ 
+                $goods_id = GoodsModel::insertGetId($post);
+
                 if(!$goods_id){
                     return false;
                 }
@@ -106,8 +108,8 @@ class GoodsController extends Controller
                                 'attr_price' => $attr_price_list[$i],
                             ];
                         }
-                      GoodsAttr::insert($data);
 
+                      Goods_AttrModel::insert($data);
 
                 }
                 $arr = [];
@@ -117,7 +119,8 @@ class GoodsController extends Controller
                         'img_url' => $v,
                     ];
                 }
-                GoodsGallery::insert($arr);
+
+                Goods_GalleryModel::insert($arr);
                 //判断是否有规格
                 $goods_sper= $this->Attrnum($goods_id);
                 // dump($goods_sper);
@@ -128,7 +131,8 @@ class GoodsController extends Controller
                         $new_goods_sper['attr_value'][$v['attr_id']][$v['goods_attr_id']] = $v['attr_value'];
                     }
                     //  dd($new_goods_sper);
-                        $goods = Goods::select('goods_id','goods_name','goods_sn')
+
+                        $goods = GoodsModel::select('goods_id','goods_name','goods_sn')
                                  ->where('goods_id',$goods_id)
                                  ->first();
                         return view('goods.product',['goods_sper'=>$new_goods_sper,'goods_id'=>$goods_id,'goods'=>$goods]);
@@ -164,8 +168,9 @@ class GoodsController extends Controller
                         'product_number' => $post['product_number'][$k]?:'1',
                     ];
                 }
-                $srt = Product::insert($product);
-                //dd($srt);
+
+                $srt = ProductModel::insert($product);
+   //dd($srt);
                 if($srt){
                     return redirect('/goods/list');
                 }else{
@@ -200,12 +205,9 @@ class GoodsController extends Controller
              // return $this->JsonResponse('0','上传成功',$store_results);
 
          }
-         return $this->JsonResponse('1','文件上传失败');
+         return json_encode(['code'=>1,'msg'=>'文件上传失败']);
 
      }
-
-
-
     /**
      * Display the specified resource.
      *
@@ -253,19 +255,26 @@ class GoodsController extends Controller
 
     public function getattr(Request $request){
         $cat_id = $request->all();
-        $attr = Attribute::where('cat_id',$cat_id)->get();
+        $attr = GoodsAttrModel::where('cat_id',$cat_id)->get();
         // dd($attr);
         return view('goods.typeattr',['attr'=>$attr]);
     }
 
 
     public function Attrnum($goods_id){
-            $res =  GoodsAttr::select('goods_attr_id','sh_goods_attr.attr_id','sh_attribute.attr_name','sh_goods_attr.attr_value')
-                    ->leftjoin('sh_attribute','sh_goods_attr.attr_id','=','sh_attribute.attr_id')
+
+            $res =  Goods_AttrModel::select('goods_attr_id','sh_goods_attr.attr_id','sh_attribute.attr_name','sh_goods_attr.attr_value')
+              ->leftjoin('sh_attribute','sh_goods_attr.attr_id','=','sh_attribute.attr_id')
                     ->where(['goods_id'=>$goods_id,'attr_type'=>1])
                     ->get();
             return $res ? $res->toArray() : [];
 
     }
 
+
+
+//     public function item($id){
+// //        $goods = GoodsModel::find($id);
+//         return view('goods.jyl');
+//     }
 }

@@ -94,8 +94,16 @@ class RoleController extends Controller
         $RoleModel =  new RoleModel();
          $res=$RoleModel->destroy_date($role_id);
         if($res){
-            return redirect('role/list');
-        }
+          
+                echo "<script>
+                        if(confirm('添加成功,是否继续添加')==true){
+                            location.href='create';
+                       }else{
+                          location.href='list';
+                       }
+                       </script>";
+              }
+        
     }
     public function addpriv($role_id){
         // dump($role_id);

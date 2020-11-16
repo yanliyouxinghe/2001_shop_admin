@@ -89,7 +89,7 @@
                 // console.log(res);
                 if( res.code == 0 ){
                     // location.reload();
-                    alert(res.msg)
+                    // alert(res.msg)
                     // $(".brand_id").remove();
                     _this.parent().html('<span class="brand_name">'+newname+'</span>');
                 }else{
