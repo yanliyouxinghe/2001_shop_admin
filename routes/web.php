@@ -18,11 +18,11 @@ Route::view('/403','403');//403
 
 
 Route::middleware('login')->group(function(){
-  Route::middleware('checkadmin')->group(function(){
-    Route::view('index','index')->name('index');//403  
-Route::get('/', function(){
-    return view('layouts.layout');
-});
+Route::middleware('checkadmin')->group(function(){
+Route::view('/','index')->name('index');//403  
+// Route::get('/', function(){
+//     return view('layouts.layout');
+// });
 
 Route::get('/logout','Admin\LoginController@logout')->name('logout');//退出登录
 Route::get('/changepwd','Admin\LoginController@changepwd')->name('changepwd');//修改密码
