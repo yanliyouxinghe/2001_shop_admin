@@ -53,6 +53,7 @@ class AdvController extends Controller
     public function store(StoreAdvPost $request)
     {
         $post = $request->except('_token');
+        $post['adv_img'] = 'http://2001.shop.admin.com'.$post['adv_img'];
         // dd($post);
         $res = AdvModel::create($post);
         // dd($res);
