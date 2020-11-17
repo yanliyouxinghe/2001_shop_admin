@@ -33,6 +33,7 @@
                 <th width="300px">是否开启</th>
                 <th width="300px">联系人电话</th>
                 <th width="300px">联系人Email</th>
+                <th width="300px">广告描述</th>
                 <th width="300px">模板类型</th>
                 <th width="300px">操作</th>
             </tr>
@@ -53,6 +54,7 @@
                 <td>{{$v->is_open}}</td>
                 <td>{{$v->link_tel}}</td>
                 <td>{{$v->link_email}}</td>
+                <td>{{$v->adv_desc}}</td>
                 <td>@if($v->template==1)单图片
                     @elseif($v->template==2)多图片
                     @else 文字
@@ -65,7 +67,7 @@
            
           </tr>
         @endforeach
-        <tr><td colspan="7">{{$adv->links()}}</td>
+        <tr><td colspan="8">{{$adv->links('vendor.pagination.adminbrand')}}</td>
           <button type="button" class="moredel">批量删除</button>
         </tr>
         </tbody>
