@@ -50,7 +50,7 @@ class Admin
             $arr3[] = $v['menu_url'];
         }
          // dd($arr3);
-         // dd($url);
+        //  dd($url);
         if(!in_array($url,$arr3)){
           return redirect('/403');
        }
