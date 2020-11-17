@@ -1,1 +1,0 @@
-<img src="/upload/vU2gejSk6tdmrq4IAgowLQ4KEKec1Wn6zmovZVCD.jpeg" width="111" height="245">
