@@ -51,7 +51,8 @@ class Admin
         }
         // dd($arr3);
         // dd($arr3);
-        if(!in_array($url['as'],$arr3)){
+        //dd($url);
+        if(!in_array($url,$arr3)){
           return redirect('/403');
        }
 

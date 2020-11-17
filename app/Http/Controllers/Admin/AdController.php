@@ -66,7 +66,7 @@ class AdController extends Controller
         }
         $content = view('ad.ads.'.$template,['ads'=>$ads,'height'=>$res->ad_height,'width'=>$res->ad_width])->render();
         // dd($content);
-        $filename = resource_path('views/ad/lib/'.$ad_id.".blade.php");
+        $filename = resource_path('2001.shop.index.com/app/resources/views/lib/'.$ad_id.".blade.php");
         $red = file_put_contents($filename,$content);
         if($red){
             echo "<script>alert('生成成功');history.go(-1);</script>";
