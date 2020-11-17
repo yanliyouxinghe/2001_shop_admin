@@ -38,7 +38,7 @@ class AdController extends Controller
      */
     public function store(StoreAdPost $request)
     {
-        $post = $request->except('token');
+        $post = $request->except('_token');
         $res = AdModel::create($post);
         if($res){
             return redirect('/ad');
@@ -65,8 +65,8 @@ class AdController extends Controller
             $template='morepic';
         }
         $content = view('ad.ads.'.$template,['ads'=>$ads,'height'=>$res->ad_height,'width'=>$res->ad_width])->render();
-        // dd($content);
-        $filename = resource_path('views/ad/lib/'.$ad_id.".blade.php");
+        $content = 'document.write(\''.$content.'\')';
+        $filename = public_path('../../2001_shop_index/public/static/ads/'.$ad_id.".js");
         $red = file_put_contents($filename,$content);
         if($red){
             echo "<script>alert('生成成功');history.go(-1);</script>";

@@ -53,7 +53,7 @@
            
           </tr>
         @endforeach
-        <tr><td colspan="7">{{$ad->links()}}</td>
+        <tr><td colspan="7">{{$ad->links('vendor.pagination.adminbrand')}}</td>
           <button type="button" class="moredel">批量删除</button>
         </tr>
         </tbody>

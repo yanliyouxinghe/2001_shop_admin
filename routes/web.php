@@ -20,7 +20,7 @@ Route::view('/403','403');//403
 Route::middleware('login')->group(function(){
 
 Route::middleware('checkadmin')->group(function(){
-Route::view('/','index')->name('index');//403  
+Route::get('/','Admin\IndexController@index')->name('index');//403  
 // Route::get('/', function(){
 //     return view('layouts.layout');
 // });

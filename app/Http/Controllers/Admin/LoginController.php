@@ -5,6 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\AdminModel;
+use App\Model\GoodsModel;
+use App\Model\CartgoryModel;
+use App\Model\BrandModel;
+use App\Model\AdModel;
+use App\Model\AdvModel;
+use App\Model\NoticeModel;
+use App\Model\MenuModel;
+use App\Model\RoleModel;
 use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
@@ -27,9 +35,9 @@ class LoginController extends Controller
         if(password_verify($post['admin_pwd'],$admin->admin_pwd)){
               session(['admin_name'=>$admin->admin_name]);
               session(['admin_id'=>$admin->admin_id]);
-              return redirect('/index');
+              return redirect('/');
         }else{
-            return redirect('/login')->with('msg','用户名或密码错误');
+            return redirect('/login')->with('msg','用户名或密码错误'); 
         }
     }
 
@@ -82,6 +90,6 @@ class LoginController extends Controller
 
     }   
 
-    
 
+   
 }
