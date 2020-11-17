@@ -8,7 +8,7 @@ use App\Model\RoleModel;
 use App\Model\MenuModel;
 use App\Model\Admin_RoleModel;
 use App\Model\Role_MenuModel;
-// use Illuminate\Support\Facades\Route;
+//use \Illuminate\Support\Facades\Route;
 class Admin
 {
     /**
@@ -21,9 +21,9 @@ class Admin
     public function handle($request, Closure $next)
     {   
         //查询权限
-        $url=$request->route()->getAction();
+        //$url=$request->route()->getAction();
     //    $url= $request->route()->getName();
-        // $url=Route::currentRouteName();
+         $url=\Illuminate\Support\Facades\Route::currentRouteName();
        // dd($url);
         $admin_id = session('admin_id');
         if(!$admin_id){
@@ -49,9 +49,9 @@ class Admin
         foreach ($menu_url as $v){
             $arr3[] = $v['menu_url'];
         }
-        // dd($arr3);
-        // dd($arr3);
-        if(!in_array($url['as'],$arr3)){
+         // dd($arr3);
+        //  dd($url);
+        if(!in_array($url,$arr3)){
           return redirect('/403');
        }
 

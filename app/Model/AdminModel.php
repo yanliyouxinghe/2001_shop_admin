@@ -15,15 +15,10 @@ class AdminModel extends Model
      //黑名单
      protected $guarded=[];
 
-     public function create_data($data){
-        $data['admin_pwd']=password_hash($data['admin_pwd'],PASSWORD_DEFAULT);
-         $data=self::create($data);
-         if($data){
-            return redirect('admin.list');
-         }
+     
          
          
-     }
+     
      public function list_data(){
          $data=self::orderBy('admin_id','desc')->paginate(3);;
          return $data;
