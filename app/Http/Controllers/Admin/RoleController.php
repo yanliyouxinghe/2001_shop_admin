@@ -115,6 +115,7 @@ class RoleController extends Controller
         $role_menu = count($role_menu)?$role_menu->toArray():[];
         // dd($role_menu);
         // $Menu = menuTree($Menu);
+        // $Menu = $this->weight($menu);
         return view('role/addpriv',['menu'=>$Menu,'role_id'=>$role_id,'role_menu'=>$role_menu]);
     }
 
