@@ -35,7 +35,6 @@ class LoginController extends Controller
         if(password_verify($post['admin_pwd'],$admin->admin_pwd)){
               session(['admin_name'=>$admin->admin_name]);
               session(['admin_id'=>$admin->admin_id]);
-        //获取各项数据
               return redirect('/');
         }else{
             return redirect('/login')->with('msg','用户名或密码错误'); 
