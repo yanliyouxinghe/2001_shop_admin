@@ -19,7 +19,7 @@ Route::view('/403','403');//403
 
 Route::middleware('login')->group(function(){
   Route::middleware('checkadmin')->group(function(){
-    Route::view('index','index')->name('index');//403  
+    Route::view('index','index')->name('index');//首页
 Route::get('/', function(){
     return view('layouts.layout');
 });
@@ -145,14 +145,14 @@ Route::prefix('/goodstype')->group(function(){
 });
 //商品
 Route::prefix('/goods')->group(function(){
-  Route::get('/create','Admin\GoodsController@create')->name('goods.create');
-  Route::any('/upload','Admin\GoodsController@upload');
-  Route::post('/uploads','Admin\GoodsController@uploads');
-  Route::get('/getattr','Admin\GoodsController@getattr');
-  Route::post('/store','Admin\GoodsController@store');
-  Route::post('/pruct','Admin\GoodsController@pruct');
-  Route::get('/list','Admin\GoodsController@list')->name('goods.list');
-  Route::get('/jyl/{id}','Admin\GoodsController@item');
+  Route::get('/create','Admin\GoodsController@create')->name('goods.create');//添加商品
+  Route::any('/upload','Admin\GoodsController@upload')->name('goods.upload');
+  Route::post('/uploads','Admin\GoodsController@uploads')->name('goods.uploads');
+  Route::get('/getattr','Admin\GoodsController@getattr')->name('gooods.getattr');
+  Route::post('/store','Admin\GoodsController@store')->name('goods.store');//执行添加
+  Route::post('/pruct','Admin\GoodsController@pruct')->name('goods.pruct');
+  Route::get('/list','Admin\GoodsController@list')->name('goods.list');//商品列表
+  Route::get('/jyl/{id}','Admin\GoodsController@item')->name('goods.jyl');//查看商品
 });
 
 });
