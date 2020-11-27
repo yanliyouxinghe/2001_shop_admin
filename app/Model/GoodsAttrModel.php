@@ -11,4 +11,5 @@ class GoodsAttrModel extends Model
       protected $primaryKey = "attr_id";
 
       public $timestamps = false;
+      
 }

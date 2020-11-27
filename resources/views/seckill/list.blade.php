@@ -1,4 +1,4 @@
-@extends('layout.layout')
+@extends('layouts.layout')
 @section('title', '抢购列表')
 @section('content')
 
@@ -13,37 +13,36 @@
                 <th width="50px">结束时间</th>
                 <th width="50px">图片</th>
                 <th width="50px">名称</th>
-                <th width="50px">原价格</th>
                 <th width="50px">限时抢购价格</th>
+                <th width="50px">限时抢购数量</th>
                 <th width="50px">介绍</th>
                 <th width="200px">操作</th>
             </tr>
-            @foreach($menu as $k=>$v)
+            @foreach($data as $k=>$v)
                 <tr>
                     <td>{{$v->seckill_id}}</td>
                     <td>{{$v->seckill_name}}</td>
-                    <td>{{date('Y-m-d h:i:s',$v->start_time)}}</td>
-                    <td>{{date('Y-m-d h:i:s',$v->end_time)}}</td>
-                    
+                    <td>{{$v->start_time}}</td>
+                    <td>{{$v->end_time}}</td>
+                    <td>{{$v->seckill_number}}</td>
                     <td>
                         @if($v->goods_img)
                         <img src="{{$v->goods_img}}" width="50px" height="50px">
                         @endif
 
                     </td>
-                    <td>{{$v->goods_id}}</td>
                     <td>{{$v->goods_name}}</td>
-                    <td>{{$v->goods_price}}</td>
-                    <td>{{$v->goods_qprice}}</td>
-                    <td>{{$v->desc}}</td>
+                    <td>{{$v->new_price}}</td>
+                    <td>{{$v->seckill_desc}}</td>
                     <td>
                         <a href="/seckill/item/{{$v->seckill_id}}"><button type="button" class="layui-btn layui-btn-normal">查看</button></a>
                         <a href="{{url('/poster/edit/'.$v->position_id)}}" id="{{$v->position_id}}" type="button" class="btn btn-dange">编辑</a>
                         <a href="javascript:void(0);" id="{{$v->position_id}}" type="button" class="btn btn-danger">删除</a>
                     </td>
-            @endforeach
-            <tr>
+          
             </tr>
+            @endforeach
+      
             </tbody>
         </table>
     </div>
