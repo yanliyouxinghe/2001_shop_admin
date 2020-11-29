@@ -61,7 +61,7 @@
                     @endif
                 </td>
             <td>
-            <a href="{{url('adv/edit/'.$v->adv_id)}}"><button type="button" class="layui-btn layui-btn-normal">修改</button></a>
+           <a href="{{url('adv/edit/'.$v->adv_id)}}"><button type="button" class="layui-btn layui-btn-normal">修改</button></a>
             <button type="button" class="layui-btn layui-btn-danger del" adv_id="{{$v->adv_id}}">删除</button>
                </td>
            
@@ -105,6 +105,7 @@
         // console.log($(this));
         adv_id.push($(this).val());
     });
+    // console.log(adv_id);return;
     // return false
     if(adv_id.length==0){
       alert("请选择要删除的数据");
