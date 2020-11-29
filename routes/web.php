@@ -45,6 +45,13 @@ Route::prefix('ad')->group(function(){
   Route::any('/ch/{ad_id}','Admin\AdController@ch')->name('ad.ch');   //查看广告
 });
 
+//商家管理
+Route::prefix('seuser')->group(function(){
+    Route::get('/list','Admin\SeuserController@list')->name('seuser.list');  //商家审核展示
+    Route::get('/won','Admin\SeuserController@won')->name('seuser.won');  //商家审核通过或失败  ajax
+    Route::get('/morepass','Admin\SeuserController@morepass')->name('seuser.morepass');  //批量审核  ajax
+});
+
 //广告
 Route::prefix('adv')->group(function(){
   Route::any('/create','Admin\AdvController@create')->name('adv.create');//广告添加
