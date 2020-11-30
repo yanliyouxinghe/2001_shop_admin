@@ -18,7 +18,7 @@ class IndexController extends Controller
 
 	public function index(){
 		$data = $this->getData();
-        return view('index',['data'=>$data]);
+    return view('index',['data'=>$data]);
 	}
 
 
