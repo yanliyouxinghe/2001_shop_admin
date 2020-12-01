@@ -45,6 +45,13 @@ Route::prefix('ad')->group(function(){
   Route::any('/ch/{ad_id}','Admin\AdController@ch')->name('ad.ch');   //查看广告
 });
 
+//商家管理
+Route::prefix('seuser')->group(function(){
+    Route::get('/list','Admin\SeuserController@list')->name('seuser.list');  //商家审核展示
+    Route::get('/won','Admin\SeuserController@won')->name('seuser.won');  //商家审核通过或失败  ajax
+    Route::get('/morepass','Admin\SeuserController@morepass')->name('seuser.morepass');  //批量审核  ajax
+});
+
 //广告
 Route::prefix('adv')->group(function(){
   Route::any('/create','Admin\AdvController@create')->name('adv.create');//广告添加
@@ -70,8 +77,7 @@ Route::prefix('/cartgory')->group(function(){
   Route::post('/destroy','Admin\CartgoryController@destroy')->name('cartgory.destroy');//分类删除
   Route::get('/edit/{id}','Admin\CartgoryController@edit')->name('cartgory.edit');
   Route::post('/update','Admin\CartgoryController@update')->name('cartgory.update');//分类修改
-  Route::post('/destrys','Admin\CartgoryController@destrys');//分类修改
-
+  Route::post('/destrys','Admin\CartgoryController@destrys')->name('cartgory.destrys');//分类批量删除
   
 
 });
@@ -119,6 +125,15 @@ Route::prefix('/role')->group(function(){
   Route::get('/role/destroy/{role_id?}','Admin\RoleController@destroy')->name('role.destroy');//删除
   Route::get('/role/addpriv/{role_id?}','Admin\RoleController@addpriv')->name('role.addpriv');//角色添加权限
   Route::post('/addprivdo','Admin\RoleController@addprivdo')->name('role.addprivdo');//执行添加权限
+});
+//秒杀管理
+//角色管理
+Route::prefix('/seckill')->group(function(){
+  Route::get('/create','Admin\SeckillController@create')->name('seckill.create');//添加秒杀
+  Route::post('/store','Admin\SeckillController@store')->name('seckill.store');//执行添加
+  Route::any('/list','Admin\SeckillController@index')->name('seckill.list');//秒杀商品列表
+  Route::get('/skill/destroy/{id?}','Admin\SeckillController@destroy')->name('seckill.destroy');//删除
+
 });
 
 //权限管理
