@@ -1,5 +1,5 @@
 @extends('layouts.layout')
-@section('title','商家列表')
+@section('title','商家商品列表')
 @section('content')
   
     <!DOCTYPE html>
@@ -7,7 +7,7 @@
 
 <body>
  <blockquote class="layui-elem-quote layui-text">
-<h4 style="color:green">商家审核展示</h4>
+<h4 style="color:green">商家商品审核展示</h4>
 </blockquote>
   <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
@@ -17,30 +17,42 @@
     <thead>
     <tr>
         <th><input type="checkbox" name="allbox"></th>
-        <th>ID</th>
-        <th>商家电话</th>
-        <th>审核状态</th>
+                <th width="30px">商品ID</th>
+                <th width="100px">商品名称</th>
+                <th width="50px">商品货号</th>
+                <th width="50px">商品价格</th>
+                <th width="50px">商品图片</th>
+                <th width="50px">商品重量</th>
+                <th width="50px">商品存库</th>
+                <th width="50px">库存警告数量</th>
+                <th width="50px">审核状态</th>
         <th>操作</th>
     </tr>
     </thead>
     <tbody>
     @foreach($seuserInfo as $k=>$v)
-    <tr seuser_id="{{$v->seuser_id}}">
-        <td><input type="checkbox" name="box" value="{{$v->seuser_id}}"></td>
-        <td>{{$v->seuser_id}}</td>
-        <td id="{{$v->seuser_id}}"><span class="oldname user_name">{{$v->seuser_plone}}</span></td>
+    <tr goods_id="{{$v->goods_id}}">
+        <td><input type="checkbox" name="box" value="{{$v->goods_id}}"></td>
+        <td>{{$v->goods_id}}</td>
+                <td>{{$v->goods_name}}</td>
+                <td>{{$v->goods_sn}}</td>
+                <td>{{$v->shop_price}}</td>
+                <td>@if(!empty($v->goods_img)) <img src="{{$v->goods_img}}" width="50px"> @endif </td>
+                <td>{{$v->goods_weight}}</td>
+                <td>{{$v->goods_number}}</td>
+                <td>{{$v->warn_number}}</td>
         <td class="shen">
-           @if($v->seuser_start==0)
+           @if($v->is_static==0)
              待审核
-            @elseif($v->seuser_start==1)
+            @elseif($v->is_static==1)
             审核通过
-            @elseif($v->seuser_start==2)
+            @elseif($v->is_static==2)
              审核失败
             @endif
         </td>
         <td>
-            <button type="button" class="btn btn-info aa" seuser_id="{{$v->seuser_id}}">审核通过</button>
-            <button type="button" class="btn btn-danger aa" seuser_id="{{$v->seuser_id}}">审核失败</button>
+            <button type="button" class="btn btn-info aa" goods_id="{{$v->goods_id}}">审核通过</button>
+            <button type="button" class="btn btn-danger aa" goods_id="{{$v->goods_id}}">审核失败</button>
         </td>
     </tr>
     @endforeach
@@ -65,9 +77,9 @@
     //    alert(_val);
 
       var _this = $(this);
-      var seuser_id = _this.attr('seuser_id');
-      //alert(seuser_id);
-      $.get('/seuser/won',{seuser_id:seuser_id,_val:_val},function(res){
+      var goods_id = _this.attr('goods_id');
+    //   alert(goods_id);
+      $.get('/segoods/won',{goods_id:goods_id,_val:_val},function(res){
            // console.log(res);
            if(res.code==5){
               location.reload();
@@ -83,17 +95,17 @@
    $(document).on('click','#su',function(){
       let _val=$(this).html();
       var _this = $(this);
-      var seuser_id = new Array();
+      var goods_id = new Array();
       $('input[name="box"]:checked').each(function(){
-        seuser_id.push($(this).val())
+        segoods_id.push($(this).val())
       });
 
-      if(seuser_id.length==0){
+      if(goods_id.length==0){
           alert("请选择要删除的数据");
       return;
     }
 
-    $.get('/seuser/morepass',{seuser_id:seuser_id,_val:_val},function(res){
+    $.get('/segoods/morepass',{goods_id:goods_id,_val:_val},function(res){
         //    console.log(res);
            if(res.code==7){
               location.reload();
@@ -118,4 +130,3 @@
 //   })
 
 </script>
-

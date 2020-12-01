@@ -51,7 +51,12 @@ Route::prefix('seuser')->group(function(){
     Route::get('/won','Admin\SeuserController@won')->name('seuser.won');  //商家审核通过或失败  ajax
     Route::get('/morepass','Admin\SeuserController@morepass')->name('seuser.morepass');  //批量审核  ajax
 });
-
+//商家商品管理
+Route::prefix('segoods')->group(function(){
+    Route::get('/lists','Admin\SegoodsController@lists')->name('segoods.lists');  //商家商品审核展示
+    Route::get('/won','Admin\SegoodsController@won')->name('segoods.won');  //商家商品审核通过或失败  ajax
+    Route::get('/morepass','Admin\SegoodsController@morepass')->name('segoods.morepass');  //批量审核  ajax
+});
 //广告
 Route::prefix('adv')->group(function(){
   Route::any('/create','Admin\AdvController@create')->name('adv.create');//广告添加

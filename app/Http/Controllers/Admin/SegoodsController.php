@@ -4,44 +4,44 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Model\SeuserModel;
-class SeuserController extends Controller
+use App\Model\SegoodsModel;
+class SegoodsController extends Controller
 {
     /**商家审核展示 */
-    public function list(){
-        $seuserInfo = SeuserModel::paginate(2);
-        return view('seuser.list',['seuserInfo'=>$seuserInfo]);
+    public function lists(){
+        $seuserInfo = SegoodsModel::paginate(2);
+        return view('segoods.lists',['seuserInfo'=>$seuserInfo]);
     }
 
     /**审核 */
     public function won(){
-        $seuser_id = request()->seuser_id;
+        $goods_id = request()->goods_id;
+        // print_r($goods_id);
         $_val = request()->_val;
         
        // dd($user_id);
          //判断用户是否为待审核
 
         if($_val=='审核通过'){
-           SeuserModel::where('seuser_id',$seuser_id)->update(['seuser_start'=>1]);  
+           SegoodsModel::where('goods_id',$goods_id)->update(['is_static'=>1]);  
            return json_encode(['code'=>5,'msg'=>'审核通过']);
         }else{
-            SeuserModel::where('seuser_id',$seuser_id)->update(['seuser_start'=>2]); 
+            SegoodsModel::where('goods_id',$goods_id)->update(['is_static'=>2]);
             return json_encode(['code'=>6,'msg'=>'审核失败']);
         }
     }
 
     //批量审核
     public function morepass(){
-        $seuser_id = request()->seuser_id;
+        $goods_id = request()->goods_id;
         $_val = request()->_val;
 
         if($_val=='批量通过'){
-            SeuserModel::whereIn('seuser_id',$seuser_id)->update(['seuser_start'=>1]);  
+            SegoodsModel::whereIn('goods_id',$goods_id)->update(['is_static'=>1]);  
             return json_encode(['code'=>7,'msg'=>'批量审核通过']);
          }else{
-             SeuserModel::whereIn('seuser_id',$seuser_id)->update(['seuser_start'=>2]); 
+             SegoodsModel::whereIn('goods_id',$goods_id)->update(['is_static'=>2]); 
              return json_encode(['code'=>8,'msg'=>'批量审核失败']);
          }
-       
     }
 }
