@@ -21,6 +21,7 @@
             <tr>
                 <th width="30px">商品ID</th>
                 <th width="100px">商品名称</th>
+                <th width="100px">所属商户</th>
                 <th width="50px">商品货号</th>
                 <th width="50px">商品价格</th>
                 <th width="50px">所属分类</th>
@@ -37,6 +38,7 @@
             <tr goods_id="{{$v->goods_id}}">
                 <td>{{$v->goods_id}}</td>
                 <td>{{$v->goods_name}}</td>
+                <td>{{$v->seuser_plone}}</td>
                 <td>{{$v->goods_sn}}</td>
                 <td>{{$v->shop_price}}</td>
                 <td>{{$v->cat_id}}</td>

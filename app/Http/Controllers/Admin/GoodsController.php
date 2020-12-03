@@ -12,6 +12,7 @@ use App\Model\GoodsModel;
 use App\Model\Goods_AttrModel;
 use App\Model\Goods_GalleryModel;
 use App\Model\ProductModel;
+use App\Model\SeuserModel;   
 use Illuminate\Support\Facades\DB;
 use Carbon\Traits\Timestamp;
 class GoodsController extends Controller
@@ -23,7 +24,8 @@ class GoodsController extends Controller
      */
     public function list()
     {
-        $goods = GoodsModel::get();
+        $goods = GoodsModel::leftjoin('sh_seuser','sh_goods.seuser_id','=','sh_seuser.seuser_id')->get();
+        
         return view('goods.list',['goods'=>$goods]);
     }
 
@@ -37,10 +39,11 @@ class GoodsController extends Controller
         $data = CartgoryModel::all();
         $Ecsbrand = BrandModel::all();
         $type = GoodsTypeModel::all();
+        $seuserInfo = SeuserModel::get();
         // dd($data);
         $weight_list =  $this->weightTrees($data);
         // dd($weight_list);
-        return view('goods.create',['weight_list'=>$weight_list,'Ecsbrand'=>$Ecsbrand,'type'=>$type]);
+        return view('goods.create',['weight_list'=>$weight_list,'Ecsbrand'=>$Ecsbrand,'type'=>$type,'seuserInfo'=>$seuserInfo]);
     }
 
     public function weightTrees($data,$parent_id=0,$level=0){
@@ -76,15 +79,18 @@ class GoodsController extends Controller
                 $attr_value_list = $request->input('attr_value_list')??[];
                 $attr_price_list = $request->input('attr_price_list')??[];
                 $goods_imgs = $request->input('goods_imgs')??[];
+            
 
 
                 $promote_start_date = $request->input('promote_start_date');
                 $promote_end_date = $request->input('promote_end_date');
 
                 $post = $request->except(['attr_id_list','attr_value_list','attr_price_list','goods_imgs']);
-                 $post['goods_sn'] = $post['goods_sn']?$post['goods_sn']:$this->addProduct();
+                // dd($post);
+                $post['goods_sn'] = $post['goods_sn']?$post['goods_sn']:$this->addProduct();
                 $post['promote_start_date'] = strtotime($promote_start_date);
                 $post['promote_end_date'] = strtotime($promote_end_date);
+
                 // dd($post);
                 // dd($post);
                 $goods_id = GoodsModel::insertGetId($post);
@@ -102,8 +108,6 @@ class GoodsController extends Controller
                             ];
                         }
                       Goods_AttrModel::insert($data);
-
-
                 }
                 $arr = [];
                 foreach($goods_imgs as $v){
@@ -126,6 +130,7 @@ class GoodsController extends Controller
                         $goods = GoodsModel::select('goods_id','goods_name','goods_sn')
                                  ->where('goods_id',$goods_id)
                                  ->first();
+                        // dd($goods);         
                         return view('goods.product',['goods_sper'=>$new_goods_sper,'goods_id'=>$goods_id,'goods'=>$goods]);
                 }
                 // dd($goods_sper);
@@ -141,6 +146,7 @@ class GoodsController extends Controller
 
         public function pruct(){
             $post = request()->all();
+            // dd($post);
             if(count($post['attr'])){
                 $attr = $post['attr'];
                 // dump($post);
