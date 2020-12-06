@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="/static/admin/jquery.min.js"></script>
     <script src="/static/admin/bootstrap.min.js"></script>
-    <form action="{{url('/notice/edit/'.$data->notice_id)}}" method="POST" class="form-horizontal" role="form" enctype="multipart/form-data">
+    <form action="{{url('/notice/update/'.$data->notice_id)}}" method="post" class="form-horizontal" role="form" enctype="multipart/form-data">
 
         @if (session('msg'))
             <div class="alert alert-success">

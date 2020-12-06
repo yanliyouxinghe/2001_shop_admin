@@ -77,6 +77,11 @@ class MenuController extends Controller
     public function edit($id)
     {
         //
+        $MenuModel=new MenuModel();
+        $data= $MenuModel->p_list();
+        $data1=MenuModel::where('menu_id',$id)->first();
+        // dump($data1);die;
+        return view('menu.edit',['data'=>$data,'data1'=>$data1]);
     }
 
     /**
@@ -89,6 +94,16 @@ class MenuController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $data=$request->except('_token');
+        $res=MenuModel::where('menu_id',$id)->update($data);
+        if($res){
+            echo '<script>alert("修改成功");location.href="/menu/list"</script>';
+            die;
+            // return json_encode(['code'=>0,'msg'=>'OK']);
+        }else{
+            return redirect('menu.edit');
+
+        }
     }
 
     /**
@@ -99,9 +114,9 @@ class MenuController extends Controller
      */
     public function destroy($id)
     {
-        $menu_id=$id; 
+        // echo $id;die;
         $MenuModel =  new MenuModel();
-         $res=$MenuModel->destroy_date($menu_id);
+         $res=$MenuModel->destroy($id);
         if($res){
             return redirect('menu/list');
         }

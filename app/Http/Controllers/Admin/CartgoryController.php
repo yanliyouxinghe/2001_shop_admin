@@ -155,6 +155,7 @@ class CartgoryController extends Controller
     public function destroy(Request $request)
     {
         $cat_ids = $request->input('cat_id');
+
         if(!$cat_ids){
             return json_encode(['code'=>1,'msg'=>'缺少参数...']);
         }

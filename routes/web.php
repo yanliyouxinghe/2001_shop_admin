@@ -105,9 +105,11 @@ Route::prefix('/notice')->group(function(){
   Route::get('/list','Admin\NoticeController@index')->name('notice.list');//公告展示
   Route::post('/store','Admin\NoticeController@store')->name('notice.store');
   Route::any('/uploads','Admin\NoticeController@uploads')->name('notice.uploads');
-  Route::get('/destroy','Admin\NoticeController@destroy')->name('notice.destroy');//公告删除
-  Route::get('/show/{id}','Admin\NoticeController@show')->name('notice.show');
-  Route::post('/edit/{id}','Admin\NoticeController@edit')->name('notice.edit');
+  Route::get('/destroy/{id}','Admin\NoticeController@destroy')->name('notice.destroy');//公告删除
+  // Route::get('/show/{id}','Admin\NoticeController@show')->name('notice.show');
+  Route::get('/edit/{id}','Admin\NoticeController@edit')->name('notice.edit');
+ Route::post('/update/{id}','Admin\NoticeController@update')->name('notice.update');//公告执行修改
+ 
   Route::any('/updated','Admin\NoticeController@updated')->name('notice.updated');//公告修改
 
 });
@@ -121,6 +123,9 @@ Route::prefix('/admin')->group(function(){
   Route::get('/admin/destroy/{admin_id?}','Admin\AdminController@destroy')->name('admin.destroy');//删除
   Route::get('/admin/addrole/{admin_id?}','Admin\AdminController@addrole')->name('admin.addrole');//添加角色
   Route::post('/addroledo','Admin\AdminController@addroledo')->name('role.addroledo');//执行添加角色
+  Route::get('/edit/{id}','Admin\AdminController@edit')->name('admin.edit');//修改角色
+  Route::post('/update/{id}','Admin\AdminController@update')->name('admin.update');//执行修改角色
+
 });
 //角色管理
 Route::prefix('/role')->group(function(){
@@ -137,7 +142,9 @@ Route::prefix('/seckill')->group(function(){
   Route::get('/create','Admin\SeckillController@create')->name('seckill.create');//添加秒杀
   Route::post('/store','Admin\SeckillController@store')->name('seckill.store');//执行添加
   Route::any('/list','Admin\SeckillController@index')->name('seckill.list');//秒杀商品列表
-  Route::get('/skill/destroy/{id?}','Admin\SeckillController@destroy')->name('seckill.destroy');//删除
+  Route::get('/destroy/{id}','Admin\SeckillController@destroy')->name('seckill.destroy');//删除
+  Route::get('/edit/{id}','Admin\SeckillController@edit')->name('seckill.edit');//删除
+  Route::post('/update/{id}','Admin\SeckillController@update')->name('seckill.update');//执行删除
 
 });
 
@@ -146,7 +153,9 @@ Route::prefix('/menu')->group(function(){
   Route::get('/create','Admin\MenuController@create')->name('menu.create');//添加菜单
   Route::post('/store','Admin\MenuController@store')->name('menu.store');//执行添加
   Route::any('/list','Admin\MenuController@index')->name('menu.index');//菜单列表
-  Route::get('/menu/destroy/{menu_id?}','Admin\MenuController@destroy')->name('menu.destroy');//删除
+  Route::get('/destroy/{id}','Admin\MenuController@destroy')->name('menu.destroy');//添加菜单
+  Route::get('/edit/{id}','Admin\MenuController@edit')->name('menu.edit');//修改菜单
+  Route::post('/update/{id}','Admin\MenuController@update')->name('menu.update');//执行修改菜单
 
 });
 //商品类型
@@ -175,7 +184,28 @@ Route::prefix('/goods')->group(function(){
   Route::post('/pruct','Admin\GoodsController@pruct')->name('goods.pruct');
   Route::get('/list','Admin\GoodsController@list')->name('goods.list');//商品列表
   Route::get('/jyl/{id}','Admin\GoodsController@item')->name('goods.jyl');//查看商品
+  Route::post('/destroy','Admin\GoodsController@destroy')->name('goods.destroy');//商品删除
+  // Route::get('/edit/{id}','Admin\GoodsController@edit')->name('goods.edit');//商品修改
+  // Route::post('/update/{id}','Admin\GoodsController@update')->name('goods.update');//商品执行修改
+  
+
+
+  });
+Route::prefix('/coupons')->group(function(){
+  Route::get('/create','Admin\CouponsController@create')->name('coupons.create');//添加
+  Route::post('/store','Admin\CouponsController@store')->name('coupons.store');//执行添加
+  Route::get('/list','Admin\CouponsController@list')->name('coupons.list');//添加
+  Route::get('/destroy/{id}','Admin\CouponsController@destroy')->name('coupons.destroy');//删除
+  Route::get('/edit/{id}','Admin\CouponsController@edit')->name('coupons.edit');//修改
+  Route::post('/update/{id}','Admin\CouponsController@update')->name('coupons.update');//执行修改
+
 });
 
 });
 });
+
+
+
+
+
+
