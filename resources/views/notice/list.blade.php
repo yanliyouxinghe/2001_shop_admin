@@ -36,7 +36,7 @@
             <a href="{{url('/notice/destroy/'.$v->notice_id)}}">
                 <button type="button" class="btn btn-danger" notice_id = "{{$v->notice_id}}">删除</button>
            </a>
-            <a href="{{url('/notice/show/'.$v->notice_id)}}"><button type="button" class="btn btn-info">编辑</button></a>
+            <a href="{{url('/notice/edit/'.$v->notice_id)}}"><button type="button" class="btn btn-info">编辑</button></a>
         </td>
     </tr>
 
@@ -143,41 +143,41 @@ $(document).on('click',".layui-btn-xs",function(){
         return false;
 });
 
-{{--    删除--}}
-    $(document).on("click",".btn-danger",function (){
-        //这个对象
-        var _this = $(this);
-        //判断用户是否确认删除
-       var ifdel = confirm("您确定删除吗？");
-       if(ifdel == true){
-           var id = _this.attr('brand_id');
-           // console.log(id);
-            $.ajax({
-                url : '/brand/destroy',
-                dataType : 'json',
-                type : 'get',
-                data : {'id':id},
-                success:function ( res ){
-                    if( res.code == 0 ){
-                        location.reload();
-                    }else{
-                        alert('操作繁忙，请稍后重试...');
-                        return false;
-                    }
-                  }
-            });
-       }
-       return false;
-    });
-    //分页
-    $(document).on('click','#layui-laypage-1 a',function(){
-        // alert(111);
-        var url = $(this).attr('href');
-        $.get(url,function(result){
-            $('tbody').html(result);
-        });
-        return false;
-    });
+// {{--    删除--}}
+//     $(document).on("click",".btn-danger",function (){
+//         //这个对象
+//         var _this = $(this);
+//         //判断用户是否确认删除
+//        var ifdel = confirm("您确定删除吗？");
+//        if(ifdel == true){
+//            var id = _this.attr('brand_id');
+//            // console.log(id);
+//             $.ajax({
+//                 url : '/brand/destroy',
+//                 dataType : 'json',
+//                 type : 'get',
+//                 data : {'id':id},
+//                 success:function ( res ){
+//                     if( res.code == 0 ){
+//                         location.reload();
+//                     }else{
+//                         alert('操作繁忙，请稍后重试...');
+//                         return false;
+//                     }
+//                   }
+//             });
+//        }
+//        return false;
+//     });
+//     //分页
+//     $(document).on('click','#layui-laypage-1 a',function(){
+//         // alert(111);
+//         var url = $(this).attr('href');
+//         $.get(url,function(result){
+//             $('tbody').html(result);
+//         });
+//         return false;
+//     });
 
 
 

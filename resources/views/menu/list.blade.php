@@ -44,7 +44,7 @@
                     @endif
                 </td>
                 <td>
-                    <a href="menu/destroy/{{$v->role_id}}" onclick="DeleteGetId({{$v->menu_id}},this)">
+                    <a href="{{url('menu/destroy/'.$v->menu_id)}}" onclick="">
                         <button type="button" class="layui-btn layui-btn-danger">删除</button>
                     </a>
                     <a href="{{url('menu/edit/'.$v->menu_id)}}">

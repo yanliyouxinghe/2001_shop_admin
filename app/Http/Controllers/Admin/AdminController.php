@@ -84,6 +84,10 @@ class AdminController extends Controller
     public function edit($id)
     {
         //
+        $RoleModel=new RoleModel();
+        $role=$RoleModel->roleinfo();
+        $data=AdminModel::where('admin_id',$id)->first();
+        return view('admin.edit',['data'=>$data,'role'=>$role]);
     }
 
     /**
@@ -96,6 +100,17 @@ class AdminController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $data=$request->except('_token');
+
+        $res=AdminModel::where('admin_id',$id)->update($data);
+        if($res){
+            echo '<script>alert("修改成功");location.href="/admin/list"</script>';
+            die;
+            // return json_encode(['code'=>0,'msg'=>'OK']);
+        }else{
+            return redirect('admin.edit');
+
+        }
     }
 
     /**

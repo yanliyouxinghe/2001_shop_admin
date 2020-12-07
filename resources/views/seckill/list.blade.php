@@ -36,8 +36,8 @@
                     <td>{{$v->seckill_desc}}</td>
                     <td>
                         <a href="/seckill/item/{{$v->seckill_id}}"><button type="button" class="layui-btn layui-btn-normal">查看</button></a>
-                        <a href="{{url('/poster/edit/'.$v->position_id)}}" id="{{$v->position_id}}" type="button" class="btn btn-dange">编辑</a>
-                        <a href="javascript:void(0);" id="{{$v->position_id}}" type="button" class="btn btn-danger">删除</a>
+                        <a href="{{url('/seckill/edit/'.$v->seckill_id)}}" id="" type="button" class="btn btn-dange">编辑</a>
+                        <a href="{{url('/seckill/destroy/'.$v->seckill_id)}}" id="{{$v->position_id}}" type="button" class="btn btn-danger">删除</a>
                     </td>
           
             </tr>

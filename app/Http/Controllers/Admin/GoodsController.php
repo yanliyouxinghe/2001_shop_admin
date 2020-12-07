@@ -27,6 +27,13 @@ class GoodsController extends Controller
         $goods = GoodsModel::leftjoin('sh_seuser','sh_goods.seuser_id','=','sh_seuser.seuser_id')->get();
         
         return view('goods.list',['goods'=>$goods]);
+
+        $goods = GoodsModel::get();
+        if(request()->ajax()){
+              return view('cartgory.listajax',['cart_data'=>$cart_data]);
+        }
+        $goods_data=$goods->toArray();
+        return view('goods.list',['goods'=>$goods,'goods_data'=>$goods_data]);
     }
 
     /**
@@ -224,6 +231,12 @@ class GoodsController extends Controller
     public function edit($id)
     {
         //
+        $data = CartgoryModel::all();
+        $weight_list =  $this->weightTrees($data);
+         $Ecsbrand = BrandModel::all();
+        $type = GoodsTypeModel::all();
+        $data=GoodsModel::where('goods_id',$id)->first();
+        return view('goods.edit',['data'=>$data,'weight_list'=>$weight_list,'Ecsbrand'=>$Ecsbrand,'type'=>$type]);
     }
 
     /**
@@ -235,7 +248,21 @@ class GoodsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $promote_start_date = $request->input('promote_start_date');
+        $promote_end_date = $request->input('promote_end_date');
+
+        $post = $request->except(['attr_id_list','attr_value_list','attr_price_list','goods_imgs','_token']);
+        $post['goods_sn'] = $post['goods_sn']?$post['goods_sn']:$this->addProduct();
+        $post['promote_start_date'] = strtotime($promote_start_date);
+        $post['promote_end_date'] = strtotime($promote_end_date);
+        // dump($post);die;
+
+        $res=GoodsModel::where('goods_id',$id)->update($post);
+        if($res){
+            return redirect('goods.list');
+        }else{
+            return redirect('goods.edit');
+        }
     }
 
     /**
@@ -244,9 +271,17 @@ class GoodsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy()
     {
-        //
+        $goods_id=Request()->input('goods_id');
+        
+        $res=GoodsModel::destroy($goods_id);
+        if($res){
+            return json_encode(['code'=>0,'msg'=>'删除成功']);
+        }else{
+            return json_encode(['code'=>1,'msg'=>'删除失败']);
+            
+        }
     }
 
     public function getattr(Request $request){

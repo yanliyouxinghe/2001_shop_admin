@@ -81,6 +81,10 @@ class SeckillController extends Controller
     public function edit($id)
     {
         //
+        $goods = GoodsModel::get();
+        
+        $data=SeckillModel::where("seckill_id",$id)->first();
+        return view('seckill.edit',['data'=>$data,'goods'=>$goods]);
     }
 
     /**
@@ -93,6 +97,16 @@ class SeckillController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $post=$request->except('_token');
+        $res=SeckillModel::where('seckill_id',$id)->update($post);
+        if($res){
+            echo '<script>alert("修改成功");location.href="/seckill/list"</script>';
+            die;
+            // return json_encode(['code'=>0,'msg'=>'OK']);
+        }else{
+            return redirect('seckill.edit');
+
+        }
     }
 
     /**
@@ -104,5 +118,14 @@ class SeckillController extends Controller
     public function destroy($id)
     {
         //
+        $res=SeckillModel::where('seckill_id',$id)->delete();
+        if($res){
+            echo '<script>alert("删除成功");location.href="/seckill/list"</script>';
+            die;
+            // return json_encode(['code'=>0,'msg'=>'OK']);
+        }else{
+            return redirect('seckill.list');
+            
+        }
     }
 }

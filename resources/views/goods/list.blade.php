@@ -49,11 +49,12 @@
                 <td>{{$v->warn_number}}</td>
                 <td>
                 <a href="/goods/jyl/{{$v->goods_id}}"><button type="button" class="layui-btn layui-btn-normal">查看</button></a>
-                    <a href="/admin/goods/edit/{{$v->goods_id}}"><button type="button" class="layui-btn layui-btn-normal">修改</button></a>
-                    <button type="button" class="layui-btn layui-btn-danger del">删除</button>
+                    <a href="{{'/goods/edit/'.$v->goods_id}}"><button type="button" class="layui-btn layui-btn-normal">修改</button></a>
+                    <a href="javascript:;" class="layui-btn layui-btn-danger del">删除</a>
                 </td>
             </tr>
         @endforeach
+        <tr><td colspan="6"><!--  --></td></tr>
         </tbody>
 
     </table>
@@ -62,27 +63,36 @@
 <!-- <script src="/jquery.js"></script> -->
 <script src="/static/js/jquery.min.js"></script>
 <script>
+    //分页
+    $(document).on('click','#layui-laypage-1 a',function(){
+// alert(123);
+    });
+    
     //删除
     $(document).on('click','.del',function(){
         var goods_id=$(this).parents('tr').attr('goods_id');
-        if(window.confirm("确认删除吗？")){
-            $.ajax({
-                url:'/admin/goods/destroy',
-                data:{goods_id:goods_id},
-                type:'post',
-                dataType:'json',
-                success:function(result){
-                    if(result['code']==00000){
-                        alert(result['msg']);
-                        location.href=result['url'];
+        // console.log(goods_id);
+        if(!goods_id){
+              return;
+          }
+          if(confirm('确定删除吗？')){
+              $.ajax({
+                  url : '/goods/destroy',
+                  dataType : 'json',
+                  type : 'post',
+                  data : {'goods_id':goods_id},
+                  success:function(ret){
+                    if(ret.code==0){
+                        alert(ret.msg);
                     }else{
-                        alert(result['msg']);
-                        location.href=result['url'];
+                      alert(ret.msg);
                     }
                 }
-            })
-        }
+              });
+          }
+          return;
     });
+
     //无刷新分页
     $(document).on("click",".layui-laypage a",function(){
         var url=$(this).attr("href");
