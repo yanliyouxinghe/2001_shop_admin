@@ -16,16 +16,8 @@ class CartgoryController extends Controller
     public function index()
     {
         $cartgory = new CartgoryModel();
-        $cart_data = $cartgory->cart_datas();
-        foreach ($cart_data as $k => $v) {
-            if($v->parent_id > 0){
-              $v['parent_name'] = $cartgory->select('cat_name')->where(['is_show'=>1,'cat_id'=>$v->parent_id])->get()->toArray();
-            }
-        }
-        if(request()->ajax()){
-              return view('cartgory.listajax',['cart_data'=>$cart_data]);
-        }
-        // dd($cart_data);
+        $cart_data = $cartgory->cart_data();
+        $cart_data = $this->Treecate($cart_data);
         return view('cartgory.list',['cart_data'=>$cart_data]);
     }
 
@@ -106,13 +98,12 @@ class CartgoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
+    {   
         $cartgory = new CartgoryModel();
         $cart_data = $cartgory->cart_data_update($id);
-        // dd($cart_data);
+        //dd($cart_data);
         $cart_datas = $cartgory->cart_data();
         $cart = $this->Treecate($cart_datas);
-        // dd($cart_data);
         return view('cartgory.edit',['cart_data'=>$cart_data,'cart'=>$cart]);
     }
 
@@ -124,12 +115,13 @@ class CartgoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
-    {
+    { 
+
       $cat_id = $request->input('cat_id');
       $cat_name = $request->input('cat_name');
       $parent_id = $request->input('parent_id');
       $is_show = $request->input('is_show');
-      if(!$cat_name || !$parent_id || !$is_show || !$cat_id){
+      if(empty($cat_id) || empty($cat_name) || empty($parent_id) || empty($is_show)){
           return redirect('/cartgory/edit/'.$cat_id)->with('status','参数丢失...');
       }
       $data = [
@@ -201,12 +193,4 @@ class CartgoryController extends Controller
         }
     }
 
-
-
-    //冒泡排序
-    public function mysort(){
-
-
-
-    }
 }

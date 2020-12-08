@@ -39,7 +39,7 @@
     <div class="layui-input-block">
       <select name="parent_id" lay-filter="aihao">
         @foreach($cart as $k=>$v)
-        @if($v->cat_id==$cart_data->parent_id)
+        @if($v->cat_id==$cart_data->parent_id )
         <option value="{{$v->cat_id}}" selected> {{str_repeat('|--',$v->level)}}{{$v->cat_name}}</option>
         @else
         <option value="{{$v->cat_id}}"> {{str_repeat('|--',$v->level)}}{{$v->cat_name}}</option>

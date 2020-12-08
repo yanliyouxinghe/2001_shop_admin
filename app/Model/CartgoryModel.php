@@ -19,10 +19,6 @@ class CartgoryModel extends Model
         return $data;
       }
 
-      public function cart_datas(){
-        $data = self::where('is_show',1)->paginate(10);
-        return $data;
-      }
 
       //添加分类
       public function iscreate($data){
