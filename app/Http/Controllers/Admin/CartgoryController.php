@@ -121,7 +121,7 @@ class CartgoryController extends Controller
       $cat_name = $request->input('cat_name');
       $parent_id = $request->input('parent_id');
       $is_show = $request->input('is_show');
-      if(empty($cat_id) || empty($cat_name) || empty($parent_id) || empty($is_show)){
+      if(empty($cat_id) || empty($cat_name) || !isset($parent_id) || empty($is_show)){
           return redirect('/cartgory/edit/'.$cat_id)->with('status','参数丢失...');
       }
       $data = [
