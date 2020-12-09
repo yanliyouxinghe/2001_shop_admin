@@ -90,7 +90,7 @@ Route::prefix('/cartgory')->group(function(){
 //品牌
 Route::prefix('/brand')->group(function(){
   Route::get('/create','Admin\BrandController@create')->name('brand.create');//品牌添加
-  Route::get('/list','Admin\BrandController@index')->name('brand.index');//品牌展示
+  Route::any('/list','Admin\BrandController@index')->name('brand.index');//品牌展示
   Route::post('/store','Admin\BrandController@store')->name('brand.store');
   Route::any('/uploads','Admin\BrandController@uploads')->name('brand.uploads');
   Route::get('/destroy','Admin\BrandController@destroy')->name('brand.destroy');//品牌删除
