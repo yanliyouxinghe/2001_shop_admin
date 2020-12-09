@@ -21,7 +21,7 @@
          <div class="layui-form-item">
             <label class="layui-form-label">广告名称:</label>
             <div class="layui-input-block">
-            <input type="text" name="adv_name" lay-verify="title" autocomplete="off" placeholder="请输入广告名称" class="layui-input">
+            <input type="text" name="adv_name" lay-verify="title" autocomplete="off" placeholder="请输入广告名称" class="layui-input"><span></span>
             <b style="color:red">{{$errors->first('adv_name')}}</b>
             </div>
         </div>
@@ -34,6 +34,7 @@
                    <option value="1" >图片</option>
                    <option value="2">文字</option>
                  </select>
+                 <span></span>
                </div>
            </div>
           
@@ -41,6 +42,7 @@
             <label class="layui-form-label">普通文本域</label>
             <div class="layui-input-block"> 
               <textarea placeholder="请输入内容" class="layui-textarea" name="adv_desc"></textarea>
+              <span></span>
             </div>
           </div>
 
@@ -70,8 +72,8 @@
                    @foreach($ad as $v)
                    <option value="{{$v->ad_id}}">{{$v->ad_name}}</option>
                    @endforeach
-                   
                  </select>
+                 <span></span>
                </div>
            </div>
 
@@ -80,6 +82,7 @@
               <label class="layui-form-label">开始日期</label>
               <div class="layui-input-inline">
                 <input type="text" name="start_time" class="layui-input" id="date1" placeholder="yyyy-MM-dd HH:mm:ss">
+                <span></span>
               </div>
             </div>
 			    </div>
@@ -89,6 +92,7 @@
               <label class="layui-form-label">结束日期</label>
               <div class="layui-input-inline">
                 <input type="text" name="end_time" class="layui-input" id="date" placeholder="yyyy-MM-dd HH:mm:ss">
+                <span></span>
               </div>
             </div>
 			    </div>
@@ -97,6 +101,7 @@
             <label class="layui-form-label">广告链接:</label>
             <div class="layui-input-block">
             <input type="text" name="adv_link" lay-verify="title" autocomplete="off" placeholder="请输入广告链接" class="layui-input">
+            <span></span>
              
             </div>
         </div>
@@ -129,7 +134,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label"></label>
             <div class="layui-input-block" align="center">
-            <button type="submit" class="layui-btn">添加</button>
+            <button type="button" class="layui-btn add">添加</button>
             <button type="reset" class="layui-btn layui-btn-primary">清除</button>
             </div>
         </div>
@@ -138,9 +143,89 @@
 </body>
 </html>
 <script src="/static/admin/layui.js"></script>
+<script src="http://libs.baidu.com/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+  //js验证
+  $(document).on('click','.add',function(){
+    var falg1 = false;
+    var adv_name = $('input[name="adv_name"]').val();
+    // alert(ad_name);
+    if(adv_name==''){
+      $("input[name='adv_name']+span").html("<font color='red'>广告名称不能为空</font>");
+      flag1 = false;
+    }else{
+      $("input[name='adv_name']+span").html("<font color='green'>√</font>");
+      flag1 = true;
+    }
+
+    var falg2 = false;
+    var media_type = $('select[name="media_type"]').val();
+    if(media_type==''){
+      $("select[name='media_type']+span").html("<font color='red'>媒介类型不能为空</font>");
+      falg2 = false;
+    }else{
+      $("select[name='media_type']+span").html("<font color='green'>√</font>");
+      falg2 = true;
+    }
+
+    var falg3 = false;
+    var ad_id = $('select[name="ad_id"]').val();
+    if(ad_id==''){
+      $("select[name='ad_id']+span").html("<font color='red'>广告位置不能为空</font>");
+      falg3 = false;
+    }else{
+      $("select[name='ad_id']+span").html("<font color='green'>√</font>");
+      falg3 = true;
+    }
+
+
+    var falg4 = false;
+    var start_time = $('input[name="start_time"]').val();
+    if(start_time==''){
+      $("input[name='start_time']+span").html("<font color='red'>开始日期不能为空</font>");
+      falg4 = false;
+    }else{
+      $("input[name='start_time']+span").html("<font color='green'>√</font>");
+      falg4 = true;
+    }
+
+
+    var falg5 = false;
+    var end_time = $('input[name="end_time"]').val();
+    if(end_time==''){
+      $("input[name='end_time']+span").html("<font color='red'>结束时间不能为空</font>");
+      falg5 = false;
+    }else{
+      $("input[name='end_time']+span").html("<font color='green'>√</font>");
+      falg5 = true;
+    }
 
 
 
+    var falg6 = false;
+    var adv_link = $('input[name="adv_link"]').val();
+    if(adv_link==''){
+      $("input[name='adv_link']+span").html("<font color='red'>广告链接不能为空</font>");
+      falg6 = false;
+    }else{
+      $("input[name='adv_link']+span").html("<font color='green'>√</font>");
+      falg6 = true;
+    }
+
+    if(falg1===false || falg2===false || falg3===false || falg4===false ||falg5===false ||falg6===false){
+      return false;
+    }else{
+      $('from').submit();
+    }
+   
+
+
+
+  })
 </script>
+
+
+
+
 
 @endsection

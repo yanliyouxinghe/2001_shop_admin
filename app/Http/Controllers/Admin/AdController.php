@@ -16,8 +16,20 @@ class AdController extends Controller
      */
     public function index()
     {
-        $ad = AdModel::where('is_del',1)->orderBy('ad_id','desc')->paginate(3);
-        return view('ad.index',['ad'=>$ad]);
+        $ad_name = request()->ad_name;
+        $where = [];
+        if($ad_name){
+            $where[] = ['ad_name','like',"%$ad_name%"];
+        }
+
+        
+        $ad = AdModel::where('is_del',1)->where($where)->orderBy('ad_id','desc')->paginate(3);
+
+        if(request()->ajax()){
+            return view('ad.ajaxindex',['ad'=>$ad]);
+        }
+        
+        return view('ad.index',['ad'=>$ad,'ad_name'=>$ad_name]);
     }
 
     /**
@@ -47,6 +59,8 @@ class AdController extends Controller
 
     /**查看广告 */
     public function ch($id){
+        //判断广告位下有无广告
+        
         $adv = AdvModel::join('sh_ad','sh_adv.ad_id','=','sh_ad.ad_id')
                        ->where('sh_adv.ad_id',$id)
                        ->paginate(5);
@@ -124,10 +138,6 @@ class AdController extends Controller
     {
         $id = request()->ad_id;
 
-        // foreach($id as $key=>$val){
-        //     $res = AdModel::where(['ad_id'=>$val])->update(['is_del'=>2]);
-        // }
-        // dd($res);
         if(!$id){
             return json_encode(['code'=>1,'msg'=>'参数丢失']);
         }

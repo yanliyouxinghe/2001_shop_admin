@@ -16,11 +16,22 @@ class AdvController extends Controller
      */
     public function index()
     {
+        $adv_name = request()->adv_name;
+        $where = [];
+        if($adv_name){
+            $where[] = ['adv_name','like',"%$adv_name%"];
+        }
+
+
         $adv = AdvModel::join('sh_ad','sh_adv.ad_id','=','sh_ad.ad_id')
                         ->orderBy('adv_id','desc')
                         ->where('sh_adv.is_del',1)
+                        ->where($where)
                         ->paginate(5);
-        return view('adv.index',['adv'=>$adv]);                
+        if(request()->ajax()){
+            return view('adv.ajaxindex',['adv'=>$adv]);
+        }                
+        return view('adv.index',['adv'=>$adv,'adv_name'=>$adv_name]);                
     }
 
     /**

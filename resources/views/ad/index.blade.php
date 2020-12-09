@@ -9,7 +9,7 @@
 <meta name="renderer" content="webkit">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<link rel="stylesheet" href="//res.layui.com/layui/dist/css/layui.css" media="all">
+<!-- <link rel="stylesheet" href="//res.layui.com/layui/dist/css/layui.css" media="all"> -->
 <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
 </head>
 <body>
@@ -17,7 +17,11 @@
 <blockquote class="layui-elem-quote layui-text">
 <h4 style="color:green">广告位置列表</h4>
 </blockquote>
-
+    <form action="">
+    广告位置名称：<input type="text" name="ad_name" value="{{$ad_name}}" placeholder="请输入广告位置名称">
+      <button>搜索</button>
+    </form>
+    <p align="right"><a href="{{url('/ad/create')}}">添加</a></p>
     <div class="layui-form">
      <table class="layui-table">
         <thead>
@@ -53,7 +57,7 @@
            
           </tr>
         @endforeach
-        <tr><td colspan="7">{{$ad->links('vendor.pagination.adminbrand')}}</td>
+        <tr><td colspan="7">{{$ad->links('vendor.pagination.adminbrand')}}</td>  
           <button type="button" class="moredel">批量删除</button>
         </tr>
         </tbody>
@@ -64,6 +68,20 @@
 
 <script src="http://libs.baidu.com/jquery/1.7.2/jquery.min.js"></script>
 <script type="text/javascript">
+    /**ajax分页 */
+    $(document).on('click','.#layui-laypage-1 a',function(){
+      // alert(11);
+      var url = $(this).attr('href');
+      // console.log(url);
+
+      $.get(url,function(res){
+        // alert(res);
+        $('tbody').html(res);
+      })
+      return false;
+    })
+
+
   //ajax删除(单)
   $(document).on('click','.del',function(){
     var _this = $(this);
