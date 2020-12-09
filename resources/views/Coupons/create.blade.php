@@ -18,9 +18,9 @@
 @endif
     <div class="form-group">
         <label for="firstname" class="col-sm-2 control-label">优惠券名称</label>
-        <div class="col-sm-8">
-            <input type="text" class="form-control" id="firstname" name="coupons_name"
-                   placeholder="请输入优惠券名称">
+        <div class="col-sm-8 coupons_name">
+            <input type="text" class="form-control couponsname" id="firstname" name="coupons_name"
+                   placeholder="请输入优惠券名称"><span></span>
         </div>   <span style="color: darkred;"></span>
     </div>
     <div class="form-group">
@@ -46,25 +46,43 @@
     <div class="form-group">
         <label for="firstname" class="col-sm-2 control-label">满足条件</label>
         <div class="col-sm-8">
-      <input type="text" class="form-control" id="firstname" name="coupons_meet"
+      <input type="text" class="form-control coupons_meet" id="firstname" name="coupons_meet"
                    placeholder="">
         </div><span style="color:green"></span>
     </div>
     <div class="form-group">
         <label for="firstname" class="col-sm-2 control-label">优惠券价格</label>
         <div class="col-sm-8">
-            <input type="text" class="form-control" id="firstname" name="coupons_price"
+            <input type="text" class="form-control coupons_price" id="firstname" name="coupons_price"
                    placeholder="请输入优惠券价格">
         </div><span style="color: darkred;"></span>
     </div>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">添加</button>
+            <button type="submit" class="coupons btn btn-default">添加</button>
             <button type="reset" class="btn btn-default">重置</button>
-            <a href="/coupons/list" class="btn btn-default">前往列表</a>
+            <a href="/coupons/list" class="btn btn-default coupons">前往列表</a>
         </div>
     </div>
 </form>
 
 
 @endsection
+  <script src="/static/admin/jquery.min.js"></script>
+
+<script>
+    $(document).on('click','.coupons',function(){
+        var coupons_name=$("div[class='col-sm-8 coupons_name']").children().val();
+        var reg=/^([A-Za-z]|[\u4E00-\u9FA5]|[0-9])+$/;
+        if(!reg.test(coupons_name)){
+                $("#article_title").next('span').text('标题已存在');
+            alert("优惠券名称不正确");
+            return false;
+        }
+ 
+    })
+
+</script>
+
+
+
