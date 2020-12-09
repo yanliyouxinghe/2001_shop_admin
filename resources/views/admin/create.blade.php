@@ -34,7 +34,7 @@
           </div>
       </div>
       <div class="layui-form-item">
-          <label class="layui-form-label">确认密码:</label>
+          <label class="layui-form-label" id="confirm">确认密码:</label>
           <div class="layui-input-block">
           <input type="password" name="admin_pwd" lay-verify="title" autocomplete="off" placeholder="请确认管理员密码 " class="layui-input">
           <b style="color:red; font-family:'仿宋' "></b> 
@@ -74,4 +74,5 @@
 @endsection
 <script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>
+
 </script>

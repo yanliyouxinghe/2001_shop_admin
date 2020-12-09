@@ -123,8 +123,8 @@ Route::prefix('/admin')->group(function(){
   Route::get('/admin/destroy/{admin_id?}','Admin\AdminController@destroy')->name('admin.destroy');//删除
   Route::get('/admin/addrole/{admin_id?}','Admin\AdminController@addrole')->name('admin.addrole');//添加角色
   Route::post('/addroledo','Admin\AdminController@addroledo')->name('role.addroledo');//执行添加角色
-  Route::get('/edit/{id}','Admin\AdminController@edit')->name('admin.edit');//修改角色
-  Route::post('/update/{id}','Admin\AdminController@update')->name('admin.update');//执行修改角色
+  Route::get('/edit/{id}','Admin\AdminController@edit')->name('admin.edit');//管理员修改
+  Route::post('/update/{id}','Admin\AdminController@update')->name('admin.update');//执行修改
 
 });
 //角色管理
