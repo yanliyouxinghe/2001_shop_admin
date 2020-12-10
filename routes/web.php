@@ -90,7 +90,7 @@ Route::prefix('/cartgory')->group(function(){
 //品牌
 Route::prefix('/brand')->group(function(){
   Route::get('/create','Admin\BrandController@create')->name('brand.create');//品牌添加
-  Route::get('/list','Admin\BrandController@index')->name('brand.index');//品牌展示
+  Route::any('/list','Admin\BrandController@index')->name('brand.index');//品牌展示
   Route::post('/store','Admin\BrandController@store')->name('brand.store');
   Route::any('/uploads','Admin\BrandController@uploads')->name('brand.uploads');
   Route::get('/destroy','Admin\BrandController@destroy')->name('brand.destroy');//品牌删除
@@ -105,7 +105,7 @@ Route::prefix('/notice')->group(function(){
   Route::get('/list','Admin\NoticeController@index')->name('notice.list');//公告展示
   Route::post('/store','Admin\NoticeController@store')->name('notice.store');
   Route::any('/uploads','Admin\NoticeController@uploads')->name('notice.uploads');
-  Route::get('/destroy/{id}','Admin\NoticeController@destroy')->name('notice.destroy');//公告删除
+  Route::get('/destroy','Admin\NoticeController@destroy')->name('notice.destroy');//公告删除
   // Route::get('/show/{id}','Admin\NoticeController@show')->name('notice.show');
   Route::get('/edit/{id}','Admin\NoticeController@edit')->name('notice.edit');
  Route::post('/update/{id}','Admin\NoticeController@update')->name('notice.update');//公告执行修改
