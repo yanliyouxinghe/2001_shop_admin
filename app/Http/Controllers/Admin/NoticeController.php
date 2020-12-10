@@ -127,30 +127,30 @@ class NoticeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy()
     {
-//         $ids = Request()->all();
-//         if(!$ids){
-//             return json_encode(['code'=>11,'msg'=>'请选择要删除的数据']);
-//         }
-//         foreach ($ids as $k=>$v){
-//             $isdel = NoticeModel::destroy($v);
-//         }
-// //        dd($isdel);
-//         if($isdel){
-//             return json_encode(['code'=>0,'msg'=>'OK']);
-//         }else{
-//             return json_encode(['code'=>1,'msg'=>'删除失败']);
-//         }
-            $res=NoticeModel::where('notice_id',$id)->delete();
-            if($res){
-            echo '<script>alert("删除成功");location.href="/notice/list"</script>';
-            die;
-            // return json_encode(['code'=>0,'msg'=>'OK']);
-            }else{
-                return redirect('notice.list');
+         $ids = Request()->all();
+        if(!$ids){
+            return json_encode(['code'=>11,'msg'=>'请选择要删除的数据']);
+        }
+        foreach ($ids as $k=>$v){
+            $isdel = NoticeModel::destroy($v);
+        }
+//        dd($isdel);
+        if($isdel){
+            return json_encode(['code'=>0,'msg'=>'OK']);
+        }else{
+            return json_encode(['code'=>1,'msg'=>'删除失败']);
+        }
+            // $res=NoticeModel::where('notice_id',$id)->delete();
+            // if($res){
+            // echo '<script>alert("删除成功");location.href="/notice/list"</script>';
+            // die;
+            // // return json_encode(['code'=>0,'msg'=>'OK']);
+            // }else{
+            //     return redirect('notice.list');
                 
-            }
+            // }
     }
 
     //即点即该

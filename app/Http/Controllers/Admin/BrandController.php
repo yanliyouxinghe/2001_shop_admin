@@ -12,10 +12,17 @@ class BrandController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+
+         $brand_name = $request->input('brand_name');
+          //print_r($brand_name);exit;
+        $where = [];
+        if($brand_name){
+            $where[]=['brand_name','like',"%$brand_name%"];
+        }
          $brandModel = new BrandModel();
-        $data = $brandModel->paginate(3);
+        $data = $brandModel::where($where)->paginate(3);
         if (Request()->ajax()){
             return view('brand.ajaxpage', ['data' => $data]);
         }

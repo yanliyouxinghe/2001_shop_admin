@@ -54,7 +54,7 @@
 <!-- 提交 -->
 
 <center><div>
-       <button type="submit" class="layui-btn">添加</button>
+       <button type="submit" class="layui-btn sub">添加</button>
        <button type="reset" class="layui-btn layui-btn-danger">重置</button>
        <a href="/category/list" class="layui-btn">列表</a>
  </div></center>
@@ -63,7 +63,4 @@
 </form>
 </body>
 </html>
-
-
-
 @endsection

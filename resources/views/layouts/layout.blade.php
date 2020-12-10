@@ -51,7 +51,7 @@
       @if(isset($priv))
       @foreach($priv as $v)
          
-        <li @if(strpos($name,$v->menu_url)!==false) class="layui-nav-item" @else class="layui-nav-item " @endif>
+        <li @if(strpos($name,$v->menu_url)!==false) class="layui-nav-item layui-nav-itemed" @else class="layui-nav-item " @endif>
           <a class="" href="javascript:;">{{$v->menu_name}}</a>
           @if($v->son) 
           <dl class="layui-nav-child">
@@ -59,6 +59,7 @@
             <dd @if($name==$value->menu_url) class="layui-this" @endif><a href="{{$value->route}}">{{$value->menu_name}}</a></dd>
             @endforeach
           </dl>
+          
           @endif
         </li>
       @endforeach
