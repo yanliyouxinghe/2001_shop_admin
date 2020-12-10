@@ -191,13 +191,16 @@ Route::prefix('/goods')->group(function(){
 
 
   });
+//优惠券
 Route::prefix('/coupons')->group(function(){
   Route::get('/create','Admin\CouponsController@create')->name('coupons.create');//添加
   Route::post('/store','Admin\CouponsController@store')->name('coupons.store');//执行添加
-  Route::get('/list','Admin\CouponsController@list')->name('coupons.list');//添加
-  Route::get('/destroy/{id}','Admin\CouponsController@destroy')->name('coupons.destroy');//删除
+  Route::get('/list','Admin\CouponsController@list')->name('coupons.list');//列表展示
+  Route::any('/uploads','Admin\CouponsController@uploads')->name('coupons.uploads');//图片上传
+  Route::get('/destroy','Admin\CouponsController@destroy')->name('coupons.destroy');//删除
   Route::get('/edit/{id}','Admin\CouponsController@edit')->name('coupons.edit');//修改
   Route::post('/update/{id}','Admin\CouponsController@update')->name('coupons.update');//执行修改
+  Route::any('/updated','Admin\CouponsController@updated')->name('coupons.updated');//即点即改
 
 });
 

@@ -48,7 +48,7 @@
     </tr>
 
     @endforeach
-    <tr><td colspan="6">{{ $data->links('vendor.pagination.adminbrand') }}</td></tr>
+    <tr><td colspan="6">{{$data->links('vendor.pagination.adminbrand')}}</td></tr>
     <button type="button" class="layui-btn layui-btn-xs layui-btn-normal" id="pil">批量删除</button>
     </tbody>
 

@@ -20,7 +20,7 @@
         <label for="firstname" class="col-sm-2 control-label">优惠券名称</label>
         <div class="col-sm-8 coupons_name">
             <input type="text" class="form-control couponsname" id="firstname" name="coupons_name"
-                   placeholder="请输入优惠券名称"><span></span>
+                   placeholder="请输入优惠券名称"><span style="color: red" ></span>
         </div>   <span style="color: darkred;"></span>
     </div>
     <div class="form-group">
@@ -37,31 +37,34 @@
     </div>
     <div class="form-group">
         <label for="firstname" class="col-sm-2 control-label">优惠券图片</label>
-        <div >
-            <input type="file"  name="coupons_img" value="">
-            
+        <div class="layui-upload-drag" id="test10">
+            <input type="hidden" id="fileview" name="coupons_img" value="">
+            <i class="layui-icon"></i>
+            <p>点击上传，或将文件拖拽到此处</p>
+            <div class="layui-hide" id="uploadDemoView">
+                <hr>
+                <img src="" alt="上传成功后渲染" style="max-width: 196px">
+            </div>
         </div>
-        <span style="color: darkred;"></span>
-    </div>
     <div class="form-group">
         <label for="firstname" class="col-sm-2 control-label">满足条件</label>
-        <div class="col-sm-8">
-      <input type="text" class="form-control coupons_meet" id="firstname" name="coupons_meet"
-                   placeholder="">
+        <div class="col-sm-8 coupons_meet">
+      <input type="text" class="form-control couponsmeet" id="firstname" name="coupons_meet"
+                   placeholder=""><span style="color: red" ></span>
         </div><span style="color:green"></span>
     </div>
     <div class="form-group">
         <label for="firstname" class="col-sm-2 control-label">优惠券价格</label>
-        <div class="col-sm-8">
-            <input type="text" class="form-control coupons_price" id="firstname" name="coupons_price"
-                   placeholder="请输入优惠券价格">
+        <div class="col-sm-8 coupons_price">
+            <input type="text" class="form-control couponsprice" id="firstname" name="coupons_price"
+                   placeholder="请输入优惠券价格"><span style="color: red" ></span>
         </div><span style="color: darkred;"></span>
     </div>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
             <button type="submit" class="coupons btn btn-default">添加</button>
             <button type="reset" class="btn btn-default">重置</button>
-            <a href="/coupons/list" class="btn btn-default coupons">前往列表</a>
+            <a href="/coupons/list" class="btn btn-default">前往列表</a>
         </div>
     </div>
 </form>
@@ -72,14 +75,51 @@
 
 <script>
     $(document).on('click','.coupons',function(){
-        var coupons_name=$("div[class='col-sm-8 coupons_name']").children().val();
         var reg=/^([A-Za-z]|[\u4E00-\u9FA5]|[0-9])+$/;
-        if(!reg.test(coupons_name)){
-                $("#article_title").next('span').text('标题已存在');
-            alert("优惠券名称不正确");
+        var reg2=/^[0-9]*$/;
+        var flag=false;
+        var coupons_name=$("div[class='col-sm-8 coupons_name']").children().val();
+         if(coupons_name==''){
+            // alert(111);
+            $(".couponsname").next('span').text('优惠券名称不能为空');
+            flag=false;
+        }else if(!reg.test(coupons_name)){
+            $(".couponsname").next('span').text('优惠券名称格式不正确');
+            flag= false;
+        }else{
+            $(".couponsname").next('span').text('✔');
+            flag=true;
+        }
+        var mflag=false;
+        var coupons_meet=$("div[class='col-sm-8 coupons_meet']").children().val();
+        if(coupons_meet==''){
+            $(".couponsmeet").next('span').text('满足条件不能为空');
+            mflag=false;
+        }else if(!reg2.test(coupons_meet)){
+            $(".couponsmeet").next('span').text('只能为数字');
+            mflag=false;
+        }else{
+            $(".couponsmeet").next('span').text('✔');
+            mflag=true;
+        }
+        var pflag=false;
+        var coupons_price=$("div[class='col-sm-8 coupons_price']").children().val();
+        if(coupons_price==''){
+            $(".couponsprice").next('span').text('优惠价格不能为空');
+            pflag= false;
+        }else if(!reg2.test(coupons_price)){
+            $(".couponsprice").next('span').text('只能为数字');
+            pflag= false;
+        }else if(coupons_price>coupons_meet){
+            $(".couponsprice").next('span').text('优惠价格不能大于等于满足条件');
+            pflag=false;
+        }else{
+            $(".couponsprice").next('span').text('✔');
+            pflag=true;
+        }        
+        if(flag==false||mflag==false||pflag==false){
             return false;
         }
- 
     })
 
 </script>
