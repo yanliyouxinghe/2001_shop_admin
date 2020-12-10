@@ -27,6 +27,18 @@
     </div>
     </div>
 
+    <div class="layui-form-item">
+    <label class="layui-form-label">所属商户</label>
+    <div class="layui-input-inline">
+       <select name="seuser_id">
+          <option value="">--请选择--</option>
+          @foreach($seuserInfo as $k=>$v)
+          <option value="{{$v->seuser_id}}">{{$v->seuser_plone}}</option>
+          @endforeach
+       </select>
+    </div>
+    </div>
+
 
     <div class="layui-form-item">
     <label class="layui-form-label">商品货号</label>

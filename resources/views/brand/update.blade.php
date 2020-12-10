@@ -28,6 +28,7 @@
                        placeholder="请输入品牌网址" >
             </div><span style="color: darkred;"></span>
         </div>
+
         <div class="form-group">
             <label for="firstname" class="col-sm-2 control-label">品牌LOGO</label>
             <div class="layui-upload-drag" id="test10">
@@ -46,6 +47,7 @@
 
             <span style="color: darkred;"></span>
         </div>
+        
         <div class="form-group">
             <label for="firstname" class="col-sm-2 control-label">品牌描述</label>
             <div class="col-sm-8">

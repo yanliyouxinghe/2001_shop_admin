@@ -43,9 +43,10 @@ Route::prefix('ad')->group(function(){
   Route::any('upload','Admin\AdController@upload')->name('ad.upload');   //广告图片
   Route::any('/sh/{ad_id}','Admin\AdController@sh')->name('ad.sh');   //生成广告
   Route::any('/ch/{ad_id}','Admin\AdController@ch')->name('ad.ch');   //查看广告
+  Route::any('/list','Admin\AdController@list')->name('ad.list');   //广告
 });
 
-//商家管理
+//商家审核管理
 Route::prefix('seuser')->group(function(){
     Route::get('/list','Admin\SeuserController@list')->name('seuser.list');  //商家审核展示
     Route::get('/won','Admin\SeuserController@won')->name('seuser.won');  //商家审核通过或失败  ajax
@@ -90,7 +91,7 @@ Route::prefix('/cartgory')->group(function(){
 //品牌
 Route::prefix('/brand')->group(function(){
   Route::get('/create','Admin\BrandController@create')->name('brand.create');//品牌添加
-  Route::get('/list','Admin\BrandController@index')->name('brand.index');//品牌展示
+  Route::any('/list','Admin\BrandController@index')->name('brand.index');//品牌展示
   Route::post('/store','Admin\BrandController@store')->name('brand.store');
   Route::any('/uploads','Admin\BrandController@uploads')->name('brand.uploads');
   Route::get('/destroy','Admin\BrandController@destroy')->name('brand.destroy');//品牌删除
@@ -105,7 +106,7 @@ Route::prefix('/notice')->group(function(){
   Route::get('/list','Admin\NoticeController@index')->name('notice.list');//公告展示
   Route::post('/store','Admin\NoticeController@store')->name('notice.store');
   Route::any('/uploads','Admin\NoticeController@uploads')->name('notice.uploads');
-  Route::get('/destroy/{id}','Admin\NoticeController@destroy')->name('notice.destroy');//公告删除
+  Route::get('/destroy','Admin\NoticeController@destroy')->name('notice.destroy');//公告删除
   // Route::get('/show/{id}','Admin\NoticeController@show')->name('notice.show');
   Route::get('/edit/{id}','Admin\NoticeController@edit')->name('notice.edit');
  Route::post('/update/{id}','Admin\NoticeController@update')->name('notice.update');//公告执行修改
@@ -123,8 +124,8 @@ Route::prefix('/admin')->group(function(){
   Route::get('/admin/destroy/{admin_id?}','Admin\AdminController@destroy')->name('admin.destroy');//删除
   Route::get('/admin/addrole/{admin_id?}','Admin\AdminController@addrole')->name('admin.addrole');//添加角色
   Route::post('/addroledo','Admin\AdminController@addroledo')->name('role.addroledo');//执行添加角色
-  Route::get('/edit/{id}','Admin\AdminController@edit')->name('admin.edit');//修改角色
-  Route::post('/update/{id}','Admin\AdminController@update')->name('admin.update');//执行修改角色
+  Route::get('/edit/{id}','Admin\AdminController@edit')->name('admin.edit');//管理员修改
+  Route::post('/update/{id}','Admin\AdminController@update')->name('admin.update');//执行修改
 
 });
 //角色管理

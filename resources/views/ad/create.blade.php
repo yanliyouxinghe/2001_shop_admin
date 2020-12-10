@@ -9,19 +9,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <link rel="stylesheet" href="//res.layui.com/layui/dist/css/layui.css"  media="all">
+  <!-- <link rel="stylesheet" href="//res.layui.com/layui/dist/css/layui.css"  media="all"> -->
 </head>
 <body>
 
 <blockquote class="layui-elem-quote layui-text">
 <h4 style="color:green">广告位置添加</h4>
+<p align="right"><a href="{{url('/ad')}}">列表页</a></p>
 </blockquote>
     <form class="layui-form" action="{{url('/ad/store')}}" method="post">
          @csrf
         <div class="layui-form-item">
             <label class="layui-form-label">广告位置名称:</label>
             <div class="layui-input-block">
-            <input type="text" name="ad_name" lay-verify="title" autocomplete="off" placeholder="请输入广告位置位名称" class="layui-input">
+            <input type="text" name="ad_name" lay-verify="title" autocomplete="off" placeholder="请输入广告位置位名称" class="layui-input"><span></span>
             <b style="color:red">{{$errors->first('ad_name')}}</b>
             </div>
         </div>
@@ -29,8 +30,9 @@
          <div class="layui-form-item">
             <label class="layui-form-label">广告位置宽度:</label>
             <div class="layui-input-block">
-            <input type="text" name="ad_width" lay-verify="title" autocomplete="off" placeholder="请输入广告位置宽度" class="layui-input">
+            <input type="text" name="ad_width" lay-verify="title" autocomplete="off" placeholder="请输入广告位置宽度" class="layui-input"><span></span>
             <b style="color:red">{{$errors->first('ad_width')}}</b>
+            
             </div>
         </div>
 
@@ -38,7 +40,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">广告位置高度:</label>
             <div class="layui-input-block">
-            <input type="text" name="ad_height" lay-verify="title" autocomplete="off" placeholder="请输入广告位置高度" class="layui-input"> 
+            <input type="text" name="ad_height" lay-verify="title" autocomplete="off" placeholder="请输入广告位置高度" class="layui-input"><span></span>
             </div>
         </div>          
 
@@ -47,6 +49,7 @@
             <label class="layui-form-label">广告位置介绍</label>
             <div class="layui-input-block">
               <textarea placeholder="请输入广告位置介绍" name="ad_desc" class="layui-textarea"></textarea>
+              <span></span>
             </div>
         </div>
 
@@ -65,7 +68,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label"></label>
             <div class="layui-input-block" align="center">
-            <button type="submit" class="layui-btn">添加</button>
+            <button type="submit" class="layui-btn add">添加</button>
             <button type="reset" class="layui-btn layui-btn-primary">清除</button>
             </div>
         </div>
@@ -73,6 +76,65 @@
 
 </body>
 </html>
+<script src="http://libs.baidu.com/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+  //js验证
+  $(document).on('click','.add',function(){
+    
+    var ad_name = $('input[name="ad_name"]').val();
+    // alert(ad_name);
+    var flag1 = false;
+    if(ad_name==''){
+      $("input[name='ad_name']+span").html("<font color='red'>广告位置名称不能为空</font>");
+      flag1 = false;
+    }else{
+      $("input[name='ad_name']+span").html("<font color='green'>√</font>");
+      flag1 = true;
+    }
+
+    var ad_width = $('input[name="ad_width"]').val();
+    var falg2 = false;
+    if(ad_width==''){
+      $("input[name='ad_width']+span").html("<font color='red'>广告位置宽度不能为空</font>");
+      falg2 = false;
+    }else{
+      $("input[name='ad_width']+span").html("<font color='green'>√</font>");
+      falg2 = true;
+    }
+
+   
+    var ad_height = $('input[name="ad_height"]').val();
+    var falg3 = false;
+    if(ad_height==''){
+      $("input[name='ad_height']+span").html("<font color='red'>广告位置高度不能为空</font>");
+      falg3 = false;
+    }else{
+      $("input[name='ad_height']+span").html("<font color='green'>√</font>");
+      falg3 = true;
+    }
+
+
+    var ad_desc = $('textarea[name="ad_desc"]').val();
+    var falg4 = false;
+    if(ad_desc==''){
+      $("textarea[name='ad_desc']+span").html("<font color='red'>广告位置内容不能为空</font>");
+      falg4 = false;
+    }else{
+      $("textarea[name='ad_desc']+span").html("<font color='green'>√</font>");
+      falg4 = true;
+    }
+
+    if(flag1===false || falg2===false || falg3===false || falg4===false){
+      return false;
+    }else{
+        $('from').submit();
+    }
+
+   
+
+
+  });
+</script>
 
 
 

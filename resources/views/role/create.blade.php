@@ -23,6 +23,7 @@
             <label class="layui-form-label">角色名称:</label>
             <div class="layui-input-block">
             <input type="text" name="role_name" lay-verify="title" autocomplete="off" placeholder="请输入角色名称" class="layui-input">
+            <span></span>
             <b style="color:red; font-family:'仿宋' "></b> 
             </div>
         </div>
@@ -36,7 +37,7 @@
 <div class="layui-form-item">
             <label class="layui-form-label"></label>
             <div class="layui-input-block" align="center">
-            <button type="submit" class="layui-btn">添加</button>
+            <button type="submit" class="layui-btn add">添加</button>
             <button type="reset" class="layui-btn layui-btn-primary">清除</button>
             </div>
         </div>
@@ -44,3 +45,26 @@
 </body>
 </html>
 @endsection
+
+<script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+$(document).on('click','.add',function(){
+    var role_name=$('input[name="role_name"]').val();
+    var falg1=false;
+    if(role_name==''){
+        $("input[name='role_name']+span").html("<font color='red'>角色名称不能为空</font>");
+        falg1=false;
+    }else{
+        $("input[name='role_name']+span").html("<font color='green'>√</font>");
+        falg1=true;
+    }
+    if(falg1===false){
+        return false;
+    }else{
+        $('from').submit();
+    }
+    // alert(admin_name);
+})
+
+
+</script>

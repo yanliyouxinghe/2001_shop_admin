@@ -58,7 +58,7 @@ class Admin
           //查询左侧菜单
      if($admin_id == 1){
         $privmenu = \DB::select("select * from sh_menu where is_show = 1");
-       // dd($privmenu);
+    //    dd($privmenu);
     }else{
         $privmenu = \DB::select("select DISTINCT rm.menu_id,m.* from sh_role_menu as rm inner join sh_menu as m on rm.menu_id=m.menu_id inner join sh_admin_role as ar on ar.role_id = rm.role_id where m.is_show =1 and ar.admin_id='$admin_id'");
     }
