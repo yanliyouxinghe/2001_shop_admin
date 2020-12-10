@@ -72,9 +72,7 @@ class CouponsController extends Controller
   //列表展示
     public function list(){
         $coupons_name=Request()->input('coupons_name');
-        // $pageSize=config('app.pageSize');
 
-    	// $data1=$data->toArray();
     	$where=[];
         if($coupons_name){
             $where[]=['coupons_name','like',"%$coupons_name%"];
@@ -82,14 +80,11 @@ class CouponsController extends Controller
         $couponsModel = new CouponsModel();
         $query = $couponsModel->where($where)->paginate(3);
         $query1=$query->toArray();
-        // dump($query);die;
         
         $data=CouponsModel::get();
-    // dump($data);die;
         foreach($data as $v){}
         
     	$goods_data=GoodsModel::where('goods_id',$v->goods_id)->first();
-    	// dump($goods_data);die;
         if(request()->ajax()){
               return view('coupons.listajax',['query'=>$query,'data'=>$data,'data1'=>$goods_data]);
         }
@@ -151,7 +146,6 @@ class CouponsController extends Controller
 //        dd($ret);
         if($ret==1){
            return json_encode(['code'=>0,'msg'=>'修改成功']);
-            // return $this->JsonResponse('0','修改成功');
         }else{
             return json_encode(['code'=>4,'msg'=>'修改失败']);
         }
