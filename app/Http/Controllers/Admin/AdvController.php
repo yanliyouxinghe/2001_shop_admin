@@ -21,8 +21,6 @@ class AdvController extends Controller
         if($adv_name){
             $where[] = ['adv_name','like',"%$adv_name%"];
         }
-
-
         $adv = AdvModel::join('sh_ad','sh_adv.ad_id','=','sh_ad.ad_id')
                         ->orderBy('adv_id','desc')
                         ->where('sh_adv.is_del',1)
@@ -81,7 +79,7 @@ class AdvController extends Controller
      */
     public function show($id)
     {
-        //
+       
     }
 
     /**

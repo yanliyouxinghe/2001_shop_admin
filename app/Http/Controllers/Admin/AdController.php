@@ -60,12 +60,21 @@ class AdController extends Controller
     /**查看广告 */
     public function ch($id){
         //判断广告位下有无广告
-        
-        $adv = AdvModel::join('sh_ad','sh_adv.ad_id','=','sh_ad.ad_id')
-                       ->where('sh_adv.ad_id',$id)
-                       ->paginate(5);
-        return view('adv.index',['adv'=>$adv]);
-    }
+            if(!$id){
+               return;
+            }
+
+            $adv = AdvModel::where('ad_id',$id)->first();
+            if(!isset($adv)){
+                return "<script>alert('该广告位还没广告,请添加广告');location.href='/adv/create'; </script>";
+            }else{
+                $advModel = new AdvModel();
+                $advs = $advModel->leftjoin('sh_ad','sh_adv.ad_id','=','sh_ad.ad_id')->where('sh_adv.ad_id',$id)->get();
+                return view('ad.list',['advs'=>$advs]);
+            }
+
+            
+        }
 
     /**生成广告 */
     public function sh($ad_id){

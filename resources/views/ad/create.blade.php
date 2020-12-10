@@ -15,6 +15,7 @@
 
 <blockquote class="layui-elem-quote layui-text">
 <h4 style="color:green">广告位置添加</h4>
+<p align="right"><a href="{{url('/ad')}}">列表页</a></p>
 </blockquote>
     <form class="layui-form" action="{{url('/ad/store')}}" method="post">
          @csrf

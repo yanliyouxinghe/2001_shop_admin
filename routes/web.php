@@ -43,9 +43,10 @@ Route::prefix('ad')->group(function(){
   Route::any('upload','Admin\AdController@upload')->name('ad.upload');   //广告图片
   Route::any('/sh/{ad_id}','Admin\AdController@sh')->name('ad.sh');   //生成广告
   Route::any('/ch/{ad_id}','Admin\AdController@ch')->name('ad.ch');   //查看广告
+  Route::any('/list','Admin\AdController@list')->name('ad.list');   //广告
 });
 
-//商家管理
+//商家审核管理
 Route::prefix('seuser')->group(function(){
     Route::get('/list','Admin\SeuserController@list')->name('seuser.list');  //商家审核展示
     Route::get('/won','Admin\SeuserController@won')->name('seuser.won');  //商家审核通过或失败  ajax

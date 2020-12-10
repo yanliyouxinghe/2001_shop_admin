@@ -6,6 +6,11 @@
                      <span class="span_name">{{$v->adv_name}}</span>
                 </td>
                 <td>{{$v->media_type==1?'图片':'文字'}}</td>
+                <td>
+                  @if($v->adv_img)
+                  <img src="{{$v->adv_img}}" width="50px" height="50px">
+                  @endif
+                </td>
                 <td>{{$v->ad_name}}</td>
                 <td>{{$v->start_time}}</td>
                 <td>{{$v->end_time}}</td>
@@ -13,7 +18,6 @@
                 <td>{{$v->is_open==1?'是':'否'}}</td>
                 <td>{{$v->link_tel}}</td>
                 <td>{{$v->link_email}}</td>
-                <td>{{$v->adv_desc}}</td>
                 <td>@if($v->template==1)单图片
                     @elseif($v->template==2)多图片
                     @else 文字

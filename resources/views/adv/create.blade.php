@@ -9,12 +9,13 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <link rel="stylesheet" href="//res.layui.com/layui/dist/css/layui.css"  media="all">
+  <!-- <link rel="stylesheet" href="//res.layui.com/layui/dist/css/layui.css"  media="all"> -->
 </head>
 <body>
 
 <blockquote class="layui-elem-quote layui-text">
 <h4 style="color:green">广告添加</h4>
+<p align="right"><a href="{{url('/adv')}}">列表页</a></p>
 </blockquote>
     <form class="layui-form" action="{{url('/adv/store')}}" method="post" enctype="multipart/form-data">
          @csrf
@@ -134,7 +135,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label"></label>
             <div class="layui-input-block" align="center">
-            <button type="button" class="layui-btn add">添加</button>
+            <button type="submit" class="layui-btn add">添加</button>
             <button type="reset" class="layui-btn layui-btn-primary">清除</button>
             </div>
         </div>
@@ -147,8 +148,8 @@
 <script type="text/javascript">
   //js验证
   $(document).on('click','.add',function(){
-    var falg1 = false;
     var adv_name = $('input[name="adv_name"]').val();
+    var flag1 = false;
     // alert(ad_name);
     if(adv_name==''){
       $("input[name='adv_name']+span").html("<font color='red'>广告名称不能为空</font>");
@@ -158,8 +159,9 @@
       flag1 = true;
     }
 
-    var falg2 = false;
+    
     var media_type = $('select[name="media_type"]').val();
+    var falg2 = false;
     if(media_type==''){
       $("select[name='media_type']+span").html("<font color='red'>媒介类型不能为空</font>");
       falg2 = false;
@@ -168,8 +170,9 @@
       falg2 = true;
     }
 
-    var falg3 = false;
+    
     var ad_id = $('select[name="ad_id"]').val();
+    var falg3 = false;
     if(ad_id==''){
       $("select[name='ad_id']+span").html("<font color='red'>广告位置不能为空</font>");
       falg3 = false;
@@ -179,8 +182,9 @@
     }
 
 
-    var falg4 = false;
+    
     var start_time = $('input[name="start_time"]').val();
+    var falg4 = false;
     if(start_time==''){
       $("input[name='start_time']+span").html("<font color='red'>开始日期不能为空</font>");
       falg4 = false;
@@ -190,8 +194,9 @@
     }
 
 
-    var falg5 = false;
+    
     var end_time = $('input[name="end_time"]').val();
+    var falg5 = false;
     if(end_time==''){
       $("input[name='end_time']+span").html("<font color='red'>结束时间不能为空</font>");
       falg5 = false;
@@ -202,8 +207,9 @@
 
 
 
-    var falg6 = false;
+    
     var adv_link = $('input[name="adv_link"]').val();
+    var falg6 = false;
     if(adv_link==''){
       $("input[name='adv_link']+span").html("<font color='red'>广告链接不能为空</font>");
       falg6 = false;
@@ -212,11 +218,10 @@
       falg6 = true;
     }
 
-    if(falg1===false || falg2===false || falg3===false || falg4===false ||falg5===false ||falg6===false){
+    if(flag1===false || falg2===false || falg3===false || falg4===false ||falg5===false ||falg6===false){
       return false;
-    }else{
-      $('from').submit();
     }
+    
    
 
 

@@ -9,7 +9,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <link rel="stylesheet" href="//res.layui.com/layui/dist/css/layui.css"  media="all">
+  <!-- <link rel="stylesheet" href="//res.layui.com/layui/dist/css/layui.css"  media="all"> -->
 </head>
 <body>
 
@@ -49,17 +49,19 @@
                 <label class="layui-form-label" name="adv_img" >上传图片:</label>
                 <div class="layui-input-block">
                 <div class="layui-upload-drag" id="test10">
+               
                   <i class="layui-icon">&#xe67c;</i>
                   <p>点击上传，或将文件拖拽到此处</p >
-                  <div class="layui-hide" id="uploadDemoView" >
+                  <div @if(!$adv->adv_img) class="layui-hide" @endif id="uploadDemoView">
                     <hr>
-                    <img src="" alt="上传成功后渲染" style="max-width: 196px">
-                    <input type="hidden" name="adv_img" value="">
+                    <img src="{{$adv->adv_img}}" alt="上传成功后渲染" style="max-width: 196px">
+                    <input type="hidden" name="adv_img" @if($adv->adv_img) value="{{$adv->adv_img}}" @endif>
                   </div>
                 </div>
                 </div>
             </div>
-         
+
+    
 
             <div class="layui-form-item">
                <label class="layui-form-label">广告位置</label>
@@ -68,12 +70,12 @@
                    <option value="">--请选择--</option>
                    @foreach($ad as $v)
                    @if($v->ad_id==$adv->ad_id)
-                   <option value="{{$v->ad_id}}"  selected>{{$v->ad_name}}</option>
+                   <option value="{{$v->ad_id}}" selected>{{$v->ad_name}}</option>
                    @else
                    <option value="{{$v->ad_id}}" >{{$v->ad_name}}</option>
                    @endif
                    @endforeach
-                   
+
                  </select>
                </div>
            </div>
@@ -82,7 +84,7 @@
             <div class="layui-inline">
               <label class="layui-form-label">开始日期</label>
               <div class="layui-input-inline">
-                <input type="text" name="start_time" class="layui-input" id="date1" placeholder="yyyy-MM-dd HH:mm:ss">
+                <input type="text" name="start_time" value="{{$adv->start_time}}" class="layui-input" id="date1" placeholder="yyyy-MM-dd HH:mm:ss">
               </div>
             </div>
 			    </div>
@@ -91,7 +93,7 @@
             <div class="layui-inline">
               <label class="layui-form-label">结束日期</label>
               <div class="layui-input-inline">
-                <input type="text" name="end_time" class="layui-input" id="date" placeholder="yyyy-MM-dd HH:mm:ss">
+                <input type="text" name="end_time" value="{{$adv->end_time}}" class="layui-input" id="date" placeholder="yyyy-MM-dd HH:mm:ss">
               </div>
             </div>
 			    </div>

@@ -18,10 +18,7 @@
 <h4 style="color:green">广告列表</h4>
 
 </blockquote>
-<form action="">
-    广告名称：<input type="text" name="adv_name" value="{{$adv_name}}" placeholder="请输入广告名称">
-      <button>搜索</button>
-  </form>
+
    <p align="right"><a href="{{url('/adv/create')}}">添加</a></p>
     <div class="layui-form">
      <table class="layui-table">
@@ -44,7 +41,7 @@
             </tr>
         </thead>
         <tbody>
-        @foreach($adv as $v)
+        @foreach($advs as $v)
           <tr adv_id="{{$v->adv_id}}">
                 <td><input type="checkbox" class="box" name="box" value="{{$v->adv_id}}"></td>
                 <td>{{$v->adv_id}}</td>
@@ -76,7 +73,6 @@
            
           </tr>
         @endforeach
-        <tr><td colspan="8">{{$adv->links('vendor.pagination.adminbrand')}}</td>
           <button type="button" class="moredel">批量删除</button>
         </tr>
         </tbody>
