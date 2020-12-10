@@ -125,7 +125,7 @@ $(document).on('click',".layui-btn-xs",function(){
        var isdel = confirm("确定要删除所选的数据吗？");
         if(isdel == true){
             $.ajax({
-                url : '/brand/destroy',
+                url : '/notice/destroy',
                 dataType : 'json',
                 type : 'get',
                 data : {'ids':ids},
@@ -142,43 +142,30 @@ $(document).on('click',".layui-btn-xs",function(){
         }
         return false;
 });
-
-// {{--    删除--}}
-//     $(document).on("click",".btn-danger",function (){
-//         //这个对象
-//         var _this = $(this);
-//         //判断用户是否确认删除
-//        var ifdel = confirm("您确定删除吗？");
-//        if(ifdel == true){
-//            var id = _this.attr('brand_id');
-//            // console.log(id);
-//             $.ajax({
-//                 url : '/brand/destroy',
-//                 dataType : 'json',
-//                 type : 'get',
-//                 data : {'id':id},
-//                 success:function ( res ){
-//                     if( res.code == 0 ){
-//                         location.reload();
-//                     }else{
-//                         alert('操作繁忙，请稍后重试...');
-//                         return false;
-//                     }
-//                   }
-//             });
-//        }
-//        return false;
-//     });
-//     //分页
-//     $(document).on('click','#layui-laypage-1 a',function(){
-//         // alert(111);
-//         var url = $(this).attr('href');
-//         $.get(url,function(result){
-//             $('tbody').html(result);
-//         });
-//         return false;
-//     });
-
-
-
+//删除
+  $(document).on("click",".btn-danger",function (){
+        //这个对象
+        var _this = $(this);
+        //判断用户是否确认删除
+       var ifdel = confirm("您确定删除吗？");
+       if(ifdel == true){
+           var id = _this.attr('notice_id');
+           // console.log(id);
+            $.ajax({
+                url : '/notice/destroy',
+                dataType : 'json',
+                type : 'get',
+                data : {'id':id},
+                success:function ( res ){
+                    if( res.code == 0 ){
+                        location.reload();
+                    }else{
+                        alert('操作繁忙，请稍后重试...');
+                        return false;
+                    }
+                  }
+            });
+       }
+       return false;
+    });
 </script>

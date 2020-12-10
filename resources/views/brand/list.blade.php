@@ -9,17 +9,30 @@
  <blockquote class="layui-elem-quote layui-text">
 <h4 style="color:green">品牌展示</h4>
 </blockquote>
-  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
- <a href="/brand/create"><button type="button" class="btn btn-primary">前往添加</button></a>
-<table class="table">
+<p>
+
+<div style="float:right">
+  <a href="/brand/create"><button type="button" class="btn btn-primary">前往添加</button></a>
+  <button type="button" class="layui-btn layui-btn-xs layui-btn-normal" id="pil">批量删除</button>
+</div>
+  <div id="di">
+  <form action="">
+             <label class="layui-form-label">品牌名称:</label>
+             <div class="layui-input-inline">
+                <input type="text" name="brand_name" lay-verify="required" placeholder="请输入品牌名称" autocomplete="off" class="layui-input">
+             </div>
+               <button type="submit" id="sou" class="layui-btn">搜索</button>
+            </form>
+            </div>
+ </p>           
+<table class="layui-table">
+            
     <thead>
     <tr>
         <th><input type="checkbox" name="checkbox1"></th>
         <th>ID</th>
         <th>品牌名称</th>
-        <th>品牌网址</th>
+        <th width="45%">品牌网址</th>
         <th>品牌logo</th>
         <th>品牌简介</th>
         <th>操作</th>
@@ -48,7 +61,7 @@
     </tr>
 
     @endforeach
-    <tr><td colspan="6">{{ $data->links('vendor.pagination.adminbrand') }}</td></tr>
+    <tr><td colspan="6">{{$data->links('vendor.pagination.adminbrand')}}</td></tr>
     <button type="button" class="layui-btn layui-btn-xs layui-btn-normal" id="pil">批量删除</button>
     </tbody>
 
@@ -58,6 +71,21 @@
 @endsection
 <script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>
+ //搜索
+    //   $(document).on('click', '#sou', function () {
+    //     //   alert(222);
+    //     var brand_name = $("input[name='brand_name']").val();
+    //     $.ajax({
+    //         url: "{'brand/list'}",
+    //         data: { 'brand_name': brand_name },
+    //         dataType: 'text',
+    //         type: '',
+    //         success: function (res) {
+    //             $("#di").html(res);
+    //         }
+    //     });
+    //     return false;
+    // });
     //即点即该
     // var brand_name = $('.brand_name').text();
     $(document).on('click','.brand_name',function (){

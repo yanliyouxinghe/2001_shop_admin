@@ -17,8 +17,7 @@ class CouponsController extends Controller
 	//添加
 	public function create(){
 		$data=GoodsModel::all();
-		// dump($data);die;
-		return view('coupons.create',['data'=>$data]);
+		return view('Coupons.create',['data'=>$data]);
 	}
 
 	//执行添加
@@ -42,12 +41,6 @@ class CouponsController extends Controller
             return redirect('/coupons/create')->with('msg', '此优惠券价格已存在');
             die;
         }
-// dump($res);die;
-
-        if($request->hasFile('coupons_img')){
-            $res['coupons_img']=$this->upload('coupons_img');
-        }
-
         $data=CouponsModel::create($res);
          if ($data) {
             //添加成功
@@ -60,43 +53,60 @@ class CouponsController extends Controller
         }
 	}
 
-	//图片上传
-	function upload($filename){
-        if(request()->file($filename)->isValid()){
-            $photo=request()->file($filename);
-            $store_result=$photo->store('upload');
-            return $store_result;
+    public function uploads(Request $request)
+    {
+        //接收文件上传的值
+        $photo = $request->file();
+        if ($request->hasFile('file') && $request->file('file')->isValid()) {
+        $photo = $request->file('file');
+        //文件上传
+        $store_result = $photo->store("upload");
+            $store_results = '/'.$store_result;
+            return json_encode(['code'=>0,'msg'=>'上传成功','data'=>$store_results]);
         }
-        exit('未获取到上传文件或上传文件中出错');
+        return json_encode(['code'=>1,'msg'=>'文件上传失败']);
+
     }
 
-    //列表展示
+  //列表展示
     public function list(){
-    	$data=CouponsModel::all();
-    	// $data1=$data->toArray();
-    	foreach ($data as $v) {
-    		
-    	}
+        $coupons_name=Request()->input('coupons_name');
 
+    	$where=[];
+        if($coupons_name){
+            $where[]=['coupons_name','like',"%$coupons_name%"];
+        }
+        $couponsModel = new CouponsModel();
+        $query = $couponsModel->where($where)->paginate(3);
+        $query1=$query->toArray();
+        
+        $data=CouponsModel::get();
+        foreach($data as $v){}
+        
     	$goods_data=GoodsModel::where('goods_id',$v->goods_id)->first();
-    	// dump($goods_data);die;
-    	return view('coupons.list',['data'=>$data,'data1'=>$goods_data]);
+        if(request()->ajax()){
+              return view('Coupons.listajax',['query'=>$query,'data'=>$data,'data1'=>$goods_data]);
+        }
+    	return view('Coupons.list',['data'=>$data,'data1'=>$goods_data,'query'=>$query,'query1'=>$query1]);
     }
 
     //删除
-    public function destroy($id)
-    {
+    public function destroy()
+    {        
         
-        // dump($id);die;
-        $res=CouponsModel::destroy($id);
-        // dump($res);die;
-        if($res){
-        	echo '<script>alert("删除成功");location.href="/coupons/list"</script>';
-            die;
-            // return json_encode(['code'=>0,'msg'=>'OK']);
+        $id = Request()->all();
+
+        if(!$id){
+            return json_encode(['code'=>11,'msg'=>'请选择要删除的数据']);
+        }
+        foreach ($id as $k=>$v){
+            // print_r($v);die;
+            $isdel = CouponsModel::destroy($v);
+        }
+        if($isdel){
+            return json_encode(['code'=>0,'msg'=>'OK']);
         }else{
-            // return json_encode(['code'=>1,'msg'=>'删除失败']);
-            
+            return json_encode(['code'=>1,'msg'=>'删除失败']);
         }
     }
 
@@ -107,7 +117,7 @@ class CouponsController extends Controller
 
     	return view('coupons.edit',['data'=>$res,'data1'=>$data]);
     }
-
+    //执行修改
     public function update($id){
     	$data=Request()->except('_token');
 
@@ -117,10 +127,28 @@ class CouponsController extends Controller
         }
     	$res=CouponsModel::where('coupons_id',$id)->update($data);
     	if($res){
-    		return redirect('coupons/list');
+    		return redirect('/coupons/list');
     	}else{
-    		return redirect('coupons/edit');
+    		return redirect('/coupons/edit');
     	}
+    }
+
+    //即点即该
+    public function updated(Request $request){
+        $coupons_id = $request->input('coupons_id');
+        $coupons_name = $request->input('coupons_name');
+//        dd($brand_names);
+        if(!$coupons_id || !$coupons_name){
+            return json_encode(['code'=>3,'msg'=>'不能为空']);
+        }
+        $ret = CouponsModel::where('coupons_id',$coupons_id)->update(['coupons_name'=>$coupons_name]);
+//        dd($ret);
+        if($ret==1){
+           return json_encode(['code'=>0,'msg'=>'修改成功']);
+        }else{
+            return json_encode(['code'=>4,'msg'=>'修改失败']);
+        }
+
     }
 
 

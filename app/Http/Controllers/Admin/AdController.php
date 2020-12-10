@@ -16,8 +16,20 @@ class AdController extends Controller
      */
     public function index()
     {
-        $ad = AdModel::where('is_del',1)->orderBy('ad_id','desc')->paginate(3);
-        return view('ad.index',['ad'=>$ad]);
+        $ad_name = request()->ad_name;
+        $where = [];
+        if($ad_name){
+            $where[] = ['ad_name','like',"%$ad_name%"];
+        }
+
+        
+        $ad = AdModel::where('is_del',1)->where($where)->orderBy('ad_id','desc')->paginate(3);
+
+        if(request()->ajax()){
+            return view('ad.ajaxindex',['ad'=>$ad]);
+        }
+        
+        return view('ad.index',['ad'=>$ad,'ad_name'=>$ad_name]);
     }
 
     /**
@@ -47,11 +59,22 @@ class AdController extends Controller
 
     /**查看广告 */
     public function ch($id){
-        $adv = AdvModel::join('sh_ad','sh_adv.ad_id','=','sh_ad.ad_id')
-                       ->where('sh_adv.ad_id',$id)
-                       ->paginate(5);
-        return view('adv.index',['adv'=>$adv]);
-    }
+        //判断广告位下有无广告
+            if(!$id){
+               return;
+            }
+
+            $adv = AdvModel::where('ad_id',$id)->first();
+            if(!isset($adv)){
+                return "<script>alert('该广告位还没广告,请添加广告');location.href='/adv/create'; </script>";
+            }else{
+                $advModel = new AdvModel();
+                $advs = $advModel->leftjoin('sh_ad','sh_adv.ad_id','=','sh_ad.ad_id')->where('sh_adv.ad_id',$id)->get();
+                return view('ad.list',['advs'=>$advs]);
+            }
+
+            
+        }
 
     /**生成广告 */
     public function sh($ad_id){
@@ -124,10 +147,6 @@ class AdController extends Controller
     {
         $id = request()->ad_id;
 
-        // foreach($id as $key=>$val){
-        //     $res = AdModel::where(['ad_id'=>$val])->update(['is_del'=>2]);
-        // }
-        // dd($res);
         if(!$id){
             return json_encode(['code'=>1,'msg'=>'参数丢失']);
         }

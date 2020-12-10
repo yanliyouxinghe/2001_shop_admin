@@ -92,7 +92,7 @@ class RoleController extends Controller
     {
         $role_id=$id; 
         $RoleModel =  new RoleModel();
-         $res=$RoleModel->destroy_date($role_id);
+        $res=$RoleModel->destroy_date($role_id);
         if($res){
           
                 echo "<script>
@@ -105,6 +105,8 @@ class RoleController extends Controller
               }
         
     }
+
+    /**添加权限 */
     public function addpriv($role_id){
         // dump($role_id);
         $MenuModel=new MenuModel();
@@ -119,7 +121,7 @@ class RoleController extends Controller
         return view('role/addpriv',['menu'=>$Menu,'role_id'=>$role_id,'role_menu'=>$role_menu]);
     }
 
-     //角色权限添加
+     //执行添加角色权限
      public function addprivdo(Request $request){
         $post = $request->except('_token');
         // dd($post);
