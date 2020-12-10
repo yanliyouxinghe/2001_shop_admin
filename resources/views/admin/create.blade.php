@@ -23,20 +23,23 @@
             <label class="layui-form-label">管理员名称:</label>
             <div class="layui-input-block">
             <input type="text" name="admin_name" lay-verify="title" autocomplete="off" placeholder="请输入管理员名称" class="layui-input">
+            <span></span>
             <b style="color:red; font-family:'仿宋' "></b> 
             </div>
         </div>
         <div class="layui-form-item">
           <label class="layui-form-label">管理员密码:</label>
           <div class="layui-input-block">
-          <input type="password" name="admin_pwd" lay-verify="title" autocomplete="off" placeholder="请输入管理员密码 " class="layui-input">
+          <input type="password" name="admin_pwd" lay-verify="title" autocomplete="off" placeholder="请输入管理员密码 " class="layui-input pwd">
+          <span></span>
           <b style="color:red; font-family:'仿宋' "></b> 
           </div>
       </div>
       <div class="layui-form-item">
           <label class="layui-form-label" id="confirm">确认密码:</label>
           <div class="layui-input-block">
-          <input type="password" name="admin_pwd" lay-verify="title" autocomplete="off" placeholder="请确认管理员密码 " class="layui-input">
+          <input type="password" name="true_pwd" lay-verify="title" autocomplete="off" placeholder="请确认管理员密码 " class="layui-input">
+          <span></span>
           <b style="color:red; font-family:'仿宋' "></b> 
           </div>
       </div>
@@ -64,7 +67,7 @@
 <div class="layui-form-item">
             <label class="layui-form-label"></label>
             <div class="layui-input-block" align="center">
-            <button type="submit" class="layui-btn">添加</button>
+            <button type="submit" class="layui-btn add">添加</button>
             <button type="reset" class="layui-btn layui-btn-primary">清除</button>
             </div>
         </div>
@@ -74,5 +77,41 @@
 @endsection
 <script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>
+$(document).on('click','.add',function(){
+    var admin_name=$('input[name="admin_name"]').val();
+    var falg1=false;
+    if(admin_name==''){
+        $("input[name='admin_name']+span").html("<font color='red'>管理员名称不能为空</font>");
+        falg1=false;
+    }else{
+        $("input[name='admin_name']+span").html("<font color='green'>√</font>");
+        falg1=true;
+    }
+    var falg2=false;
+    var admin_pwd=$('input[name="admin_pwd"]').val();
+    if(admin_pwd==''){
+        $("input[name='admin_pwd']+span").html("<font color='red'>管理员密码不能为空</font>");
+        falg2=false;
+    }else{
+        $("input[name='admin_pwd']+span").html("<font color='green'>√</font>");
+        falg2=true;
+    }
+    var falg3=false;
+    var true_pwd=$('input[name="true_pwd"]').val();
+    if(true_pwd!=admin_pwd){
+        $("input[name='true_pwd']+span").html("<font color='red'>确认密码与第一次不一致</font>");
+        falg3=false;
+    }else{
+        $("input[name='true_pwd']+span").html("<font color='green'>√</font>");
+        falg3=true;
+    }
+    if(falg1===false || falg2===false || falg3===false){
+        return false;
+    }else{
+        $('from').submit();
+    }
+    // alert(admin_name);
+})
+
 
 </script>

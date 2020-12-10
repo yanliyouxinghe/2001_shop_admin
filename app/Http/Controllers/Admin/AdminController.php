@@ -44,11 +44,8 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         
-        $data=$request->except('_token','role');
+        $data=$request->except('_token','role','true_pwd');
     //    dd($data['admin_name']);
-        if(empty($data['admin_name'])){
-            dd(123);
-        }
         $AdminModel =  new AdminModel();
         $data['admin_pwd']=password_hash($data['admin_pwd'],PASSWORD_DEFAULT);
         $reg=  $AdminModel->create($data);
