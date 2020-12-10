@@ -47,7 +47,7 @@
         </div>
 
         <span style="color: darkred;"></span>
-                <img src="{{$data->coupons_img}}" alt="上传成功后渲染" style="max-width: 196px">
+                <img src="{{$data->coupons_img}}" alt="" style="max-width: 196px">
     </div>
     <div class="form-group">
         <label for="firstname" class="col-sm-2 control-label">满足条件</label>
