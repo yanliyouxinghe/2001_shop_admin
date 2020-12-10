@@ -113,9 +113,6 @@
         }else if(!reg2.test(coupons_price)){
             $(".couponsprice").next('span').text('只能为数字');
             pflag= false;
-        }else if(coupons_price>=coupons_meet){
-            $(".couponsprice").next('span').text('优惠价格不能大于等于满足条件');
-            pflag=false;
         }else{
             $(".couponsprice").next('span').text('✔');
             pflag=true;
