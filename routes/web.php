@@ -144,8 +144,8 @@ Route::prefix('/seckill')->group(function(){
   Route::post('/store','Admin\SeckillController@store')->name('seckill.store');//执行添加
   Route::any('/list','Admin\SeckillController@index')->name('seckill.list');//秒杀商品列表
   Route::get('/destroy/{id}','Admin\SeckillController@destroy')->name('seckill.destroy');//删除
-  Route::get('/edit/{id}','Admin\SeckillController@edit')->name('seckill.edit');//删除
-  Route::post('/update/{id}','Admin\SeckillController@update')->name('seckill.update');//执行删除
+  Route::get('/edit/{id}','Admin\SeckillController@edit')->name('seckill.edit');//修改
+  Route::post('/update/{id}','Admin\SeckillController@update')->name('seckill.update');//修改
 
 });
 
@@ -154,7 +154,7 @@ Route::prefix('/menu')->group(function(){
   Route::get('/create','Admin\MenuController@create')->name('menu.create');//添加菜单
   Route::post('/store','Admin\MenuController@store')->name('menu.store');//执行添加
   Route::any('/list','Admin\MenuController@index')->name('menu.index');//菜单列表
-  Route::get('/destroy/{id}','Admin\MenuController@destroy')->name('menu.destroy');//添加菜单
+  Route::get('/destroy/{id}','Admin\MenuController@destroy')->name('menu.destroy');//删除菜单
   Route::get('/edit/{id}','Admin\MenuController@edit')->name('menu.edit');//修改菜单
   Route::post('/update/{id}','Admin\MenuController@update')->name('menu.update');//执行修改菜单
 

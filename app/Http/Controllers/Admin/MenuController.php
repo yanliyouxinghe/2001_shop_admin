@@ -18,6 +18,7 @@ class MenuController extends Controller
     {
         $MenuModel =  new MenuModel();
         $data =  $MenuModel->list_data();
+        $data = $this->Treecate($data);
         return view('menu.list',['data'=>$data]);
     }
     
@@ -67,6 +68,21 @@ class MenuController extends Controller
     {
         //
     }
+        //无限极分类
+        public function Treecate($data,$parent_id=0,$level=0){
+            if(!$data){
+                return;
+            }
+           static  $res = [];
+            foreach ($data as $key => $value) {
+              if($value['parent_id'] == $parent_id){
+                  $value['level'] = $level;
+                  $res[] = $value;
+                  $this->Treecate($data,$value['menu_id'],$level+1);
+              }
+            }
+            return $res;
+        }
 
     /**
      * Show the form for editing the specified resource.

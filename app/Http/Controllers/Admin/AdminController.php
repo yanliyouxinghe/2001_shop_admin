@@ -86,6 +86,7 @@ class AdminController extends Controller
         //
         $RoleModel=new RoleModel();
         $role=$RoleModel->roleinfo();
+        // dd($role);
         $data=AdminModel::where('admin_id',$id)->first();
         return view('admin.edit',['data'=>$data,'role'=>$role]);
     }
@@ -101,7 +102,8 @@ class AdminController extends Controller
     {
         //
         $data=$request->except('_token');
-
+        $data['admin_pwd']=password_hash($data['admin_pwd'],PASSWORD_DEFAULT);
+        // dd($data['admin_pwd']);
         $res=AdminModel::where('admin_id',$id)->update($data);
         if($res){
             echo '<script>alert("修改成功");location.href="/admin/list"</script>';

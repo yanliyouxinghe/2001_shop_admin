@@ -2,7 +2,9 @@
 @section('content')
     <!-- 内容主体区域 -->
     <!-- <div style="padding: 15px;"></div> -->
-    <center><h1>角色列表</h1></center>
+    <blockquote class="layui-elem-quote layui-text">
+<h4 style="color:green">角色展示</h4>
+</blockquote>
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
         <legend>
             <span class="layui-breadcrumb">

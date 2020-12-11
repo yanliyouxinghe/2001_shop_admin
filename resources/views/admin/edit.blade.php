@@ -14,7 +14,7 @@
 <body>
 
 <blockquote class="layui-elem-quote layui-text">
-<h4 style="color:green">管理员添加</h4>
+<h4 style="color:green">管理员修改</h4>
 </blockquote>
 
 <form class="layui-form" action="{{url('/admin/update/'.$data->admin_id)}}" method="post" enctype="multipart/form-data">
@@ -27,6 +27,12 @@
             </div>
         </div>
         <div class="layui-form-item">
+            <label class="layui-form-label">管理员密码:</label>
+            <div class="layui-input-block">
+            <input type="password" name="admin_pwd" lay-verify="title" autocomplete="off" placeholder="请输入管理员密码" class="layui-input" value="{{$data->admin_pwd}}">
+            <b style="color:red; font-family:'仿宋' "></b> 
+            </div>
+        </div>
           
       </div>
       <div class="layui-form-item">
@@ -43,6 +49,7 @@
                 <img src="{{$data->admin_logo}}" alt="上传成功后渲染" style="max-width: 196px">
             </div>
         </div>
+
         <span style="color: darkred;"></span>
     </div>
 <div class="layui-form-item">
