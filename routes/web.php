@@ -10,7 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 //后台登录
 Route::get('/login','Admin\LoginController@login');//登录
 Route::post('/logindo','Admin\LoginController@logindo');//执行登录
