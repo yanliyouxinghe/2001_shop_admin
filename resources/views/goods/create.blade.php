@@ -23,7 +23,7 @@
     <div class="layui-form-item">
     <label class="layui-form-label">商品名称</label>
     <div class="layui-input-block">
-      <input type="text" name="goods_name" lay-verify="title"  autocomplete="off" placeholder="请输入商品名称" class="layui-input">
+      <input type="text" name="goods_name" lay-verify="title"  autocomplete="off" placeholder="请输入商品名称" class="layui-input"><span></span>
     </div>
     </div>
 
@@ -43,7 +43,7 @@
     <div class="layui-form-item">
     <label class="layui-form-label">商品货号</label>
     <div class="layui-input-inline">
-      <input type="text" name="goods_sn" lay-verify="required" placeholder="请输入商品货号" autocomplete="off" class="layui-input">
+      <input type="text" name="goods_sn" lay-verify="required" placeholder="请输入商品货号" autocomplete="off" class="layui-input"><span></span>
     </div>
   </div>
 
@@ -51,7 +51,7 @@
     <div class="layui-form-item">
     <label class="layui-form-label">本店售价</label>
     <div class="layui-input-inline">
-      <input type="text" name="shop_price" lay-verify="required" placeholder="请输入售价" autocomplete="off" class="layui-input">
+      <input type="text" name="shop_price" lay-verify="required" placeholder="请输入售价" autocomplete="off" class="layui-input"><span></span>
     </div>
   </div>
 
@@ -115,7 +115,7 @@
 
     <!-- 详细描述 -->
     <div class="layui-tab-item">
-    <textarea id="demo" name="goods_desc" style="display: none;"  ></textarea>
+    <textarea id="demo" name="goods_desc" style="display: none;"  ></textarea><span></span>
     </div>
     <!-- 详细描述 -->
 
@@ -125,7 +125,7 @@
     <div class="layui-form-item">
     <label class="layui-form-label">商品重量</label>
     <div class="layui-input-inline">
-      <input type="text" name="goods_weight" lay-verify="required" placeholder="请输入商品重量" autocomplete="off" class="layui-input">
+      <input type="text" name="goods_weight" lay-verify="required" placeholder="请输入商品重量" autocomplete="off" class="layui-input"><span></span>
     </div>
   </div>
 
@@ -140,7 +140,7 @@
   <div class="layui-form-item">
     <label class="layui-form-label">库存警告数量</label>
     <div class="layui-input-inline">
-      <input type="text" name="warn_number" lay-verify="required" placeholder="请输入商品存库" autocomplete="off" class="layui-input">
+      <input type="text" name="warn_number" lay-verify="required" placeholder="请输入商品存库" autocomplete="off" class="layui-input"><span></span>
     
     </div>
   </div>
@@ -161,7 +161,7 @@
     <div class="layui-inline">
       <label class="layui-form-label">促销开始时间</label>
       <div class="layui-input-block">
-        <input type="text" name="promote_start_date" id="date1" autocomplete="off" class="layui-input">
+        <input type="text" name="promote_start_date" id="date1" autocomplete="off" class="layui-input"><span></span>
       </div>
     </div>
 </div>
@@ -171,7 +171,7 @@
     <div class="layui-inline">
       <label class="layui-form-label">促销结束时间</label>
       <div class="layui-input-block">
-        <input type="text" name="promote_end_date" id="date" autocomplete="off" class="layui-input">
+        <input type="text" name="promote_end_date" id="date" autocomplete="off" class="layui-input"><span></span>
       </div>
     </div>
 </div>
@@ -193,7 +193,6 @@
                   @endforeach
               </select>
               <br>
-
               <span class="notice-span" style="display:block" id="noticeGoodsType">请选择商品的所属类型，进而完善此商品的属性</span></td>
           </tr>
           <tr>
@@ -221,14 +220,100 @@
   </div>    
 
  <center><div>
-        <button type="submit" class="layui-btn">添加</button>
+        <button type="submit" class="layui-btn aww">添加</button>
         <button type="reset" class="layui-btn layui-btn-danger">重置</button>
   </div></center> 
 </div>
 </form>
 <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
 <script>
-
+ $(document).on('click','.aww',function(){
+        // alert(111);
+         var falg = false;
+      var goods_name = $('input[name="goods_name"]').val();
+      if (goods_name == '') {
+                $("input[name='goods_name']+span").html("<font color='red'>商品名不能为空</font>");
+                falg = false;
+            } else {
+                $("input[name='goods_name']+span").html("<font color='green'>√</font>");
+                falg = true;
+        }
+      var pfalg = false;
+      var goods_sn = $('input[name="goods_sn"]').val();
+      if (goods_sn == '') {
+                $("input[name='goods_sn']+span").html("<font color='red'>商品货号不能为空</font>");
+                pfalg = false;
+            } else {
+                $("input[name='goods_sn']+span").html("<font color='green'>√</font>");
+                pfalg = true;
+          }
+      var afalg = false;
+      var shop_price = $('input[name="shop_price"]').val();
+      if (shop_price == '') {
+                $("input[name='shop_price']+span").html("<font color='red'>本店售价不能为空</font>");
+                afalg = false;
+            } else {
+                $("input[name='shop_price']+span").html("<font color='green'>√</font>");
+                afalg = true;
+          }
+      var ofalg = false;
+      var goods_desc = $('textarea[name="goods_desc"]').val();
+      if (goods_desc == '') {
+                $("textarea[name='goods_desc']+span").html("<font color='red'>商品描述不能为空</font>");
+                ofalg = false;
+            } else {
+                $("textarea[name='goods_desc']+span").html("<font color='green'>√</font>");
+                ofalg = true;
+          }
+           var bfalg = false;
+      var goods_weight = $('input[name="goods_weight"]').val();
+      if (goods_weight == '') {
+                $("input[name='goods_weight']+span").html("<font color='red'>商品重量不能为空</font>");
+                bfalg = false;
+            } else {
+                $("input[name='goods_weight']+span").html("<font color='green'>√</font>");
+                bfalg = true;
+        }
+         var cfalg = false;
+      var goods_number = $('input[name="goods_number"]').val();
+      if (goods_number == '') {
+                $("input[name='goods_number']+span").html("<font color='red'>商品库存不能为空</font>");
+                cfalg = false;
+            } else {
+                $("input[name='goods_number']+span").html("<font color='green'>√</font>");
+                cfalg = true;
+        }
+         var dfalg = false;
+      var warn_number = $('input[name="warn_number"]').val();
+      if (warn_number == '') {
+                $("input[name='warn_number']+span").html("<font color='red'>库存警告不能为空</font>");
+                dfalg = false;
+            } else {
+                $("input[name='warn_number']+span").html("<font color='green'>√</font>");
+                dfalg = true;
+        }
+         var efalg = false;
+      var promote_start_date = $('input[name="promote_start_date"]').val();
+      if (promote_start_date == '') {
+                $("input[name='promote_start_date']+span").html("<font color='red'>促销开始时间不能为空</font>");
+                efalg = false;
+            } else {
+                $("input[name='promote_start_date']+span").html("<font color='green'>√</font>");
+                efalg = true;
+        }
+         var ffalg = false;
+      var promote_end_date = $('input[name="promote_end_date"]').val();
+      if (promote_end_date == '') {
+                $("input[name='promote_end_date']+span").html("<font color='red'>促销结束不能为空</font>");
+                ffalg = false;
+            } else {
+                $("input[name='promote_end_date']+span").html("<font color='green'>√</font>");
+                ffalg = true;
+        }
+      if(falg === false || pfalg === false || afalg === false || ofalg === false || bfalg === false || cfalg === false || dfalg === false || efalg === false || ffalg === false){
+          return false;
+      }
+    })
 
 
 function addSpec(obj){

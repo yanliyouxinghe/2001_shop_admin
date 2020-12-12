@@ -12,8 +12,13 @@ class NoticeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+         $notice_name = $request->input('notice_name');
+        $where = [];
+        if($notice_name){
+            $where[]=['notice_name','like',"%$notice_name%"];
+        }
          $noticeModel = new NoticeModel();
         $data = $noticeModel->paginate(3);
         if (Request()->ajax()){
@@ -54,10 +59,10 @@ class NoticeController extends Controller
         $jurl = $noticeModel::where('notice_url', $post)->first();
 
         if ($jname) {
-            return redirect('/notice/create')->with('msg', '此品牌名称已存在，请重新添加');
+            return redirect('/notice/create')->with('msg', '此公告名称已存在，请重新添加');
             die;
         } else if ($jurl) {
-            return redirect('/notice/create')->with('msg', '此品牌网址已存在，请添加不存在的品牌网址');
+            return redirect('/notice/create')->with('msg', '此公告网址已存在，请添加不存在的品牌网址');
             die;
         }
         //执行添加
