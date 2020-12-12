@@ -88,22 +88,15 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        $role_id=$id; 
+        $role_id = $request->input('role_id');
+        // dd($menu_id);
         $RoleModel =  new RoleModel();
-        $res=$RoleModel->destroy_date($role_id);
+         $res=$RoleModel->destroy($role_id);
         if($res){
-          
-                echo "<script>
-                        if(confirm('添加成功,是否继续添加')==true){
-                            location.href='create';
-                       }else{
-                          location.href='list';
-                       }
-                       </script>";
-              }
-        
+            return json_encode(['code'=>0,'msg'=>'OK']);
+      }
     }
 
     /**添加权限 */

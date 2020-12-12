@@ -133,28 +133,19 @@ Route::prefix('/role')->group(function(){
   Route::get('/create','Admin\RoleController@create')->name('role.create');//添加角色
   Route::post('/store','Admin\RoleController@store')->name('role.store');//执行添加
   Route::any('/list','Admin\RoleController@index')->name('role.list');//角色列表
-  Route::get('/role/destroy/{role_id?}','Admin\RoleController@destroy')->name('role.destroy');//删除
+  Route::post('/destroy','Admin\RoleController@destroy')->name('role.destroy');//删除
   Route::get('/role/addpriv/{role_id?}','Admin\RoleController@addpriv')->name('role.addpriv');//角色添加权限
   Route::post('/addprivdo','Admin\RoleController@addprivdo')->name('role.addprivdo');//执行添加权限
 });
-//秒杀管理
-//角色管理
-Route::prefix('/seckill')->group(function(){
-  Route::get('/create','Admin\SeckillController@create')->name('seckill.create');//添加秒杀
-  Route::post('/store','Admin\SeckillController@store')->name('seckill.store');//执行添加
-  Route::any('/list','Admin\SeckillController@index')->name('seckill.list');//秒杀商品列表
-  Route::get('/destroy/{id}','Admin\SeckillController@destroy')->name('seckill.destroy');//删除
-  Route::get('/edit/{id}','Admin\SeckillController@edit')->name('seckill.edit');//修改
-  Route::post('/update/{id}','Admin\SeckillController@update')->name('seckill.update');//修改
 
-});
+
 
 //权限管理
 Route::prefix('/menu')->group(function(){
   Route::get('/create','Admin\MenuController@create')->name('menu.create');//添加菜单
   Route::post('/store','Admin\MenuController@store')->name('menu.store');//执行添加
   Route::any('/list','Admin\MenuController@index')->name('menu.index');//菜单列表
-  Route::get('/destroy/{id}','Admin\MenuController@destroy')->name('menu.destroy');//删除菜单
+  Route::post('/destroy','Admin\MenuController@destroy')->name('menu.destroy');//删除菜单
   Route::get('/edit/{id}','Admin\MenuController@edit')->name('menu.edit');//修改菜单
   Route::post('/update/{id}','Admin\MenuController@update')->name('menu.update');//执行修改菜单
 

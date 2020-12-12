@@ -17,25 +17,7 @@
     </fieldset>
 
 
-<!-- <form class="layui-form" action="{{url('/brand')}}" >
 
-  <div class="layui-form-item">
-    <div class="layui-inline">
-      <label class="layui-form-label">商品名称</label>
-      <div class="layui-input-inline">
-        <input type="text" name="brand_name" lay-verify="required|phone" autocomplete="off" class="layui-input" placeholder="商品名称" value="{{$query['brand_name']??''}}">
-      </div>
-    </div>
-    <div class="layui-inline">
-      <label class="layui-form-label">商品网址</label>
-      <div class="layui-input-inline">
-        <input type="text" name="brand_url" lay-verify="email" autocomplete="off" class="layui-input" placeholder="商品网址" value="{{$query['brand_url']??''}}">
-      </div>
-    </div>
-    <button type="submit" class="layui-btn layui-btn-warm">搜索</button>
-  </div>
-  
-</form> -->
 
     <div class="layui-form">
         <form action="{{url('role/addprivdo')}}" method="post">
@@ -50,10 +32,16 @@
             <thead>
             <tr> 
                 <th width="30%">权限名称</th>
-                <th>
-                  <input type="checkbox" name="allcheckbox" lay-skin="primary"   class="vainglory">
-                </th>
+                <th width="60%"></th>
             </tr> 
+            <tr>
+            
+            <th width="60%">全选</th>
+            <th>
+                  <input type="checkbox" name="allcheckbox" lay-skin="primary"  class="vainglory">
+                </th>
+            </tr>
+            
             </thead>
             <tbody>
             @foreach($menu as $v)
@@ -74,13 +62,13 @@
         </form>
     </div>
 
-
+<script src="http://apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>
 //JavaScript代码区域
-layui.use(['element','form'], function(){
-  var element = layui.element;
-  var form = layui.form;
-});
+// layui.use(['element','form'], function(){
+//   var element = layui.element;
+//   var form = layui.form;
+// });
 
 //全选
 $(document).on('click','.layui-form-checkbox:eq(0)',function(){
@@ -95,14 +83,13 @@ $(document).on('click','.layui-form-checkbox:eq(0)',function(){
   }
   
 })
-
 $(document).on('click','.layui-form-checkbox',function(){
     var val = $(this).prev().val();
     // alert(val);
     //当前复选框的值
     var checkval = $(this).prev().prop('checked');
     $('input[parent_id="'+val+'"]').prop('checked',checkval);
-    alert(checkval);
+    // alert(checkval);
     if(checkval){
         $('input[parent_id="'+val+'"]').next().addClass('layui-form-checked');
     }else{

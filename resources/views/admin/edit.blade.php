@@ -8,7 +8,7 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <link rel="stylesheet" href="//res.layui.com/layui/dist/css/layui.css"  media="all">
+  <link rel="stylesheet" href="/static/admin/css/layui.css"  media="all">
   <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
 </head>
 <body>
@@ -29,12 +29,26 @@
         <div class="layui-form-item">
             <label class="layui-form-label">管理员密码:</label>
             <div class="layui-input-block">
-            <input type="password" name="admin_pwd" lay-verify="title" autocomplete="off" placeholder="请输入管理员密码" class="layui-input" value="{{$data->admin_pwd}}">
+            <input type="password" name="admin_pwd" lay-verify="title" autocomplete="off" placeholder="请输入管理员密码" class="layui-input" value="">
             <b style="color:red; font-family:'仿宋' "></b> 
             </div>
         </div>
-          
+        <div class="layui-form-item">
+          <label class="layui-form-label" id="confirm">联系电话:</label>
+          <div class="layui-input-block">
+          <input type="tel" name="admin_tel" lay-verify="title" autocomplete="off" placeholder="请输入管理员电话 " class="layui-input" value="{{$data->admin_tel}}">
+          <span></span>
+          </div>
       </div>
+      </div>
+      <div class="layui-form-item">
+            <label class="layui-form-label">角色:</label>
+            <div class="layui-input-block">
+              @foreach($role as $v)
+              <input type="checkbox" name="role[]"  value="{{$v->role_id}}" title="">{{$v->role_name}}
+              @endforeach
+              </div>
+    </div>
       <div class="layui-form-item">
         
         </div>

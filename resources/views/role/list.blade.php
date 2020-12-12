@@ -38,18 +38,14 @@
                 <td>{{$v->role_name}}</td>
                 <td>{{$v->role_desc}}</td>
                 <td>
-                    <a href="role/destroy/{{$v->role_id}}" onclick="DeleteGetId({{$v->role_id}},this)">
-                        <button type="button" class="layui-btn layui-btn-danger">删除</button>
-                    </a>
+                        <button type="button" class="layui-btn layui-btn-danger del" role_id="{{$v->role_id}}">删除</button>
                     <a href="role/addpriv/{{$v->role_id}}">
                         <button type="button" class="layui-btn layui-btn-normal">添加权限</button>
                     </a>
                 </td>
             </tr>
             @endforeach
-            <tr>
-                <td colspan="5">{{$data->links()}}</td>
-            </tr>
+
             
             
             <!--  -->
@@ -59,6 +55,34 @@
     </div>
 
   @endsection
-  
+  <script src="http://libs.baidu.com/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+//删除
+$(document).on('click','.del',function(){
+          var _this = $(this);
+          var role_id = _this.attr('role_id');
+          alert(role_id);
+          if(!role_id){
+              return;
+          }
+          if(confirm('确定删除吗？')){
+              $.ajax({
+                  url : '/role/destroy',
+                  dataType : 'json',
+                  type : 'post',
+                  data : {'role_id':role_id},
+                success:function(ret){
+                    if(ret.code==0){
+                        _this.parent().parent().remove();
+                    }else{
+                      alert(ret.msg);
+                    }
+                }
+              });
+          }
+          return;
+      });
+</script>
+
   
 

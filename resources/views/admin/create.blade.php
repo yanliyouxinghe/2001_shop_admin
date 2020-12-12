@@ -44,14 +44,20 @@
           </div>
       </div>
       <div class="layui-form-item">
+          <label class="layui-form-label" id="confirm">联系电话:</label>
+          <div class="layui-input-block">
+          <input type="tel" name="admin_tel" lay-verify="title" autocomplete="off" placeholder="请输入管理员电话 " class="layui-input">
+          <span></span>
+          </div>
+      </div>
+      <div class="layui-form-item">
             <label class="layui-form-label">角色:</label>
             <div class="layui-input-block">
               @foreach($role as $v)
-              <input type="checkbox" name="role[]" lay-skin="primary" value="{{$v->role_id}}" title="{{$v->role_name}}">
+              <input type="checkbox" name="role[]"  value="{{$v->role_id}}" title="{{$v->role_name}}">
               @endforeach
-            </div>
-        </div>
-        <div class="form-group">
+              </div>
+    </div>
         <label for="firstname" class="col-sm-2 control-label">管理员头像</label>
         <div class="layui-upload-drag" id="test10">
             <input type="hidden" id="fileview" name="admin_logo" value="">
@@ -63,6 +69,7 @@
             </div>
         </div>
         <span style="color: darkred;"></span>
+        
     </div>
 <div class="layui-form-item">
             <label class="layui-form-label"></label>

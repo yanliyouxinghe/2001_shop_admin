@@ -128,13 +128,14 @@ class MenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        // echo $id;die;
+        $menu_id = $request->input('menu_id');
+        // dd($menu_id);
         $MenuModel =  new MenuModel();
-         $res=$MenuModel->destroy($id);
+         $res=$MenuModel->destroy($menu_id);
         if($res){
-            return redirect('menu/list');
-        }
+            return json_encode(['code'=>0,'msg'=>'OK']);
+      }
     }
 }

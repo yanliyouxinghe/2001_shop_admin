@@ -31,7 +31,7 @@
             </td>
             <td>
             <button type="button" class="layui-btn layui-btn-danger del" menu_id="{{$v->menu_id}}">删除</button>
-            <a href="/cartgory/edit/{{$v->menu_id}}"><button type="button" class="layui-btn layui-btn-normal">修改</button></a>
+            <a href="/menu/edit/{{$v->menu_id}}"><button type="button" class="layui-btn layui-btn-normal">修改</button></a>
             </td>
             </tr>
         @endforeach
@@ -71,6 +71,7 @@
       $(document).on('click','.del',function(){
           var _this = $(this);
           var menu_id = _this.attr('menu_id');
+          alert(menu_id);
           if(!menu_id){
               return;
           }

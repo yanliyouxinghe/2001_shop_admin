@@ -27,6 +27,7 @@
             <tr>
                 <th>管理员id</th>
                 <th>管理员名称</th>
+                <th>手机号</th>
                 <th>管理员logo</th>
                 <th>操作</th>
             </tr> 
@@ -36,6 +37,7 @@
             <tr>
                 <td>{{$v->admin_id}}</td>
                 <td>{{$v->admin_name}}</td>
+                <td>{{$v->admin_tel}}</td>
                 <td>
             @if($v->admin_logo)
             <img src="{{$v->admin_logo}}" width="50px" height="50px">

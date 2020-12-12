@@ -101,7 +101,7 @@ class AdminController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $data=$request->except('_token');
+        $data=$request->except('_token','role');
         $data['admin_pwd']=password_hash($data['admin_pwd'],PASSWORD_DEFAULT);
         // dd($data['admin_pwd']);
         $res=AdminModel::where('admin_id',$id)->update($data);
@@ -112,6 +112,19 @@ class AdminController extends Controller
         }else{
             return redirect('admin.edit');
 
+        }
+        if($res){
+            Admin_RoleModel::where('admin_id',$data['admin_id'])->delete();
+            $role=$request->role;
+            $datas=[];
+            foreach($role as $k=>$v){
+                $datas['admin_id']=$reg->admin_id;
+                $datas['role_id']=$v;
+                $admin_role=Admin_RoleModel::insert($datas);
+            }
+          if($admin_role){
+            return redirect('admin/list');
+          }
         }
     }
 
