@@ -179,7 +179,7 @@ Route::prefix('/goods')->group(function(){
   Route::get('/create','Admin\GoodsController@create')->name('goods.create');//添加商品
   Route::any('/upload','Admin\GoodsController@upload')->name('goods.upload');
   Route::post('/uploads','Admin\GoodsController@uploads')->name('goods.uploads');
-  Route::get('/getattr','Admin\GoodsController@getattr')->name('gooods.getattr');
+  Route::get('/getattr','Admin\GoodsController@getattr')->name('gooods.getattr')->name('goods.getattr');
   Route::post('/store','Admin\GoodsController@store')->name('goods.store');//执行添加
   Route::post('/pruct','Admin\GoodsController@pruct')->name('goods.pruct');
   Route::get('/list','Admin\GoodsController@list')->name('goods.list');//商品列表

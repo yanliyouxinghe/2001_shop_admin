@@ -21,12 +21,17 @@ class GoodsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function list()
+    public function list(Request $request)
     {
-
-        $goods = GoodsModel::get();
+         $goods_name = $request->input('goods_name');
+          //print_r($brand_name);exit;
+        $where = [];
+        if($goods_name){
+            $where[]=['goods_name','like',"%$goods_name%"];
+        }
+        $goods = GoodsModel::where($where)->paginate(7);
         if(request()->ajax()){
-              return view('cartgory.listajax',['cart_data'=>$cart_data]);
+              return view('goods.ajaxpage',['goods'=>$goods]);
         }
         $goods_data=$goods->toArray();
         return view('goods.list',['goods'=>$goods,'goods_data'=>$goods_data]);

@@ -7,10 +7,10 @@
 </blockquote>
 
 <div style="padding: 15px;">
-    <form class="layui-form" action="/admin/goods" style="padding-bottom: 10px;padding-left: 10px;">
+    <form class="layui-form" action="" style="padding-bottom: 10px;padding-left: 10px;">
         商品名称：
         <div class="layui-input-inline">
-            <input type="text" name="goods_name"  class="layui-input" value="{{$goods['goods_name']??''}}" placeholder="请输入商品名称......">
+            <input type="text" name="goods_name"  class="layui-input"  placeholder="请输入商品名称......">
         </div>
         <button type="submit" class="layui-btn">搜索</button>
     </form>
@@ -52,6 +52,7 @@
                 </td>
             </tr>
         @endforeach
+          <tr><td colspan="6">{{ $goods->links('vendor.pagination.adminbrand') }}</td></tr>
         <tr><td colspan="6"><!--  --></td></tr>
         </tbody>
 
