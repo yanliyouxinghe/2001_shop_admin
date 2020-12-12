@@ -80,15 +80,25 @@ class CouponsController extends Controller
         $couponsModel = new CouponsModel();
         $query = $couponsModel->where($where)->paginate(3);
         $query1=$query->toArray();
-        
         $data=CouponsModel::get();
-        foreach($data as $v){}
+        if(empty($ata)){
+            foreach($data as $v){}
         
-    	$goods_data=GoodsModel::where('goods_id',$v->goods_id)->first();
+        $goods_data=GoodsModel::first();
         if(request()->ajax()){
               return view('coupons.listajax',['query'=>$query,'data'=>$data,'data1'=>$goods_data]);
         }
-    	return view('coupons.list',['data'=>$data,'data1'=>$goods_data,'query'=>$query,'query1'=>$query1]);
+        return view('coupons.list',['data'=>$data,'data1'=>$goods_data,'query'=>$query]);
+        
+    }else{
+        $goods_data=GoodsModel::where('goods_id',$v->goods_id)->first();
+
+        if(request()->ajax()){
+              return view('coupons.listajax',['query'=>$query,'data'=>$data,'data1'=>$goods_data]);
+        }
+        return view('coupons.list',['data'=>$data,'data1'=>$goods_data,'query'=>$query]);
+    }
+        
     }
 
     //删除
