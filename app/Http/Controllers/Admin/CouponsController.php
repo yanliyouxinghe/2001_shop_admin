@@ -17,8 +17,7 @@ class CouponsController extends Controller
 	//添加
 	public function create(){
 		$data=GoodsModel::all();
-		// dump($data);die;
-		return view('coupons.create',['data'=>$data]);
+		return view('Coupons.create',['data'=>$data]);
 	}
 
 	//执行添加
@@ -94,12 +93,12 @@ class CouponsController extends Controller
         $goods_data=GoodsModel::where('goods_id',$v->goods_id)->first();
 
         if(request()->ajax()){
-              return view('coupons.listajax',['query'=>$query,'data'=>$data,'data1'=>$goods_data]);
+              return view('Coupons.listajax',['query'=>$query,'data'=>$data,'data1'=>$goods_data]);
         }
         return view('coupons.list',['data'=>$data,'data1'=>$goods_data,'query'=>$query]);
     }
         
-    }
+
 
     //删除
     public function destroy()
@@ -138,9 +137,9 @@ class CouponsController extends Controller
         }
     	$res=CouponsModel::where('coupons_id',$id)->update($data);
     	if($res){
-    		return redirect('coupons/list');
+    		return redirect('/coupons/list');
     	}else{
-    		return redirect('coupons/edit');
+    		return redirect('/coupons/edit');
     	}
     }
 
