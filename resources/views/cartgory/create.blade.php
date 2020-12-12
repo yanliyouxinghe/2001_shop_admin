@@ -25,6 +25,7 @@
         <h3 style="color:red">{{ session('status') }}</h3>
     </div>
 @endif
+  <span style="color:red" class="error_span"></span>
   <!-- 分类名称 -->
   <div class="layui-form-item">
   <label class="layui-form-label">分类名称</label>
@@ -36,7 +37,7 @@
 <div class="layui-form-item">
     <label class="layui-form-label">所属分类</label>
     <div class="layui-input-block">
-      <select name="parent_id" lay-filter="aihao">
+      <select name="parent_id" lay-filter="aihao">  
         @foreach($cart as $k=>$v)
         <option value="{{$v->cat_id}}">{{str_repeat('|--',$v->level)}}{{$v->cat_name}}</option>
         @endforeach
@@ -59,8 +60,19 @@
        <a href="/category/list" class="layui-btn">列表</a>
  </div></center>
 
-
 </form>
 </body>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+<script>
+
+    $('.sub').click(function(){
+        var cat_name = $('input[name="cat_name"]').val();
+        if(!cat_name){
+          $('.error_span').html('请填写分类名称');
+          return false;
+        }
+        $('from').submit();
+    });
+</script>
 </html>
 @endsection

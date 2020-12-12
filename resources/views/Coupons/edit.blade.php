@@ -40,14 +40,14 @@
             <input type="hidden" id="fileview" name="coupons_img" value="">
             <i class="layui-icon"></i>
             <p>点击上传，或将文件拖拽到此处</p>
-            <div class="layui-hide" id="uploadDemoView">
+            <div @if(!$data->coupons_img) class="layui-hide" @endif id="uploadDemoView">
                 <hr>
                 <img src="{{$data->coupons_img}}" alt="上传成功后渲染" style="max-width: 196px">
+                <input type="hidden" name="coupons_img" @if($data->coupons_img) value="{{$data->coupons_img}}" @endif>
             </div>
         </div>
 
         <span style="color: darkred;"></span>
-                <img src="{{$data->coupons_img}}" alt="" style="max-width: 196px">
     </div>
     <div class="form-group">
         <label for="firstname" class="col-sm-2 control-label">满足条件</label>

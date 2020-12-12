@@ -13,6 +13,13 @@
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
  <a href="/notice/create"><button type="button" class="btn btn-primary">前往添加</button></a>
+  <form action="">
+             <label class="layui-form-label">公告名称:</label>
+             <div class="layui-input-inline">
+                <input type="text" name="notice_name" lay-verify="required" placeholder="请输入品牌名称" autocomplete="off" class="layui-input">
+             </div>
+               <button type="submit" id="sou" class="layui-btn">搜索</button>
+    </form>
 <table class="table">
     <thead>
     <tr>
