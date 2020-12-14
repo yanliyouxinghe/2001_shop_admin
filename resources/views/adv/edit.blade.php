@@ -30,7 +30,7 @@
                <div class="layui-input-block">
                  <select name="media_type" lay-filter="demo" value="{{$adv->media_type==1?'图片':'文字'}}">
                    <option value="0">--请选择--</option>
-                   <option value="1" >图片</option>
+                   <option value="1">图片</option>
                    <option value="2">文字</option>
                  </select>
                </div>
