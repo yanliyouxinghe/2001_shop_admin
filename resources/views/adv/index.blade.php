@@ -24,23 +24,23 @@
   </form>
    <p align="right"><a href="{{url('/adv/create')}}">添加</a></p>
     <div class="layui-form">
-     <table class="layui-table">
+     <table>
         <thead>
-            <tr width="400px">
-                <th><input type="checkbox"  name="allbox"></th>
-                <th width="200px">广告ID</th>
-                <th width="300px">广告名称</th>
-                <th width="300px">媒介类型</th>
-                <th width="300px">广告图片</th>
-                <th width="300px">广告位置</th>
-                <th width="300px">开始日期</th>
-                <th width="300px">结束日期</th>
-                <th width="300px">广告链接</th>
-                <th width="300px">是否开启</th>
-                <th width="300px">联系人电话</th>
-                <th width="300px">联系人Email</th>
-                <th width="300px">模板类型</th>
-                <th width="300px">操作</th>
+            <tr>
+                <th style="width:30px;"><input type="checkbox" name="allbox"></th>
+                <th style="width:30px;">广告ID</th>
+                <th style="width:30px;">广告名称</th>
+                <th style="width:30px;">媒介类型</th>
+                <th style="width:30px;">广告图片</th>
+                <th style="width:30px;">广告位置</th>
+                <th style="width:30px;">开始日期</th>
+                <th style="width:30px;">结束日期</th>
+                <th style="width:30px;">广告链接</th>
+                <th style="width:30px;">是否开启</th>
+                <th style="width:30px;">联系人电话</th>
+                <th style="width:30px;">联系人Email</th>
+                <th style="width:30px;">模板类型</th>
+                <th style="width:30px;">操作</th>
             </tr>
         </thead>
         <tbody>
@@ -48,7 +48,7 @@
           <tr adv_id="{{$v->adv_id}}">
                 <td><input type="checkbox" class="box" name="box" value="{{$v->adv_id}}"></td>
                 <td>{{$v->adv_id}}</td>
-                <td id="{{$v->adv_id}}" oldval="{{$v->adv_name}}">
+                <td style="width:30px;" id="{{$v->adv_id}}" oldval="{{$v->adv_name}}">
                      <span class="span_name">{{$v->adv_name}}</span>
                 </td>
                 <td>{{$v->media_type==1?'图片':'文字'}}</td>
@@ -57,13 +57,13 @@
                   <img src="{{$v->adv_img}}" width="50px" height="50px">
                   @endif
                 </td>
-                <td>{{$v->ad_name}}</td>
+                <td style="width:30px;">{{$v->ad_name}}</td>
                 <td>{{$v->start_time}}</td>
                 <td>{{$v->end_time}}</td>
                 <td>{{$v->adv_link}}</td>
                 <td>{{$v->is_open==1?'是':'否'}}</td>
-                <td>{{$v->link_tel}}</td>
-                <td>{{$v->link_email}}</td>
+                <td style="width:30px;">{{$v->link_tel}}</td>
+                <td style="width:30px;">{{$v->link_email}}</td>
                 <td>@if($v->template==1)单图片
                     @elseif($v->template==2)多图片
                     @else 文字
