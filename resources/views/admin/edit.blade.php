@@ -17,9 +17,10 @@
 <h4 style="color:green">管理员修改</h4>
 </blockquote>
 
-<form class="layui-form" action="{{url('/admin/update/'.$data->admin_id)}}" method="post" enctype="multipart/form-data">
+<form class="layui-form" action="{{url('/admin/update')}}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="layui-form-item">
+        <input type="hidden" name="admin_id" value="{{$data->admin_id}}">
             <label class="layui-form-label">管理员名称:</label>
             <div class="layui-input-block">
             <input type="text" name="admin_name" lay-verify="title" autocomplete="off" placeholder="请输入管理员名称" class="layui-input" value="{{$data->admin_name}}">
@@ -58,9 +59,10 @@
             <input type="hidden" id="fileview" name="admin_logo" value="">
             <i class="layui-icon"></i>
             <p>点击上传，或将文件拖拽到此处</p>
-            <div class="layui-hide" id="uploadDemoView">
+            <div @if(!$data->admin_logo) class="layui-hide" @endif id="uploadDemoView">
                 <hr>
                 <img src="{{$data->admin_logo}}" alt="上传成功后渲染" style="max-width: 196px">
+                <input type="hidden" name="admin_logo" @if($data->admin_logo) value="{{$data->admin_logo}}" @endif>
             </div>
         </div>
 

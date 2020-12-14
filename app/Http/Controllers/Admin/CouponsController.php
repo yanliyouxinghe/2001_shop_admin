@@ -34,12 +34,6 @@ class CouponsController extends Controller
         if ($coupons_name) {
             return redirect('/coupons/create')->with('msg', '此优惠券名称已存在，请重新添加');
             die;
-        } else if ($coupons_meet) {
-            return redirect('/coupons/create')->with('msg', '此满足条件已存在');
-            die;
-        } else if ($coupons_price) {
-            return redirect('/coupons/create')->with('msg', '此优惠券价格已存在');
-            die;
         }
         $data=CouponsModel::create($res);
          if ($data) {
@@ -98,7 +92,7 @@ class CouponsController extends Controller
         return view('coupons.list',['data'=>$data,'data1'=>$goods_data,'query'=>$query]);
     }
         
-
+    }
 
     //删除
     public function destroy()

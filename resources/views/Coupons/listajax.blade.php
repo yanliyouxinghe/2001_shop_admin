@@ -6,7 +6,7 @@
         <td>{{$data1->goods_name}}</td>
         <td>
             @if($v->coupons_img)
-            <img src="{{env('APP_URL')}}{{$v->coupons_img}}" width="50px" height="50px">
+            <img src="{{$v->coupons_img}}" width="50px" height="50px">
             @endif
 
             </td>
