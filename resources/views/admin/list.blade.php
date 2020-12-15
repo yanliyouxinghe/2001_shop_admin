@@ -47,7 +47,7 @@
                 <td>
                 
                     <a href="admin/destroy/{{$v->admin_id}}" onclick="DeleteGetId({{$v->admin_id}},this)">
-                        <button type="button" class="layui-btn layui-btn-danger">删除</button>
+                        <button type="button" class="layui-btn layui-btn-danger del">删除</button>
                     </a>
                     <a href="{{url('admin/edit/'.$v->admin_id)}}">
                         <button type="button" class="layui-btn layui-btn-normal">编辑</button>
@@ -68,6 +68,5 @@
     </div>
 
   @endsection
-  
   
 

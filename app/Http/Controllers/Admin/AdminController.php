@@ -55,7 +55,9 @@ class AdminController extends Controller
             $datas=[];
             foreach($role as $k=>$v){
                 $datas['admin_id']=$reg->admin_id;
+                // dd($datas['admin_id']);
                 $datas['role_id']=$v;
+                // dd($datas);
                 $admin_role=Admin_RoleModel::insert($datas);
             }
           if($admin_role){
@@ -106,24 +108,20 @@ class AdminController extends Controller
         $res=AdminModel::where('admin_id',$data['admin_id'])->update($data);
         if($res){
             Admin_RoleModel::where('admin_id',$data['admin_id'])->delete();
-            $role=$request->except('_token','admin_name','admin_pwd','admin_tel','admin_logo');
-            // dd($id);
-           
-            // dd($id);
-            // $admin_id=[];
-            // foreach($id as $v){
-            //     $admin_id[]=$v;
-            // }
-            // dd($id);
-
+            $role=$request->except('_token','admin_name','admin_pwd','admin_tel','admin_logo','admin_id');
+            // dd($role);
+            // dd($data['admin_id']);
             $datas=[];
-            foreach($role as $k=>$v){
-                $datas['admin_id']=['admin_id'=>$data['admin_id']];
+            
                 // dd($datas['admin_id']);
-                $datas['role_id']=['role_id'=>$v];
-                dd($datas); 
+            foreach($role['role'] as $k=>$v){
+                $datas['admin_id']=$data['admin_id'];
+                $datas['role_id']=$v;
+                // dump($datas);
                 $admin_role=Admin_RoleModel::insert($datas);
             }
+            // dump($datas);
+            // die;
             
             // $datas=json_encode($datas);
             // $datas=explode(",",$datas);
