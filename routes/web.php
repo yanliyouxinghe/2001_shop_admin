@@ -39,7 +39,7 @@ Route::prefix('ad')->group(function(){
   Route::get('edit/{id}','Admin\AdController@edit')->name('ad.edit');   //广告位置修改
   Route::post('update/{id}','Admin\AdController@update')->name('ad.update');   //广告位置执行修改
   Route::post('/change','Admin\AdController@change')->name('ad.change');//广告位置即点即改
-  Route::get('/destroy','Admin\AdController@destroy')->name('ad.destory');   //广告位置删除
+  Route::get('/destroy','Admin\AdController@destroy')->name('ad.destroy');   //广告位置删除
   Route::any('upload','Admin\AdController@upload')->name('ad.upload');   //广告图片
   Route::any('/sh/{ad_id}','Admin\AdController@sh')->name('ad.sh');   //生成广告
   Route::any('/ch/{ad_id}','Admin\AdController@ch')->name('ad.ch');   //查看广告
@@ -179,7 +179,7 @@ Route::prefix('/goods')->group(function(){
   Route::get('/create','Admin\GoodsController@create')->name('goods.create');//添加商品
   Route::any('/upload','Admin\GoodsController@upload')->name('goods.upload');
   Route::post('/uploads','Admin\GoodsController@uploads')->name('goods.uploads');
-  Route::get('/getattr','Admin\GoodsController@getattr')->name('gooods.getattr')->name('goods.getattr');
+  Route::get('/getattr','Admin\GoodsController@getattr')->name('goods.getattr');
   Route::post('/store','Admin\GoodsController@store')->name('goods.store');//执行添加
   Route::post('/pruct','Admin\GoodsController@pruct')->name('goods.pruct');
   Route::get('/list','Admin\GoodsController@list')->name('goods.list');//商品列表

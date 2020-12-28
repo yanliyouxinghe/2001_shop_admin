@@ -23,7 +23,7 @@
     <div class="layui-form-item">
     <label class="layui-form-label">商品名称</label>
     <div class="layui-input-block">
-      <input type="text" name="goods_name" lay-verify="title"  autocomplete="off" placeholder="请输入商品名称" class="layui-input"><span></span>
+      <input type="text" name="goods_name" lay-verify="title"  autocomplete="off"  value="阿萨" placeholder="请输入商品名称" class="layui-input"><span></span>
     </div>
     </div>
 
@@ -31,7 +31,7 @@
     <div class="layui-form-item">
     <label class="layui-form-label">商品货号</label>
     <div class="layui-input-inline">
-      <input type="text" name="goods_sn" lay-verify="required" placeholder="请输入商品货号" autocomplete="off" class="layui-input"><span></span>
+      <input type="text" name="goods_sn" lay-verify="required" placeholder="请输入商品货号" value="21123432343" autocomplete="off" class="layui-input"><span></span>
     </div>
   </div>
 
@@ -39,7 +39,7 @@
     <div class="layui-form-item">
     <label class="layui-form-label">本店售价</label>
     <div class="layui-input-inline">
-      <input type="text" name="shop_price" lay-verify="required" placeholder="请输入售价" autocomplete="off" class="layui-input"><span></span>
+      <input type="text" name="shop_price" lay-verify="required" placeholder="请输入售价" value="123" autocomplete="off" class="layui-input"><span></span>
     </div>
   </div>
 
@@ -217,13 +217,15 @@
 <script>
  $(document).on('click','.aww',function(){
         // alert(111);
-         var falg = false;
+      var falg = false;
       var goods_name = $('input[name="goods_name"]').val();
       if (goods_name == '') {
                 $("input[name='goods_name']+span").html("<font color='red'>商品名不能为空</font>");
+                console.log('商品名称不能为空');
                 falg = false;
             } else {
                 $("input[name='goods_name']+span").html("<font color='green'>√</font>");
+                 console.log('商品名称已填写');
                 falg = true;
         }
       var pfalg = false;
@@ -233,6 +235,7 @@
                 pfalg = false;
             } else {
                 $("input[name='goods_sn']+span").html("<font color='green'>√</font>");
+                   console.log('商品货号已填写');
                 pfalg = true;
           }
       var afalg = false;
@@ -242,17 +245,10 @@
                 afalg = false;
             } else {
                 $("input[name='shop_price']+span").html("<font color='green'>√</font>");
+                  console.log('售价已填写');
                 afalg = true;
           }
-      var ofalg = false;
-      var goods_desc = $('textarea[name="goods_desc"]').val();
-      if (goods_desc == '') {
-                $("textarea[name='goods_desc']+span").html("<font color='red'>商品描述不能为空</font>");
-                ofalg = false;
-            } else {
-                $("textarea[name='goods_desc']+span").html("<font color='green'>√</font>");
-                ofalg = true;
-          }
+    
            var bfalg = false;
       var goods_weight = $('input[name="goods_weight"]').val();
       if (goods_weight == '') {
@@ -260,6 +256,7 @@
                 bfalg = false;
             } else {
                 $("input[name='goods_weight']+span").html("<font color='green'>√</font>");
+                  console.log('商品重量已填写');
                 bfalg = true;
         }
          var cfalg = false;
@@ -269,6 +266,7 @@
                 cfalg = false;
             } else {
                 $("input[name='goods_number']+span").html("<font color='green'>√</font>");
+                  console.log('商品库存已填写');
                 cfalg = true;
         }
          var dfalg = false;
@@ -278,6 +276,7 @@
                 dfalg = false;
             } else {
                 $("input[name='warn_number']+span").html("<font color='green'>√</font>");
+                  console.log('库存警告已填写');
                 dfalg = true;
         }
          var efalg = false;
@@ -287,6 +286,7 @@
                 efalg = false;
             } else {
                 $("input[name='promote_start_date']+span").html("<font color='green'>√</font>");
+                  console.log('开始时间已填写');
                 efalg = true;
         }
          var ffalg = false;
@@ -296,14 +296,13 @@
                 ffalg = false;
             } else {
                 $("input[name='promote_end_date']+span").html("<font color='green'>√</font>");
+                  console.log('促销结束已填写');
                 ffalg = true;
         }
-      if(falg === false || pfalg === false || afalg === false || ofalg === false || bfalg === false || cfalg === false || dfalg === false || efalg === false || ffalg === false){
+      if(falg === false || pfalg === false || afalg === false || bfalg === false || cfalg === false || dfalg === false || efalg === false || ffalg === false){
           return false;
       }
     })
-
-
 function addSpec(obj){
     var newobj = $(obj).parent().parent().clone();
     newobj.find('a').html('[-]');

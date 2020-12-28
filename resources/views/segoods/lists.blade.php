@@ -97,11 +97,11 @@
       var _this = $(this);
       var goods_id = new Array();
       $('input[name="box"]:checked').each(function(){
-        segoods_id.push($(this).val())
+        goods_id.push($(this).val())
       });
 
       if(goods_id.length==0){
-          alert("请选择要删除的数据");
+          alert("请选择要审核的数据");
       return;
     }
 
