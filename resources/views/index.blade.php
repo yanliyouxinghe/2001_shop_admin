@@ -5,78 +5,79 @@
 <html>
 <head>
 	<title>首页</title>
+	   <meta charset="utf-8"><link rel="icon" href="https://jscdn.com.cn/highcharts/images/favicon.ico">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            /* css 代码  */
+        </style>
+        <script src="/static/admin/highcharts.js"></script>
+        <script src="/static/admin/exporting.js"></script>
+        <script src="/static/admin/highcharts-zh_CN.js"></script>
+        <script src="/static/admin/grid-light.js"></script>
 </head>
 <body>
-<div id="container"></div>
-<div id="sliders">
-	<table bgcolor="#FFFFFF" align="left">
-		<tr>
-			<td>α 角（内旋转角）</td>
-			<td><input id="alpha" type="range" min="0" max="45" value="15"/> <span id="alpha-value" class="value"></span></td>
-		</tr>
-		<tr>
-			<td>β 角（外旋转角）</td>
-			<td><input id="beta" type="range" min="-45" max="45" value="15"/> <span id="beta-value" class="value"></span></td>
-		</tr>
-		<tr>
-			<td>深度</td>
-			<td><input id="depth" type="range" min="20" max="100" value="50"/> <span id="depth-value" class="value"></span></td>
-		</tr>
-	</table>
-</div>
-
+  <div id="container" style="min-width:400px;height:400px"></div>
+<script>
+	var chart = Highcharts.chart('container', {
+    title: {
+        text: '各项统计表'
+    },
+    xAxis: {
+        categories: ['日', ' 周', '月', '总']
+    },
+    plotOptions: {
+        series: {
+            stacking: 'normal'
+        }
+    },
+    labels: {
+        items: [{
+            html: '日/周/月注册量',
+            style: {
+                left: '100px',
+                top: '18px',
+                color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+            }
+        }]
+    },
+    series: [{
+        type: 'column',
+        name: '活跃度',
+        data: [17,53 , 109, 179]
+    }, {
+        type: 'column',
+        name: '未支付订单',
+        data: [12, 47, 94, 173]
+    }, {
+        type: 'column',
+        name: '已支付订单',
+        data: [14, 45, 69, 128]
+    }, {
+        type: 'pie',
+        name: '注册量',
+        data: [{
+            name: '日',
+            y: 7,
+            color: Highcharts.getOptions().colors[0] // Jane's color
+        }, {
+            name: '周',
+            y: 20,
+            color: Highcharts.getOptions().colors[1] // John's color
+        }, {
+            name: '月',
+            y: 40,
+            color: Highcharts.getOptions().colors[2] // Joe's color
+        }],
+        center: [100, 80],
+        size: 100,
+        showInLegend: false,
+        dataLabels: {
+            enabled: false
+        }
+    }]
+});
+</script>
 </body>
 </html>
-<script type="text/javascript" src="https://code.highcharts.com.cn/jquery/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="https://code.highcharts.com.cn/highcharts/highcharts.js"></script>
-<script type="text/javascript" src="https://code.highcharts.com.cn/highcharts/highcharts-3d.js"></script>
-<script type="text/javascript" src="https://code.highcharts.com.cn/highcharts/modules/exporting.js"></script>
-<script type="text/javascript" src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
-<script type="text/javascript">
-	var chart = new Highcharts.Chart({
-	chart: {
-		renderTo: 'container',
-		type: 'column',
-		options3d: {
-			enabled: true,
-			alpha: 0,
-			beta: 7,
-			depth: 50,
-			viewDistance: 25
-		}
-	},
-	title: {
-		text: '各项数据统计'
-	},
-	subtitle: {
-		text: '以此为：  商品总条数  分类总条数  品牌总条数   管理员总条数 广告位总条数  广告总条数  公告总条数 菜单总条数  角色总条数'
-	},
-	plotOptions: {
-		column: {
-			depth: 25
-		}
-	},
-	series: [{
-		name:'各项分析统计',
-		data: {{$data}}
-	}]
-});
-// 将当前角度信息同步到 DOM 中
-var alphaValue = document.getElementById('alpha-value'),
-	betaValue = document.getElementById('beta-value'),
-	depthValue = document.getElementById('depth-value');
-function showValues() {
-	alphaValue.innerHTML = chart.options.chart.options3d.alpha;
-	betaValue.innerHTML = chart.options.chart.options3d.beta;
-	depthValue.innerHTML = chart.options.chart.options3d.depth;
-}
-// 监听 sliders 的变化并更新图表
-$('#sliders input').on('input change', function () {
-	chart.options.chart.options3d[this.id] = this.value;
-	showValues();
-	chart.redraw(false);
-});
-showValues();
-</script>
 
 @endsection
