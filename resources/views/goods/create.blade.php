@@ -256,15 +256,6 @@
                 $("input[name='shop_price']+span").html("<font color='green'>√</font>");
                 afalg = true;
           }
-      var ofalg = false;
-      var goods_desc = $('textarea[name="goods_desc"]').val();
-      if (goods_desc == '') {
-                $("textarea[name='goods_desc']+span").html("<font color='red'>商品描述不能为空</font>");
-                ofalg = false;
-            } else {
-                $("textarea[name='goods_desc']+span").html("<font color='green'>√</font>");
-                ofalg = true;
-          }
            var bfalg = false;
       var goods_weight = $('input[name="goods_weight"]').val();
       if (goods_weight == '') {
@@ -310,7 +301,7 @@
                 $("input[name='promote_end_date']+span").html("<font color='green'>√</font>");
                 ffalg = true;
         }
-      if(falg === false || pfalg === false || afalg === false || ofalg === false || bfalg === false || cfalg === false || dfalg === false || efalg === false || ffalg === false){
+      if(falg === false || pfalg === false || afalg === false || bfalg === false || cfalg === false || dfalg === false || efalg === false || ffalg === false){
           return false;
       }
     })

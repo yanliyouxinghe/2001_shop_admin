@@ -97,7 +97,7 @@
       var _this = $(this);
       var goods_id = new Array();
       $('input[name="box"]:checked').each(function(){
-        segoods_id.push($(this).val())
+        goods_id.push($(this).val())
       });
 
       if(goods_id.length==0){
@@ -118,15 +118,14 @@
    })
 
 
-//      //全选反选
-//   $(document).on('click','.layui-form-checkbox:eq(0)',function(){
-//     var checkval = $('input[name="allbox"]').prop('checked');
-//     $('input[name="box"]').prop('checked',checkval);
-//     if(checkval){
-//       $('.layui-form-checkbox:gt(0)').addClass('layui-form-checked')
-//     }else{
-//       $('.layui-form-checkbox:gt(0)').removeClass('layui-form-checked')
-//     }
-//   })
+//全选
+$(document).on('click','input[name="allbox"]',function (){
+    var _this = $(this);
+    if(_this.prop('checked') == true){
+        $('input[name="box"]').prop('checked',true);
+    }else{
+        $('input[name="box"]').prop('checked',false);
+    }
 
+});
 </script>
