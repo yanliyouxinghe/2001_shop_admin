@@ -45,11 +45,10 @@ class AdminController extends Controller
     {
         
         $data=$request->except('_token','role','true_pwd');
-    //    dd($data['admin_name']);
+        //dd($data['admin_name']);
         $AdminModel =  new AdminModel();
         $data['admin_pwd']=password_hash($data['admin_pwd'],PASSWORD_DEFAULT);
         $reg=  $AdminModel->create($data);
-         
         if($reg){
             $role=$request->role;
             $datas=[];
@@ -178,8 +177,7 @@ class AdminController extends Controller
                 $data[]=[
                     'admin_id' => $post['admin_id'],
                     'role_id' => $v
-                ];
-                
+                ];        
             }
             // dump($data);
             Admin_RoleModel::insert($data);

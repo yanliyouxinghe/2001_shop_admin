@@ -63,7 +63,6 @@ class AdController extends Controller
             if(!$id){
                return;
             }
-
             $adv = AdvModel::where('ad_id',$id)->first();
             if(!isset($adv)){
                 return "<script>alert('该广告位还没广告,请添加广告');location.href='/adv/create'; </script>";
@@ -72,8 +71,6 @@ class AdController extends Controller
                 $advs = $advModel->leftjoin('sh_ad','sh_adv.ad_id','=','sh_ad.ad_id')->where('sh_adv.ad_id',$id)->get();
                 return view('ad.list',['advs'=>$advs]);
             }
-
-            
         }
 
     /**生成广告 */
@@ -94,7 +91,6 @@ class AdController extends Controller
         if($red){
             echo "<script>alert('生成成功');history.go(-1);</script>";
         }
-
     }
 
     /**
@@ -133,8 +129,7 @@ class AdController extends Controller
         $res = AdModel::where('ad_id',$id)->update($post);
         if($res!==false){
             return redirect('/ad');
-        }
-        
+        } 
     }
 
     /**

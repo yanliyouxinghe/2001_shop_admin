@@ -53,7 +53,7 @@
        <button type="submit" class="layui-btn">修改</button>
        <button type="reset" class="layui-btn layui-btn-danger">重置</button>
        <a href="/" class="layui-btn">取消修改</a>
- </div></center>
+ </div></center>	
 
 
 </form>
