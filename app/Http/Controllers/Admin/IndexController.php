@@ -13,6 +13,7 @@ use App\Model\AdvModel;
 use App\Model\NoticeModel;
 use App\Model\MenuModel;
 use App\Model\RoleModel;
+use App\Model\OrderModel;
 class IndexController extends Controller
 {
 
@@ -24,6 +25,12 @@ class IndexController extends Controller
 
 	 //获取首页的各项数据
     public function getData(){
+      //小程序 统计
+      $where = [
+        'mini'=>1,
+        'is_paid'=>1
+      ];
+        $mini_count = OrderModel::where($where)->count();   //小程序订单量(已支付)
         $goods_count = GoodsModel::count();
         $cart_count = CartgoryModel::count();
         $brand_count = BrandModel::count();
@@ -43,7 +50,8 @@ class IndexController extends Controller
           'adv_count'=>$adv_count,
           'notice_count'=>$notice_count,
           'menu_count'=>$menu_count,
-          'role_count'=>$role_count
+          'role_count'=>$role_count,
+          'mini_count'=>$mini_count    //小程序订单量(已支付)  
         ];
         
         $data_arr = implode(',', $array_data);
