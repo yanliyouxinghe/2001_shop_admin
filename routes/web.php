@@ -108,12 +108,8 @@ Route::prefix('/admin')->group(function(){
   Route::get('/admin/addrole/{admin_id?}','Admin\AdminController@addrole')->name('admin.addrole');//添加角色
   Route::post('/addroledo','Admin\AdminController@addroledo')->name('role.addroledo');//执行添加角色
   Route::get('/edit/{id}','Admin\AdminController@edit')->name('admin.edit');//管理员修改
-<<<<<<< HEAD
   Route::post('/update','Admin\AdminController@update')->name('admin.update');//执行修改
 
-=======
-  Route::post('/update/{id}','Admin\AdminController@update')->name('admin.update');//执行修改
->>>>>>> gu
 });
 
 //角色管理
